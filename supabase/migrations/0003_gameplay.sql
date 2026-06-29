@@ -219,7 +219,7 @@ returns table (id uuid, carta text, es_ganadora boolean, jugador_uid uuid, nombr
 language plpgsql security definer set search_path = public as $$
 declare v_fase fase_sala; v_ronda int; v_ver_carta boolean; v_ver_autor boolean;
 begin
-  select fase, ronda into v_fase, v_ronda from salas where id = p_sala;
+  select s.fase, s.ronda into v_fase, v_ronda from salas s where s.id = p_sala;
   v_ver_carta := v_fase in ('juzgando', 'resultado', 'terminado'); -- textos al juzgar
   v_ver_autor := v_fase in ('resultado', 'terminado');             -- autoría al revelar
   return query
