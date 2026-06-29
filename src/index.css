@@ -1,0 +1,35 @@
+:root {
+  --felt-top: #1f4d2e;
+  --felt-bottom: #10301d;
+  --gold: #ffd35c;
+  --panel: #0c2114;
+  --panel-border: #2e6b45;
+  --text-light: #eaf5ec;
+  --text-muted: #9fd6a3;
+  --dark: #16331f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  background: var(--felt-bottom);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+}

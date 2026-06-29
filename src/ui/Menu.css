@@ -1,0 +1,222 @@
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(circle at 50% 35%, var(--felt-top), var(--felt-bottom));
+}
+
+.menu__panel {
+  width: min(560px, 100%);
+  background: rgba(12, 33, 20, 0.78);
+  border: 1px solid var(--panel-border);
+  border-radius: 22px;
+  padding: 32px 28px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.menu__title {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: clamp(26px, 5vw, 38px);
+  color: #fff;
+}
+
+.menu__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Botones */
+.btn {
+  appearance: none;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 14px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.1);
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn--primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--dark);
+}
+.btn--primary:hover:not(:disabled) {
+  background: #ffdd7a;
+}
+.btn--ghost {
+  background: transparent;
+}
+
+/* Crear partida */
+.create__label {
+  margin: 0 0 14px;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-align: center;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+@media (max-width: 460px) {
+  .modes {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mode {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 2px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.mode:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.mode--active {
+  border-color: var(--gold);
+  background: rgba(255, 211, 92, 0.12);
+}
+.mode__name {
+  font-size: 19px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mode__badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--dark);
+  background: var(--gold);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.mode__desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* Toggle */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle__track {
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--panel-border);
+  position: relative;
+  transition: background 0.15s ease;
+  flex: none;
+}
+.toggle__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+.toggle input:checked + .toggle__track {
+  background: var(--gold);
+}
+.toggle input:checked + .toggle__track .toggle__thumb {
+  transform: translateX(20px);
+}
+.toggle__text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Icono de información + tooltip */
+.info {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  flex: none;
+}
+.info__tip {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  background: #0a1b11;
+  color: var(--text-light);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  z-index: 5;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.create__actions {
+  display: flex;
+  gap: 12px;
+}
+.create__actions .btn {
+  flex: 1;
+}
