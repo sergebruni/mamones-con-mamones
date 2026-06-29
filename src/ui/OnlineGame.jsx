@@ -173,6 +173,19 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     return () => supabase.removeChannel(ch);
   }, [salaId, uid, fetchSala, fetchPlayers, fetchHand, fetchMesa, fetchJugaron, fetchMisJugadas]);
 
+  // Respaldo: si algún evento de Realtime se pierde, refrescamos el estado cada 3s.
+  useEffect(() => {
+    const t = setInterval(() => {
+      fetchSala();
+      fetchMesa();
+      fetchPlayers();
+      fetchJugaron();
+      fetchMisJugadas();
+      fetchHand();
+    }, 3000);
+    return () => clearInterval(t);
+  }, [fetchSala, fetchMesa, fetchPlayers, fetchJugaron, fetchMisJugadas, fetchHand]);
+
   // Reiniciar "peek" cuando cambia la ronda/mano.
   useEffect(() => setPeek({}), [ronda]);
 

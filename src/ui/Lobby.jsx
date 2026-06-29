@@ -110,9 +110,23 @@ export default function Lobby({ onBack }) {
         if (status === "SUBSCRIBED") await channel.track({ nombre });
       });
 
+    // Respaldo por si se pierde un evento de Realtime (p. ej. el inicio de partida).
+    const poll = setInterval(async () => {
+      const { data } = await supabase
+        .from("salas")
+        .select("fase,config,host_uid")
+        .eq("id", room.sala_id)
+        .maybeSingle();
+      if (!data) return;
+      setFase(data.fase);
+      setHostUid(data.host_uid);
+      if (data.config) setConfig(data.config);
+    }, 3000);
+
     return () => {
       supabase.removeChannel(channel);
       channelRef.current = null;
+      clearInterval(poll);
       setPlayers([]);
     };
   }, [room, uid, nombre]);
