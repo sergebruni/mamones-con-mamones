@@ -52,7 +52,8 @@ Versión criolla de *Manzanas con Manzanas* (Apples to Apples) con jerga venezol
 - 0011 fix mesa_actual (salas.id ambiguo). 0012 reglas (timeouts/meta/piensa>5). 0013 deadline fresco.
 - 0014 fix rowtype (escalares). 0015 resolver_timeout escalar.
 - **0016 ensure_schema** (idempotente: re-asegura TODAS las columnas + recrea funciones de ronda; correr esto deja todo consistente).
-- **0017 ruleta_congelada** (último): congelar solo con Piensa Rápido.
+- **0017 ruleta_congelada**: congelar solo con Piensa Rápido.
+- **0018 descarte_rojas** (último): descarte de rojas por partida (`salas.mazo_rojo`). Una carta jugada/descartada NO reaparece en ninguna mano hasta que termina la partida; `repartir_mano` excluye manos + mesa + descarte y recicla el descarte si el mazo se agota. Índice único `cartas_mano(sala_id,carta)` como garantía dura. **Correr en Supabase para que aplique.**
 
 ## Gotchas aprendidos (importantes)
 - **pgbouncer + rowtype cacheado:** funciones con `select * into v_sala salas` y luego `v_sala.<columna_nueva>` fallan con *“record has no field …”* tras agregar columnas. **Fix:** leer la columna nueva como **escalar** (`select col into v_x ...`). Ya aplicado en cerrar_jugadas/avanzar_ronda/resolver_timeout.
