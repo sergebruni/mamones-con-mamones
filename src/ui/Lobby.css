@@ -275,3 +275,26 @@
   font-size: 15px;
   font-weight: 700;
 }
+
+.cfg__select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-light);
+  font-size: 15px;
+  font-weight: 700;
+}
+.cfg__nota {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.switch--off {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cfg__label { margin-top: 16px; }
+.cfg > .cfg__label:first-child { margin-top: 0; }

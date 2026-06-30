@@ -12,7 +12,7 @@ export default function Lobby({ onBack }) {
   const [room, setRoom] = useState(null); // { codigo, sala_id }
   const [players, setPlayers] = useState([]);
   const [fase, setFase] = useState("lobby");
-  const [config, setConfig] = useState({ modo: "clasica", piensaRapido: false });
+  const [config, setConfig] = useState({ modo: "clasica", piensaRapido: false, meta: null });
   const [hostUid, setHostUid] = useState(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -161,17 +161,20 @@ export default function Lobby({ onBack }) {
   };
 
   // El host actualiza la config; todos la ven por Realtime.
-  const guardarConfig = async (modo, piensaRapido) => {
-    setConfig({ modo, piensaRapido }); // optimista
+  const guardarConfig = async (cambios) => {
+    const c = { modo: "clasica", piensaRapido: false, meta: null, ...config, ...cambios };
+    setConfig(c); // optimista
     const { error } = await supabase.rpc("set_config_sala", {
       p_sala: room.sala_id,
-      p_modo: modo,
-      p_piensa: piensaRapido,
+      p_modo: c.modo,
+      p_piensa: !!c.piensaRapido,
+      p_meta: c.meta ?? null,
     });
     if (error) setError(error.message);
   };
-  const elegirModo = (modo) => guardarConfig(modo, config.piensaRapido);
-  const togglePiensa = () => guardarConfig(config.modo, !config.piensaRapido);
+  const elegirModo = (modo) => guardarConfig({ modo });
+  const togglePiensa = () => guardarConfig({ piensaRapido: !config.piensaRapido });
+  const elegirMeta = (meta) => guardarConfig({ meta });
 
   const iniciarPartida = async () => {
     setError("");
@@ -228,7 +231,7 @@ export default function Lobby({ onBack }) {
 
           <div className="cfg">
             <p className="cfg__label">Modo de juego</p>
-            {room.isHost ? (
+            {isHost ? (
               <div className="seg">
                 <button
                   className={`seg__btn ${config.modo === "clasica" ? "seg__btn--active" : ""}`}
@@ -240,20 +243,48 @@ export default function Lobby({ onBack }) {
                   className={`seg__btn ${config.modo === "amarga" ? "seg__btn--active" : ""}`}
                   onClick={() => elegirModo("amarga")}
                 >
-                  Amargo
+                  Amargo 🍋
                 </button>
               </div>
             ) : (
               <p className="cfg__ro">{config.modo === "amarga" ? "Amargo 🍋" : "Clásico 🟢"}</p>
             )}
 
+            <p className="cfg__label">Cartas para ganar</p>
+            {isHost ? (
+              <select
+                className="cfg__select"
+                value={config.meta ?? ""}
+                onChange={(e) => elegirMeta(e.target.value === "" ? null : Number(e.target.value))}
+              >
+                <option value="">Automática (según jugadores)</option>
+                {[3, 4, 5, 6, 7, 8, 10, 12].map((n) => (
+                  <option key={n} value={n}>
+                    {n} cartas
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <p className="cfg__ro">{config.meta ? `${config.meta} cartas` : "Automática"}</p>
+            )}
+
             <div className="cfg__rapido">
               {isHost ? (
-                <label className="switch">
-                  <input type="checkbox" checked={!!config.piensaRapido} onChange={togglePiensa} />
-                  <span className="switch__track"><span className="switch__thumb" /></span>
-                  <span className="switch__text">Activar piensa rápido</span>
-                </label>
+                <>
+                  <label className={`switch ${players.length <= 5 ? "switch--off" : ""}`}>
+                    <input
+                      type="checkbox"
+                      checked={!!config.piensaRapido && players.length > 5}
+                      disabled={players.length <= 5}
+                      onChange={togglePiensa}
+                    />
+                    <span className="switch__track"><span className="switch__thumb" /></span>
+                    <span className="switch__text">Activar piensa rápido</span>
+                  </label>
+                  {players.length <= 5 && (
+                    <p className="cfg__nota">Requiere más de 5 jugadores.</p>
+                  )}
+                </>
               ) : (
                 <p className="cfg__ro">
                   Piensa rápido: {config.piensaRapido ? "Activado ⚡" : "Desactivado"}

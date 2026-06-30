@@ -93,7 +93,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const [preview, setPreview] = useState(null); // carta ampliada (long-press)
   const cerrarPreview = () => setPreview(null);
   const lastSyncRef = useRef("");
-  const firedRef = useRef("");
+  const firedRef = useRef(0);
   const turnsRef = useRef(5);
   const dingRef = useRef("");
 
@@ -121,7 +121,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const congelado = congeladoHasta && congeladoHasta > nowTs;
   const congSecs = congelado ? Math.ceil((congeladoHasta - nowTs) / 1000) : 0;
   const yaJugue = misJugadas >= cartasAJugar;
-  const meta = metaGanar(players.length);
+  const meta = sala?.config?.meta || metaGanar(players.length);
 
   const deadline = sala?.fase_hasta ? Date.parse(sala.fase_hasta) : null;
   const secsLeft = deadline ? Math.max(0, Math.ceil((deadline - nowTs) / 1000)) : null;
@@ -229,15 +229,15 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   // Reiniciar "peek" cuando cambia la ronda/mano.
   useEffect(() => setPeek({}), [ronda]);
 
-  // Disparar timeout al vencer la fase.
+  // Al vencer la fase, reintenta resolver hasta que el server la procese (tolera
+  // desfases de reloj y eventos perdidos). El server valida now() >= fase_hasta.
   useEffect(() => {
-    if (secsLeft !== 0 || !deadline) return;
-    const key = `${fase}:${ronda}`;
-    if (firedRef.current === key) return;
-    firedRef.current = key;
-    const t = setTimeout(() => supabase.rpc("resolver_timeout", { p_sala: salaId }), 300 + Math.random() * 1500);
-    return () => clearTimeout(t);
-  }, [secsLeft, deadline, fase, ronda, salaId]);
+    if (!deadline || nowTs <= deadline) return;
+    const now = Date.now();
+    if (now - firedRef.current < 2500) return; // throttle de reintentos
+    firedRef.current = now;
+    supabase.rpc("resolver_timeout", { p_sala: salaId });
+  }, [nowTs, deadline, salaId]);
 
   // Animación de la ruleta (modo Amargo, en resultado).
   useEffect(() => {
@@ -307,6 +307,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   let banner = "";
   if (fase === "jugando") {
     if (esJuez) banner = "Eres el Juez. Esperando jugadas…";
+    else if (cartasAJugar === 0) banner = "⏳ Esta ronda no envías carta (te demoraste como Juez).";
     else if (congelado) banner = `🥶 Mano congelada… ${congSecs}s`;
     else if (yaJugue) banner = "Ya jugaste. Esperando a los demás…";
     else if (cartasAJugar > 1) banner = `🃏 Jugada doble: juega ${cartasAJugar - misJugadas} carta(s).`;
