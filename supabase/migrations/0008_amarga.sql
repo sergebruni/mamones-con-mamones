@@ -18,11 +18,14 @@ alter table public.jugadores_sala add column if not exists cartas_a_jugar int no
 -- ---------------------------------------------------------------------------
 create or replace function public.girar_ruleta_para(p_sala uuid, p_uid uuid, p_depth int)
 returns void language plpgsql security definer set search_path = public as $$
-declare v_pick int; v_key text;
+declare v_pick int; v_key text; v_piensa boolean;
 begin
-  v_pick := floor(random() * 6)::int + 1;            -- 1..6
-  while v_pick = 5 and p_depth >= 3 loop             -- corta cadenas de "pasa"
-    v_pick := floor(random() * 6)::int + 1;
+  select coalesce((config->>'piensaRapido')::boolean, false) into v_piensa from salas where id = p_sala;
+  loop
+    v_pick := floor(random() * 6)::int + 1;             -- 1..6
+    if v_pick = 5 and p_depth >= 3 then continue; end if; -- corta cadenas de "pasa"
+    if v_pick = 2 and not v_piensa then continue; end if; -- congelar solo con piensa rápido
+    exit;
   end loop;
 
   v_key := case v_pick
