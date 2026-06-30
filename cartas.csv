@@ -160,493 +160,503 @@ INDICE,COLOR,TIPO,TEXTO,FLAVOR
 158,,,Diosdi,"Si hablas paja, te va a tocar calarte el calabozo."
 159,,,Chiave,"Nadie sabe bien quién es, pero todos lo nombran"
 160,,,El Bigoton,Famoso por hablar con pajaritos que reencarnan
-161,,,,
-162,,,,
-163,,,,
-164,,,,
-165,,,,
-166,,,,
-167,,,,
-168,,,,
-169,,,,
-170,,,,
-171,,,,
-172,,,,
-173,,,,
-174,,,,
-175,,,,
-176,,,,
-177,,,,
-178,,,,
-179,,,,
-180,,,,
-181,,,,
-182,,,,
-183,,,,
-184,,,,
-185,,,,
-186,,,,
-187,,,,
-188,,,,
-189,,,,
-190,,,,
-191,,,,
-192,,,,
-193,,,,
-194,,,,
-195,,,,
-196,,,,
-197,,,,
-198,,,,
-199,,,,
-200,,,,
-201,,,,
-202,,,,
-203,,,,
-204,,,,
-205,,,,
-206,,,,
-207,,,,
-208,,,,
-209,,,,
-210,,,,
-211,,,,
-212,,,,
-213,,,,
-214,,,,
-215,,,,
-216,,,,
-217,,,,
-218,,,,
-219,,,,
-220,,,,
-221,,,,
-222,,,,
-223,,,,
-224,,,,
-225,,,,
-226,,,,
-227,,,,
-228,,,,
-229,,,,
-230,,,,
-231,,,,
-232,,,,
-233,,,,
-234,,,,
-235,,,,
-236,,,,
-237,,,,
-238,,,,
-239,,,,
-240,,,,
-241,,,,
-242,,,,
-243,,,,
-244,,,,
-245,,,,
-246,,,,
-247,,,,
-248,,,,
-249,,,,
-250,,,,
-251,,,,
-252,,,,
-253,,,,
-254,,,,
-255,,,,
-256,,,,
-257,,,,
-258,,,,
-259,,,,
-260,,,,
-261,,,,
-262,,,,
-263,,,,
-264,,,,
-265,,,,
-266,,,,
-267,,,,
-268,,,,
-269,,,,
-270,,,,
-271,,,,
-272,,,,
-273,,,,
-274,,,,
-275,,,,
-276,,,,
-277,,,,
-278,,,,
-279,,,,
-280,,,,
-281,,,,
-282,,,,
-283,,,,
-284,,,,
-285,,,,
-286,,,,
-287,,,,
-288,,,,
-289,,,,
-290,,,,
-291,,,,
-292,,,,
-293,,,,
-294,,,,
-295,,,,
-296,,,,
-297,,,,
-298,,,,
-299,,,,
-300,,,,
-301,,,,
-302,,,,
-303,,,,
-304,,,,
-305,,,,
-306,,,,
-307,,,,
-308,,,,
-309,,,,
-310,,,,
-311,,,,
-312,,,,
-313,,,,
-314,,,,
-315,,,,
-316,,,,
-317,,,,
-318,,,,
-319,,,,
-320,,,,
-321,,,,
-322,,,,
-323,,,,
-324,,,,
-325,,,,
-326,,,,
-327,,,,
-328,,,,
-329,,,,
-330,,,,
-331,,,,
-332,,,,
-333,,,,
-334,,,,
-335,,,,
-336,,,,
-337,,,,
-338,,,,
-339,,,,
-340,,,,
-341,,,,
-342,,,,
-343,,,,
-344,,,,
-345,,,,
-346,,,,
-347,,,,
-348,,,,
-349,,,,
-350,,,,
-351,,,,
-352,,,,
-353,,,,
-354,,,,
-355,,,,
-356,,,,
-357,,,,
-358,,,,
-359,,,,
-360,,,,
-361,,,,
-362,,,,
-363,,,,
-364,,,,
-365,,,,
-366,,,,
-367,,,,
-368,,,,
-369,,,,
-370,,,,
-371,,,,
-372,,,,
-373,,,,
-374,,,,
-375,,,,
-376,,,,
-377,,,,
-378,,,,
-379,,,,
-380,,,,
-381,,,,
-382,,,,
-383,,,,
-384,,,,
-385,,,,
-386,,,,
-387,,,,
-388,,,,
-389,,,,
-390,,,,
-391,,,,
-392,,,,
-393,,,,
-394,,,,
-395,,,,
-396,,,,
-397,,,,
-398,,,,
-399,,,,
-400,,,,
-401,,,,
-402,,,,
-403,,,,
-404,,,,
-405,,,,
-406,,,,
-407,,,,
-408,,,,
-409,,,,
-410,,,,
-411,,,,
-412,,,,
-413,,,,
-414,,,,
-415,,,,
-416,,,,
-417,,,,
-418,,,,
-419,,,,
-420,,,,
-421,,,,
-422,,,,
-423,,,,
-424,,,,
-425,,,,
-426,,,,
-427,,,,
-428,,,,
-429,,,,
-430,,,,
-431,,,,
-432,,,,
-433,,,,
-434,,,,
-435,,,,
-436,,,,
-437,,,,
-438,,,,
-439,,,,
-440,,,,
-441,,,,
-442,,,,
-443,,,,
-444,,,,
-445,,,,
-446,,,,
-447,,,,
-448,,,,
-449,,,,
-450,,,,
-451,,,,
-452,,,,
-453,,,,
-454,,,,
-455,,,,
-456,,,,
-457,,,,
-458,,,,
-459,,,,
-460,,,,
-461,,,,
-462,,,,
-463,,,,
-464,,,,
-465,,,,
-466,,,,
-467,,,,
-468,,,,
-469,,,,
-470,,,,
-471,,,,
-472,,,,
-473,,,,
-474,,,,
-475,,,,
-476,,,,
-477,,,,
-478,,,,
-479,,,,
-480,,,,
-481,,,,
-482,,,,
-483,,,,
-484,,,,
-485,,,,
-486,,,,
-487,,,,
-488,,,,
-489,,,,
-490,,,,
-491,,,,
-492,,,,
-493,,,,
-494,,,,
-495,,,,
-496,,,,
-497,,,,
-498,,,,
-499,,,,
-500,,,,
-501,,,,
-502,,,,
-503,,,,
-504,,,,
-505,,,,
-506,,,,
-507,,,,
-508,,,,
-509,,,,
-510,,,,
-511,,,,
-512,,,,
-513,,,,
-514,,,,
-515,,,,
-516,,,,
-517,,,,
-518,,,,
-519,,,,
-520,,,,
-521,,,,
-522,,,,
-523,,,,
-524,,,,
-525,,,,
-526,,,,
-527,,,,
-528,,,,
-529,,,,
-530,,,,
-531,,,,
-532,,,,
-533,,,,
-534,,,,
-535,,,,
-536,,,,
-537,,,,
-538,,,,
-539,,,,
-540,,,,
-541,,,,
-542,,,,
-543,,,,
-544,,,,
-545,,,,
-546,,,,
-547,,,,
-548,,,,
-549,,,,
-550,,,,
-551,,,,
-552,,,,
-553,,,,
-554,,,,
-555,,,,
-556,,,,
-557,,,,
-558,,,,
-559,,,,
-560,,,,
-561,,,,
-562,,,,
-563,,,,
-564,,,,
-565,,,,
-566,,,,
-567,,,,
-568,,,,
-569,,,,
-570,,,,
-571,,,,
-572,,,,
-573,,,,
-574,,,,
-575,,,,
-576,,,,
-577,,,,
-578,,,,
-579,,,,
-580,,,,
-581,,,,
-582,,,,
-583,,,,
-584,,,,
-585,,,,
-586,,,,
-587,,,,
-588,,,,
-589,,,,
-590,,,,
-591,,,,
-592,,,,
-593,,,,
-594,,,,
-595,,,,
-596,,,,
-597,,,,
-598,,,,
-599,,,,
-600,,,,
-601,,,,
-602,,,,
-603,,,,
-604,,,,
-605,,,,
-606,,,,
-607,,,,
-608,,,,
-609,,,,
-610,,,,
-611,,,,
-612,,,,
-613,,,,
-614,,,,
-615,,,,
-616,,,,
-617,,,,
-618,,,,
-619,,,,
-620,,,,
-621,,,,
-622,,,,
-623,,,,
-624,,,,
-625,,,,
-626,,,,
-627,,,,
-628,,,,
-629,,,,
-630,,,,
-631,,,,
-632,,,,
-633,,,,
-634,,,,
-635,,,,
-636,,,,
-637,,,,
-638,,,,
-639,,,,
-640,,,,
-641,,,,
-642,,,,
-643,,,,
-644,,,,
-645,,,,
-646,,,,
-647,,,,
-648,,,,
-649,,,,
-650,,,,
+161,Roja,Personajes,Luis Aparicio,El único venezolano en el Salón de la Fama de Cooperstown con su número retirado por toda la MLB. Mientras tú no podías ni atrapar una bola en el patio.
+162,Roja,Comida,La hallaca recalentada el 6 de enero,"Cuando ya hasta el perro la mira con desprecio, pero igual te la comes porque botar comida es pecado mortal."
+163,Roja,Objetos,La planta eléctrica del vecino,El símbolo de estatus del barrio: ruge a las 6 p.m. como un avión despegando y te recuerda que el rico de la cuadra cenará con luz mientras tú abanicas a los muchachos.
+164,Roja,Lugares,El Ávila,"El pulmón de Caracas y el único vecino que nunca se mudó, nunca se quejó del ruido y nunca pidió la cuota del condominio. Verde cuando llueve, amarillo cuando arde."
+165,Roja,Evento,El apagón nacional de marzo,"El día que el país entero descubrió que sin luz también se acaba el agua, el internet y la paciencia. Sacamos las velas como en tiempos de Bolívar."
+166,Roja,Dichos,"""Echarle los perros""","El arte criollo de coquetear sin ninguna sutileza, como si la otra persona fuera una presa de caza y tú el sabueso más insistente del barrio."
+167,Roja,Personajes,El buhonero de la avenida,"Tiene un local más surtido que un centro comercial, pero cabe en una sábana que recoge en tres segundos cuando ve la policía."
+168,Roja,Guachafitas,Bajarse del carro en plena cola a buscar la causa del trancón,"El investigador privado nacional. Camina 200 metros, descubre que era una vaca acostada en el canal rápido y regresa a contar la novela."
+169,Roja,Musica,La gaita zuliana sonando desde el 1° de octubre,El calendario venezolano no se rige por el clima ni por la luna: se rige por el momento en que el centro comercial pone a Maracaibo 15 a todo volumen aunque haga 38°C.
+170,Roja,Espanto,La Llorona,La única señora que llora más fuerte que tu vecina cuando le suben el alquiler. Anda buscando a sus hijos por la quebrada y de paso te quita el sueño gratis.
+171,Roja,Personajes,Andrés Galarraga,"'El Gran Gato', que bateaba jonrones tan altos que todavía hay pelotas dando vueltas por la órbita de Maracaibo."
+172,Roja,Comida,El pabellón criollo completo,"La bandera nacional servida en un plato: caraotas, arroz, carne mechada y tajada. Patriotismo que se mastica."
+173,Roja,Objetos,El termo de Avon,"Herencia familiar más sagrada que la casa. Mantiene el café caliente desde 1987 y nadie sabe cómo, pero ay de quien lo bote."
+174,Roja,Lugares,Sabana Grande,"El bulevar donde puedes comprar un reloj 'Rolex', un perro caliente y una predicción del futuro con la misma señora, todo en una sola cuadra."
+175,Roja,Evento,La quincena que dura dos días,"Cobras el 15, pagas todo el 16, y el 17 ya estás matando tigre otra vez. La quincena más corta del calendario gregoriano."
+176,Roja,Dichos,"""Estar pelando bola""",No tener ni un centavo partido por la mitad. Estado financiero permanente del venezolano entre quincena y quincena.
+177,Roja,Personajes,El guachimán del edificio,"El verdadero dueño del condominio. Sabe a qué hora llegas, con quién y por qué, pero jura que «no vio nada»."
+178,Roja,Guachafitas,Tener tres canaimitas en la casa y ninguna prende,El cementerio de tablets del gobierno. Sirven de posavasos y de espejo para sacarse los pelos de la nariz.
+179,Roja,Musica,Cardenales del Éxito,"Que suenen a las 7 de la mañana en diciembre es ley no escrita de la abuela. Si no hay gaita prendida, es porque no hay luz."
+180,Roja,Espanto,La Bola de Fuego,"Una candela que rueda por la sabana de noche y que, según los abuelos, es un alma en pena. Según el municipio, es un transformador que volvió a explotar."
+181,Roja,Personajes,Omar Vizquel,Sacaba outs con la mano pelada como si estuviera espantando un zancudo. El guante era pura decoración.
+182,Roja,Comida,El asado negro de la abuela,Tan oscuro y tan sabroso que te hace dudar de tu fe en la cocina de tu mamá. Nadie sabe el secreto y nadie lo sabrá jamás.
+183,Roja,Objetos,Las cholas,"Calzado nacional multiusos: para la casa, para la bodega, para correr al carro y, en mano de tu mamá, arma teledirigida de precisión quirúrgica."
+184,Roja,Lugares,El Metro de Caracas,"Antes el orgullo de Latinoamérica; hoy una sauna rodante donde aprendes el olor de toda la ciudad sin pedirlo. 'Por favor, dejen salir antes de entrar' (nadie obedece)."
+185,Roja,Evento,El sancocho familiar del domingo,"Tres horas alrededor de un fogón, una tía revolviendo, un tío dando instrucciones que nadie pidió y un primo que solo aparece cuando ya está servido."
+186,Roja,Dichos,"""Más sabe el diablo por viejo que por diablo""",La sabiduría de la abuela que te cachó la mentira antes de que terminaras de inventarla.
+187,Roja,Personajes,El motorizado kamikaze,Cree que el espejo retrovisor es un adorno y la acera es un canal exclusivo. Te toca corneta hasta cuando vas caminando.
+188,Roja,Guachafitas,Manejar con el brazo de afuera para que no se note que no hay aire,El ventilador de tracción humana. A 60 km/h refresca; en la cola te asas como tequeño olvidado.
+189,Roja,Musica,El joropo recio,"Cuatro, arpa, maracas y un señor zapateando con tanta fuerza que el piso pide clemencia. El llano entero en tres minutos de adrenalina."
+190,Roja,Espanto,El Hachador del Monte,"Lo oyes tumbando un árbol toda la noche, pero al amanecer no hay ni una rama caída. El único leñador que trabaja más que tú y produce menos."
+191,Roja,Personajes,Pablo Sandoval,'Kung Fu Panda': demostró que se puede ganar la Serie Mundial con una barriga que entra primero al estadio que el resto del cuerpo.
+192,Roja,Comida,Una cachapa con queso de mano y cochino frito,"El maíz dulce, el queso que se estira y la grasa que perdona todo. Después necesitas una siesta de tres horas."
+193,Roja,Objetos,El budare,"Disco de hierro que pesa más que un muerto y sobrevive a tres generaciones, tres mudanzas y un divorcio. Las arepas saben a abuela."
+194,Roja,Lugares,El Teleférico de Caracas,Subes al Ávila en una cajita de metal colgada de un cable y rezas dos veces: una al subir y otra cuando ves los precios de la cima.
+195,Roja,Evento,El velorio con cerveza y dominó,"Despedimos al difunto con respeto: capicúa, hielo, y la promesa de que «él hubiese querido que la pasáramos bien»."
+196,Roja,Dichos,"""Camarón que se duerme se lo lleva la corriente""","Si te descuidas un segundo en este país, te quitaron el puesto, el cambio y hasta la novia."
+197,Roja,Personajes,La suegra que llega sin avisar,"Aparece con una olla, una opinión sobre tu cocina y una maleta «por si acaso me quedo»."
+198,Roja,Guachafitas,Echarle agua de la batería al refresco para que rinda,"Mentira, no le eches eso. Pero el primo sí lo hizo una vez y todavía lo recuerdan en los cumpleaños."
+199,Roja,Musica,Despecho llanero a todo pulmón,"Cuando el arpa llora más que tú, ya no sabes si estás triste o solo estás disfrutando el dolor con una cerveza en la mano."
+200,Roja,Espanto,El Descabezado,"Un espanto que anda buscando su cabeza por el camino. Tranquilo, no es el único en Venezuela que perdió la cabeza en este país."
+201,Roja,Personajes,David Concepción,El campocorto de la Gran Maquinaria Roja que inventó el tiro de rebote en la grama artificial. Ingeniería criolla pura.
+202,Roja,Comida,La arepa rellena de reina pepiada,"Pollo, aguacate y mayonesa metidos en un puño de maíz. La reina de las arepas y nadie la destrona."
+203,Roja,Objetos,La batea de lavar,El gimnasio gratuito de la abuela. Brazos de acero forjados a punta de jabón azul y sábanas mojadas.
+204,Roja,Lugares,La Isla de Margarita,"El plan B de todo venezolano que dice 'me voy a relajar'. Llegas con maletas vacías y vuelves con tres cavas, dos hamacas y cero plata."
+205,Roja,Evento,La graduación con la promoción entera,"Cuarenta familias, un mismo cotillón, y un acto que empieza dos horas tarde porque falta el padrino."
+206,Roja,Dichos,"""Echar un camión""",Mentir con tal magnitud y desparpajo que merecerías un premio en lugar de un regaño.
+207,Roja,Personajes,El fiebrúo del gym,Postea las pesas pero nunca la dieta. Tiene más fotos en el espejo del gimnasio que en su propia casa.
+208,Roja,Guachafitas,El tío que llega a la fiesta y de una vez se mete en la cocina a opinar,"El interventor de la parrilla. No trajo ni el carbón, pero sabe exactamente cuándo voltear la carne mejor que el dueño de la casa."
+209,Roja,Musica,El cuatro desafinado de la fiesta,"Siempre hay un primo que lo agarra, lo rasguea horrible y aun así nadie tiene el corazón de quitárselo."
+210,Roja,Espanto,La Dientona,Una mujer hermosa hasta que sonríe y te enseña una dentadura que parece reja de panadería. La razón científica por la que no debes piropear en la oscuridad.
+211,Roja,Personajes,José Altuve,Mide metro y medio pero batea más alto que el dólar paralelo. El más grande de los chiquitos.
+212,Roja,Comida,Los tequeños de la fiesta,El único alimento que desaparece de la bandeja antes de que llegue la mitad de los invitados. Sin tequeños no hay fiesta venezolana.
+213,Roja,Objetos,El Daewoo Tico,"Una lata de sardinas con cuatro ruedas que, contra toda ley de la física, carga a siete personas, dos bombonas y un perro hasta la playa."
+214,Roja,Lugares,Los Roques,"El paraíso donde el agua es turquesa, la arena es blanca y la cuenta final es del color de un infarto."
+215,Roja,Evento,El matriarcado decidiendo el menú navideño,"Un consejo de abuelas, tías y la mamá que tiene la última palabra. Tú solo ralla el queso y cállate."
+216,Roja,Dichos,"""Agarrar a alguien fuera de base""","Pillar a la persona desprevenida, como out en el béisbol pero en la vida real y sin posibilidad de reclamo."
+217,Roja,Personajes,El chamo que pide la cola,Te jura que es «aquí cerquita» y te termina mandando a tres municipios de distancia.
+218,Roja,Guachafitas,Guardar las bolsas plásticas dentro de otra bolsa plástica,"La caja fuerte de toda abuela venezolana. Ahí también hay botones sueltos, llaves de candados que ya no existen y un real partío."
+219,Roja,Musica,Las parrandas decembrinas del barrio,Un grupo de señores con furruco y tambora que aparecen sin avisar en tu casa a las 11 p.m. y se van con hallaca y ron en el cuerpo.
+220,Roja,Espanto,El Cucú,"El terror número uno de los muchachitos que no quieren dormir. Nadie sabe cómo es, pero todos saben que viene si no te tomas la sopa."
+221,Roja,Personajes,Salvador Pérez,Catcher gigante que abraza al pícher después de cada juego como si fuera su última empanada antes de la cola.
+222,Roja,Comida,El cachito de jamón recién horneado,"La razón por la que un venezolano se levanta temprano un domingo. Caliente, esponjoso y con el jamón asomándose por la punta."
+223,Roja,Objetos,El Malibú del 78,"Un tanque de guerra con tapicería de peluche. Gasta más gasolina que un avión pero nunca, jamás, te deja botado."
+224,Roja,Lugares,Mérida,"La ciudad de la eterna neblina, los estudiantes y la única calor que se quita con una cobija. Aquí el frío sí existe, aunque en Maracaibo no lo crean."
+225,Roja,Evento,Montar la gaita desde octubre,"Mientras el resto del mundo apenas piensa en Halloween, aquí ya suena el furro y huele a hallaca."
+226,Roja,Dichos,"""Hacerse la vista gorda""","Mirar para otro lado profesionalmente, especialmente cuando el problema requiere que tú hagas algo."
+227,Roja,Personajes,La doña de la junta de condominio,Convoca asamblea por una bombilla fundida y lleva minuta de quién no pagó la cuota desde 2014.
+228,Roja,Guachafitas,Llamar a alguien por el nombre completo cuando ya estás molesto,"El misil teledirigido materno. Cuando suena tu segundo nombre, ya sabes que la cosa pasó de castaño a oscuro."
+229,Roja,Musica,Radio Rochela,Donde aprendimos que cualquier desgracia nacional se sobrevive mejor si primero te ríes de ella un viernes por la noche.
+230,Roja,Espanto,El Coco,"El gerente de cobranzas del mundo infantil: «Duérmete niño, duérmete ya, que viene el Coco y te comerá». Negociación de horario de sueño con amenaza incluida."
+231,Roja,Personajes,Edgardo Alfonzo,El cangrejo del Cúcuta natal que defendió la segunda base en Nueva York mejor que tú defiendes tus excusas.
+232,Roja,Comida,El pan canilla calientico,Sale de la panadería y no llega entero a la casa. Siempre falta la punta porque alguien 'la probó' en el camino.
+233,Roja,Objetos,El Caprice clásico,El carro del tío que 'lo va a restaurar algún día'. Lleva 15 años en el estacionamiento con una sábana encima y media pieza menos.
+234,Roja,Lugares,El Teleférico de Mérida,"El más alto y largo del mundo, donde subes al Pico Espejo a buscar nieve y bajas con soroche, los labios morados y una foto borrosa."
+235,Roja,Evento,El viacrucis para conseguir efectivo,"Cuatro cajeros, tres bancos, una cola eterna y al final te dan el límite diario que no alcanza ni para el pasaje."
+236,Roja,Dichos,"""Estar como anillo al dedo""",Que algo te queda tan perfecto que parece que el universo lo fabricó pensando solo en ti.
+237,Roja,Personajes,El que se cuela en la fila del banco,Llega «buscando a un amigo que ya estaba» y de repente está adelante de todos con cara de inocente.
+238,Roja,Guachafitas,Ponerle nombre al carro como si fuera familia,"«La Catira» tiene 23 años, dos puertas que no abren y un motor que reza el rosario en cada subida, pero es de la casa."
+239,Roja,Musica,Sábado Sensacional,"Cinco horas de televisión donde cabía un cantante, un concurso, una telenovela en cápsula y la promesa de un carro 0 km que nadie de tu familia ganó jamás."
+240,Roja,Espanto,Las brujas de Catia,"Vuelan en escoba sobre los cerros y, dicen, se transforman en lechuza. Las únicas que consiguen estacionamiento en Catia un viernes en la noche."
+241,Roja,Personajes,Antonio Armas,Líder jonronero de la Liga Americana cuando los venezolanos todavía pensábamos que el béisbol era nuestro destino manifiesto.
+242,Roja,Comida,Los golfeados con queso y melao,"Dulces, pegajosos y con anís. Un infarto envuelto en papas, pero qué rico se va uno."
+243,Roja,Objetos,La moto de bachaquear,"Vehículo de carga olímpico: cabe la familia, el mercado completo y una nevera amarrada con mecate. Casco opcional, fe obligatoria."
+244,Roja,Lugares,El Salto Ángel,"La cascada más alta del planeta, que para verla tienes que volar en una avioneta, navegar un río y caminar tres horas. Vale cada gota."
+245,Roja,Evento,La cola del banco que no avanza,"Entraste joven, saliste con barba. El de adelante lleva un mes y ya hizo amigos."
+246,Roja,Dichos,"""Ir a pie de bola""","Lanzarse a una situación sin plan, sin presupuesto y sin la menor idea, pero con toda la actitud."
+247,Roja,Personajes,El tío que arma el sancocho,"El general de cinco estrellas del fogón. No deja que nadie toque la olla, pero sí que todos laven los platos."
+248,Roja,Guachafitas,El que se pone los lentes oscuros adentro del bautizo,Llegó del pre-despacho del sábado directo a la iglesia. Cree que nadie nota que está rezando con resaca.
+249,Roja,Musica,Súper Sábado Sensacional,Porque a un programa de cinco horas en Venezuela siempre se le puede agregar la palabra «Súper» y media hora más.
+250,Roja,Espanto,El culto a María Lionza en Sorte,"Subes la montaña con tabaco, ron y velas, y bajas con la espalda derecha y el alma limpia. Spa espiritual venezolano, todo incluido, menos el seguro."
+251,Roja,Personajes,Ozzie Guillén,El primer mánager latino en ganar una Serie Mundial. Dice más groserías por minuto que un motorizado en hora pico.
+252,Roja,Comida,Las mandocas zulianas,"Maíz, papelón y queso fritos en forma de herradura. Maracaibo en cada mordisco, con su calor incluido."
+253,Roja,Objetos,El billete de un millón de bolívares,Pieza de museo que un día compraba una casa y al mes siguiente no alcanzaba para un chicle. Ahora sirve para tapar la gotera.
+254,Roja,Lugares,Coro y sus médanos,"El único lugar de Venezuela donde te metes arena hasta en el alma y juras que estás en el Sahara, pero con cocada al lado."
+255,Roja,Evento,El «ya casi llego» que son dos horas,La unidad de tiempo más elástica del idioma venezolano. Equivale a «ni he salido».
+256,Roja,Dichos,"""Dejar a alguien plantado""","Acordar verse a las 3 y aparecerte nunca, dejando al otro echando raíces en la esquina."
+257,Roja,Personajes,El vivo que se monta en la cola ajena,Especialista en aparecer cuando ya casi llega el turno. Tiene PhD en «yo estaba aquí desde temprano».
+258,Roja,Guachafitas,Tapar el hueco del techo con una tobo y una ponchera,La ingeniería hidráulica criolla. Cuando llueve fuerte suena como batería de salsa y hay que vaciar a las 3 a.m.
+259,Roja,Musica,Bienvenidos,El programa de humor donde un personaje en franela se volvía más memorable que cualquier discurso presidencial de la época.
+260,Roja,Espanto,El Negro Felipe,"El bravo de la Corte de María Lionza, puro tabaco y respeto. Cuando él se monta en el material, hasta el más malandro se persigna."
+261,Roja,Personajes,Francisco Rodríguez 'K-Rod',Cerraba juegos con tanto drama que el corazón del fanático cerraba antes que el inning.
+262,Roja,Comida,Los bollitos pelones con guiso,Bolitas de maíz nadando en salsa de tomate. La merienda que tu abuela hacía con lo que sobraba y quedaba mejor que un restaurante.
+263,Roja,Objetos,La cesta ticket,Aquel cuadernito de cupones que te hacía sentir rico el día de pago y pobre el día 16. El mercado entero olía a esperanza.
+264,Roja,Lugares,Maracaibo a mediodía,"No es un lugar, es una sentencia. El sol no calienta, te interroga. El asfalto se derrite y el aire acondicionado es un derecho humano."
+265,Roja,Evento,El primero de enero con la casa llena de hallacas,Sobrevives a base de hallaca recalentada hasta el 6 de enero. La dieta arranca después de Reyes.
+266,Roja,Dichos,"""Estar en la olla""","Tocar fondo total: sin trabajo, sin real y con la nevera haciendo eco."
+267,Roja,Personajes,El gandolero de la autopista,Maneja un mastodonte de 18 ruedas como si fuera una bicicleta y se cambia de canal sin avisar a nadie.
+268,Roja,Guachafitas,Comprar un solo cigarro y pedir el encendido prestado,"El microemprendedor del vicio. Compra al detal, fuma a crédito y siempre anda «sin reales pero con ganas»."
+269,Roja,Musica,Cásate y Verás,El reality antes de que existieran los realities: parejas peleando en vivo para deleite de toda la familia desde el sofá.
+270,Roja,Espanto,La Reina María Lionza,"La diosa de la montaña, montada en su danta, reina indiscutida de Sorte. La única figura femenina que aparece en una autopista, en un billete y en un altar."
+271,Roja,Personajes,Félix Hernández,'El Rey Félix' lanzó un juego perfecto y nosotros ni perfectos para llegar temprano al trabajo.
+272,Roja,Comida,El hervido de gallina del domingo,"El caldo que resucita a un muerto, cura la ratón y arregla cualquier problema existencial. Lleva auyama, ocumo y un secreto."
+273,Roja,Objetos,El tobo de agua para cuando no hay,"Reserva estratégica nacional almacenada en el baño. Sagrado e intocable, hasta que llegan visitas y se vacía en una tarde."
+274,Roja,Lugares,El Puente sobre el Lago de Maracaibo,"Ocho kilómetros de fe pura sobre el agua. Si te quedas pegado en el medio, ya eres del Zulia legalmente."
+275,Roja,Evento,Cuadrar la vuelta del transporte público,"Una negociación digna de Wall Street: «no tengo sencillo», «yo tampoco», y al final pagas de más por principio."
+276,Roja,Dichos,"""No hay arroz que no se queme""",Hasta el más experto mete la pata; consuelo nacional para cuando arruinas algo importante.
+277,Roja,Personajes,El pana que «te resuelve» todo,"Conoce un primo que tiene un compadre que vende eso más barato. Nunca aparece, pero la fe nunca muere."
+278,Roja,Guachafitas,El primo que «sabe» de carros y deja el tuyo peor,"Le metió mano al ruidito y ahora suena a maracas. «Eso ya estaba así», jura con la cara de palo."
+279,Roja,Musica,La gaita de protesta,"El único género musical donde puedes felicitar a la Virgen y reclamarle al gobierno en la misma estrofa, sin perder el ritmo."
+280,Roja,Espanto,El Tirano Aguirre,El conquistador loco que recorre la isla de Margarita convertido en candela errante. El primer venezolano que se peleó con todo el mundo y siguió dando vueltas sin rumbo.
+281,Roja,Personajes,Magglio Ordóñez,Bateaba con un swing tan elegante que parecía que estaba firmando autógrafos en pleno turno al bate.
+282,Roja,Comida,El sancocho de pescado a orillas del río,Hecho en fogón de leña con lo que cayó esa mañana. El olor a humo lo hace ilegalmente delicioso.
+283,Roja,Objetos,La nevera 'ejecutiva' de cervezas,La nevera vieja que se mudó al porche con un solo propósito en la vida: mantener las polares heladas para el comité de los domingos.
+284,Roja,Lugares,Galipán,"El pueblito de las flores y las fresas con crema arriba del Ávila, al que solo se llega en un jeep que sube por una carretera diseñada por el mismísimo diablo."
+285,Roja,Evento,La parranda que llega a tu casa sin avisar,"Tocan la puerta con cuatro, maracas y furruco. No hay forma de decir que no, ya están adentro pidiendo el ponche."
+286,Roja,Dichos,"""Échale pichón""",Ponerle ganas y fuerza a la cosa aunque no sepas bien qué estás haciendo. La filosofía de toda bomba de agua manual.
+287,Roja,Personajes,La señora que regatea hasta en el chino,Pelea un descuento por un paquete de espaguetis como si estuviera comprando una casa.
+288,Roja,Guachafitas,Mandar al menor de la casa a comprar a la bodega de noche,"El sacrificio ritual familiar. Va llorando, regresa corriendo y jura que vio al Silbón en la esquina."
+289,Roja,Musica,Un merengue venezolano de los 90,"Ritmo pegajoso, letra que no significaba nada y un paso de baile que tu tío todavía saca en cada matrimonio."
+290,Roja,Espanto,El Dr. José Gregorio Hernández,"El médico de los venezolanos, con su sombrero y su traje negro. Lo invocas para una operación complicada y para que te aparezca el repuesto del carro que no se consigue."
+291,Roja,Personajes,Bobby Abreu,Esperaba la base por bolas con la paciencia de quien lleva tres horas en la cola del banco.
+292,Roja,Comida,El chicharrón crujiente con casabe,"Grasa, sal y un crujido que se escucha en la casa del vecino. La presión arterial es un problema del Yo del futuro."
+293,Roja,Objetos,El ventilador 'recargable' chino,"Promete ocho horas de brisa y dura veinte minutos. Cuando se va la luz, hace un ruido de licuadora y luego, traición."
+294,Roja,Lugares,Chacao,"El municipio donde todo cuesta el doble, todos andan apurados y hasta el vigilante del edificio tiene mejor cuerpo que tú."
+295,Roja,Evento,El reencuentro de la familia en diciembre,Aparecen primos que no veías desde la infancia y un tío que regresó «del exterior» a contarte lo bien que le va.
+296,Roja,Dichos,"""Buscarle la quinta pata al gato""","Complicar un problema sencillo hasta volverlo irresoluble, deporte favorito de toda reunión de condominio."
+297,Roja,Personajes,El cobrador del autobús,Equilibrista que cuelga de la puerta gritando la ruta completa de un solo respiro mientras te da el vuelto exacto.
+298,Roja,Guachafitas,Calentar la comida de ayer y jurar que sabe mejor recalentada,"El sommelier del refrigerador. «El pabellón del segundo día tiene cuerpo», dice mientras esconde que no hay para más nada."
+299,Roja,Musica,El Trabuco salsero en el equipo de sonido,"Suena un par de trompetas y de repente todos en la fiesta se creen soneros, aunque ninguno sepa de dónde sacar el coro."
+300,Roja,Espanto,El Espanto de la Quebrada,Esa sombra que cruza el agua cuando vas pasando solo de noche. Puede ser un alma en pena o puede ser el vecino robando los aguacates del cerro.
+301,Roja,Personajes,Carlos Hernández,Boxeador campeón mundial que repartía golpes como mamá repartiendo correazos: precisos y sin avisar.
+302,Roja,Comida,Una malta bien fría,"La bebida que tu mamá te daba 'porque tiene hierro'. Dulce, espesa y con esa espuma que pide acompañar con queso amarillo."
+303,Roja,Objetos,El celular con la pantalla rota,"Una telaraña de vidrio que igual contesta, igual postea y igual te cortas el dedo cada vez que respondes un mensaje."
+304,Roja,Lugares,Petare,"El barrio más grande de Latinoamérica, una montaña de bloques rojos que de día es laberinto y de noche es leyenda. Respeto absoluto."
+305,Roja,Evento,Estrenar ropa el 31 de diciembre,"Tradición sagrada: si no estrenas, el año entra arrugado. Y la interior amarilla es obligatoria."
+306,Roja,Dichos,"""Quedarse con los crespos hechos""",Prepararte con todo el entusiasmo para algo que al final no pasó. La decepción más arreglada del país.
+307,Roja,Personajes,El profesor que cae mal a todo el salón,Pone examen sorpresa el lunes y jura que «esto lo van a usar toda la vida». Spoiler: no.
+308,Roja,Guachafitas,El que pide «un toquecito» de la cerveza ajena y se la baja completa,El robo a mano armada más educado de Venezuela. Te devuelve la lata vacía con una sonrisa de gratitud.
+309,Roja,Musica,"Salsa de la dura, de la que no se baila pegado",Esa que el melómano del grupo te pone para «educarte» mientras tú solo querías algo para mover el esqueleto.
+310,Roja,Espanto,El Carretón de la Muerte,Una carreta tirada por bueyes que pasa rechinando a medianoche cargada de almas. El único transporte público que sí cumple horario en este país.
+311,Roja,Personajes,Edwin Valero,Invicto con nocaut en todas sus peleas. Tenía un tatuaje de Chávez en el pecho y un gancho que mandaba a dormir.
+312,Roja,Comida,El papelón con limón en una jarra de un litro,"La gatorade criolla. Si trabajaste bajo el sol, esto te devuelve el alma al cuerpo en dos tragos."
+313,Roja,Objetos,Las pastillas de Atamel,"El paracetamol nacional que cura desde la fiebre hasta el mal de amores. Si no te lo baja el Atamel, ya eso es brujería."
+314,Roja,Lugares,El bulevar de Catia,"Universidad de la calle donde se vende, se grita, se regatea y se sobrevive. Si encuentras lo que buscas a buen precio, eres un genio del comercio."
+315,Roja,Evento,Las doce uvas a la medianoche,Te atragantas con doce uvas mientras pides doce deseos y alguien grita «¡salud!» con sidra tibia.
+316,Roja,Dichos,"""Echar broma""","Molestar, fastidiar o joder a alguien con cariño, hasta que ya no es tan con cariño."
+317,Roja,Personajes,El reguetonero del barrio,Sueña con el Hard Rock pero por ahora graba en el cuarto con una cobija pegada a la pared.
+318,Roja,Guachafitas,Estacionar en doble fila y dejar las luces intermitentes como pidiendo perdón,Las cuatro luces son el «ya vengo» universal. Significa cualquier cosa entre dos minutos y dos horas.
+319,Roja,Musica,La hora del vallenato en la barra,Cuando ya nadie está sobrio y todos cantan «la nevera» como si la letra fuera la historia de su propia vida.
+320,Roja,Espanto,La Mula Maniá,"Una mujer condenada a vagar convertida en mula encadenada por meterse con un cura. La moraleja del pueblo: cuidado con quién te enamoras, que terminas relinchando."
+321,Roja,Personajes,Antonio Cermeño,Doble campeón mundial de boxeo que pegaba más duro que la inflación de un solo día.
+322,Roja,Comida,La chicha del señor de la esquina,"Espesa, con canela por encima y servida en vaso plástico. Te la tomas sin preguntar de qué año es el arroz."
+323,Roja,Objetos,El frasco de Vick VapoRub,"Medicina universal venezolana: tos, gripe, dolor de cabeza, picadura de zancudo y, según tu abuela, hasta para los nervios. Úntalo y reza."
+324,Roja,Lugares,La playa de Choroní,"Carretera de mil curvas que te marea hasta el alma, pero al final hay un mar bravo, unos tambores y un cocofrío que te perdona todo."
+325,Roja,Evento,Correr con la maleta vacía dando la vuelta a la manzana,El ritual del Año Nuevo para que el próximo traiga viajes. El vecino te ve y ya sabe lo que viene.
+326,Roja,Dichos,"""Tirar la toalla""","Rendirse de manera oficial y solemne, generalmente tres minutos antes de que la cosa iba a funcionar."
+327,Roja,Personajes,La vecina que lo sabe todo,Sistema de inteligencia más eficiente que el SEBIN. Sabe que terminaste con tu novia antes que tú.
+328,Roja,Guachafitas,Bautizar como «el chinito» a cualquier abasto sin importar el dueño,"Geografía nacional: todo barrio tiene su chinito, su tasca y una esquina donde «mataron a uno una vez»."
+329,Roja,Musica,Tambor barloventeño en Semana Santa,"Tres tambores, un coro de tías y la garantía de que para el lunes nadie en San Francisco de Yare se podrá levantar de la cama."
+330,Roja,Espanto,El Familiar de la hacienda,Una bestia que el dueño alimentaba con peones para que el negocio prosperara. El primer caso documentado de explotación laboral con monstruo incluido.
+331,Roja,Personajes,Jorge Linares,El barquisimetano que conquistó tres categorías. Pegaba tan rápido que el rival se enteraba por las redes sociales.
+332,Roja,Comida,El guarapo de papelón en el campo,Azúcar en estado puro disfrazada de bebida natural. El combustible oficial de cualquier trabajador venezolano.
+333,Roja,Objetos,La pava (la gorra),"Accesorio sagrado del beisbolero, del taxista y del que no se peinó. Mientras más sucia y desteñida, más respeto impone."
+334,Roja,Lugares,El Parque del Este,"El oasis verde de Caracas, donde la gente trota, los niños ven el avión de Tito y siempre hay un señor haciendo Tai Chi a las seis de la mañana."
+335,Roja,Evento,El partido de la Vinotinto que para al país,"Oficinas vacías, calles muertas y un país entero rezándole al VAR."
+336,Roja,Dichos,"""Estar más arrecho que tigre flaco""",Nivel de molestia tan elevado que hasta los animales del zoológico se enteran.
+337,Roja,Personajes,El que cuadra el carro mal estacionado,"Deja el carro atravesado y se va tranquilo, con el número de teléfono detrás del vidrio para que «lo llames»."
+338,Roja,Guachafitas,El que graba el concierto entero por el teléfono y nunca lo vuelve a ver,El camarógrafo frustrado. Pagó la entrada para ver el show por una pantallita de seis pulgadas tapándole la vista al de atrás.
+339,Roja,Musica,El calipso de El Callao en Carnaval,"Madamas, medio pintos y mineros bailando: la única semana del año en que Bolívar entero se olvida del oro por el ritmo."
+340,Roja,Espanto,La Llorona del Guárico,Versión sabanera de la madre que perdió a sus hijos en el río. Llora con tan buen oído que hasta los arpistos de la zona le tienen envidia.
+341,Roja,Personajes,"Leslie Pappoe... digo, Tomás Rincón","'El General' de la Vinotinto, que corre toda la cancha como si lo persiguiera la PTJ."
+342,Roja,Comida,Un ron añejo con hielo y nada más,El orgullo nacional embotellado. Quien le echa refresco comete un crimen castigado por la sociedad.
+343,Roja,Objetos,El carrito por puesto,"Transporte público y montaña rusa a la vez. Caben cuatro atrás aunque el carro sea para tres, y el chofer maneja como si lo persiguieran."
+344,Roja,Lugares,Plaza Venezuela,El corazón vial de Caracas: una fuente bonita rodeada de la mayor concentración de bocinas y groserías por metro cuadrado del país.
+345,Roja,Evento,La caída del sistema en el banco,«Está caído el sistema» — la frase que justifica todo desde 1998. No hay fecha de regreso.
+346,Roja,Dichos,"""Echarse fresco""","Relajarse y no preocuparse por nada, idealmente con un aire acondicionado robado al vecino."
+347,Roja,Personajes,El político en campaña,"Solo aparece cada cinco años, te regala una gorra y te promete asfaltar la calle que lleva diez gobiernos rota."
+348,Roja,Guachafitas,Hacerle la cruz a la comida del difunto antes de comérsela,"Respeto y hambre en partes iguales. Primero se reza, después se devora el guiso del velorio sin remordimiento."
+349,Roja,Musica,El aguinaldo que canta el coro del colegio,"Veinte niños desafinados, una pandereta y un maestro rezando para que el acto de fin de año termine antes del apagón."
+350,Roja,Espanto,El Ánima de Pica-Pica,"El alma milagrosa de un bandolero que ahora hace favores desde el más allá. Le pides un milagro y te lo cumple, pero con la condición de que no preguntes cómo."
+351,Roja,Personajes,"Juan 'El Toro' Arango... no, Rolando Fonseca... mejor: Giancarlo Maldonado",Goleador de la Vinotinto en la época en que un gol nuestro era noticia internacional de tres días.
+352,Roja,Comida,Una cerveza bien fría en la playa,Tiene que estar tan helada que duela la mano. Si está 'al tiempo' es motivo de pelea familiar.
+353,Roja,Objetos,La olla arrocera con tapa amarrada,"El cierre se rompió en 2009 y desde entonces vive amarrada con un mecate o una liga. Sigue haciendo el arroz perfecto, eso sí."
+354,Roja,Lugares,La autopista Regional del Centro,Donde los caraqueños van a llorar los domingos en la noche. Tres horas para avanzar dos kilómetros y un alcabala que aparece de la nada.
+355,Roja,Evento,El bautizo que se vuelve fiesta hasta las 3 a.m.,"Empezó con una misa y terminó con salsa, whisky y el padrino bailando encima de una silla."
+356,Roja,Dichos,"""Comerse un cable""",Pasar hambre extrema o aguantar necesidad por falta de real. Plato principal del mes de enero.
+357,Roja,Personajes,El que llega tarde a todo,"Confirmó que «ya casi llega» hace dos horas. Maneja con la hora venezolana, que no aparece en ningún reloj del mundo."
+358,Roja,Guachafitas,Pintar el frente de la casa y dejar los lados con el bloque pelado,"La fachada presidencial. Por delante es Beverly Hills, por detrás es obra negra desde el gobierno de Caldera."
+359,Roja,Musica,El reguetón sonando en la buseta a las 6 a.m.,Porque el chofer decidió que tu derecho a despertarte en silencio es secundario frente a su derecho a perreo matutino.
+360,Roja,Espanto,El Ánima Sola,"El alma a la que nadie le reza y por eso te ayuda a cambio de una velita. La definición espiritual de «yo te resuelvo, pero acuérdate de mí»."
+361,Roja,Personajes,José Manuel Rey,El capitán defensor de la Vinotinto. Marcaba al delantero rival más pegado que un familiar pidiendo prestado.
+362,Roja,Comida,El batido de parchita con leche,"Agridulce y traicionero: rico al primer trago, pero te deja la boca como lija. Aun así te tomas dos."
+363,Roja,Objetos,La cocina de kerosén de la abuela,Reliquia que aún espera en el depósito por el día que 'no haya gas'. Huele a infancia y a peligro de explosión.
+364,Roja,Lugares,El Cementerio (la zona),"Un barrio de Caracas con nombre de chiste fácil, pero terminal de buses, comercio y movimiento las 24 horas. Vivito y coleando, irónicamente."
+365,Roja,Evento,La playa en Semana Santa con medio país encima,Llegas a las 6 a.m. y aún no consigues puesto. La toalla del vecino está pegada a la tuya.
+366,Roja,Dichos,"""Estar pendiente del medio""",Vivir vigilando lo que hace todo el mundo menos tú mismo. Talento natural de toda tía con WhatsApp.
+367,Roja,Personajes,El amigo que nunca tiene efectivo,Siempre olvida la billetera justo cuando llega la cuenta y promete una transferencia que nunca cae.
+368,Roja,Guachafitas,El que se aprende el baile de TikTok pero solo lo hace en bodas,Practicó dos meses encerrado en el cuarto para soltar el pasito a las 11 p.m. cuando ya todos están prendidos.
+369,Roja,Musica,La Billo's Caracas Boys,"La banda que tu abuelo jura que sonaba mejor que cualquier cosa de hoy, y honestamente, en eso no le falla la memoria."
+370,Roja,Espanto,El Hombre Caimán,"Un pescador que por espiar a las mujeres bañándose quedó mitad hombre, mitad caimán. La advertencia ancestral contra el sapo de río."
+371,Roja,Personajes,Gabriel Cichero,Defensor de la Vinotinto con cara de pana que te fía hasta la quincena que nunca llega.
+372,Roja,Comida,El marrón claro de la panadería,El café que pides cuando no sabes pedir café. Ni muy negro ni muy con leche: el venezolano del término medio.
+373,Roja,Objetos,El abanico de cartón de la funeraria,"Publicidad de servicios fúnebres convertida en herramienta de supervivencia en misa, en velorio y en el calor de las 2 p.m."
+374,Roja,Lugares,La cola del banco,"El deporte nacional sin medallas. Llegas a las siete de la mañana, sales a la una de la tarde y resulta que el sistema 'estaba caído'."
+375,Roja,Evento,El asado negro de la abuela los domingos,Una receta que nadie ha logrado replicar porque ella «le echa amor» y nunca te dice las cantidades.
+376,Roja,Dichos,"""Pasar más hambre que maestro de escuela""",Nivel de pobreza tan reconocido que hasta tiene profesión asignada.
+377,Roja,Personajes,La tía que pellizca los cachetes,Te ve y grita «¡pero qué grande está!» mientras te arranca media cara de un solo apretón.
+378,Roja,Guachafitas,"Echarle limón a todo, hasta a las cosas que no llevan limón","El que le exprime limón a la pizza, a los tequeños y casi al café. «Es que así mata el bicho», explica sin pruebas."
+379,Roja,Musica,La Dimensión Latina con su trombón,"El sonido que convirtió una fiesta de barrio caraqueño en orquesta sinfónica de la salsa, sin pedir permiso a nadie."
+380,Roja,Espanto,La Cigua,Una mujer salvaje del monte con los pies al revés para que no sepas hacia dónde se fue. La única que enreda más que un GPS sin señal en El Ávila.
+381,Roja,Personajes,Rafael Dudamel,Arquero histórico y luego DT de la Vinotinto. Atajaba penales y críticas con la misma serenidad.
+382,Roja,Comida,La cocada del playero,"Coco, hielo y leche condensada gritada a todo pulmón bajo el sol. '¡Cocada, cocadaaa!' es el himno de la playa."
+383,Roja,Objetos,El control remoto con teipe,Forrado en cinta para que no se le salgan las pilas. Hay que apretarlo con fe y apuntarlo en ángulo exacto para que cambie el canal.
+384,Roja,Lugares,La panadería de la esquina,"El templo del cafecito, el cachito y el chisme del barrio. Donde 'me das un palito' significa pan, y el cafecito viene con noticia gratis."
+385,Roja,Evento,El cumpleaños con torta de tres leches sudada,Sale del refrigerador transpirando azúcar. Igual te comes dos pedazos y pides para llevar.
+386,Roja,Dichos,"""Echar el resto""","Darlo absolutamente todo en algo, sin guardar nada para mañana, como si no hubiera otra quincena."
+387,Roja,Personajes,El que pone la música a todo volumen en la madrugada,"Pretende que toda la cuadra disfrute su playlist de salsa brava a las 3:00 a.m., quiéranlo o no."
+388,Roja,Guachafitas,Comprar la torta «para la dieta» y comérsela parado frente a la nevera,"Las calorías comidas de pie y a escondidas no cuentan. Es ciencia, lo dijo la prima que estudió un semestre de nutrición."
+389,Roja,Musica,Un changa tuki sonando en el malandreo,El género más venezolano y más subestimado: nació en las discotecas de barrio y el mundo entero lo copió sin dar las gracias.
+390,Roja,Espanto,El Pájaro del Mal Agüero,"Si canta cerca de tu casa, algo malo va a pasar; si no canta, igual algo malo va a pasar, esto es Venezuela. Periodista de aves, siempre con la noticia mala."
+391,Roja,Personajes,Salomón Rondón... no: Josef Martínez,Goleador récord de la MLS que celebraba con un rugido más fuerte que el de tu estómago en ayuno intermitente forzado.
+392,Roja,Comida,La jalea de mango verde,"Ácida, oscura y vendida en bloques sospechosos. Te hace doler la barriga pero igual le pides al señor 'una más'."
+393,Roja,Objetos,El colador de media de café,"Esa bolsita renegrida que nadie limpia bien pero hace el guayoyo más sabroso del planeta. Cuestión de paladar, no de higiene."
+394,Roja,Lugares,El abasto del chino,"Abre a las cinco de la mañana, cierra a medianoche y tiene de todo. 'No hay sencillo, jefe' es la frase más repetida del establecimiento."
+395,Roja,Evento,El parao de pelea de gallos en el pueblo,"Apuestas, gritos, polvo y un domingo entero que se va sin que te des cuenta."
+396,Roja,Dichos,"""Hablar paja""",Decir mucho y no decir nada. Especialidad de político en campaña y de pana después del tercer trago.
+397,Roja,Personajes,El cuñado opinador,"Experto en economía, fútbol, política y tu vida personal. Nadie sabe en qué trabaja, pero todo lo critica."
+398,Roja,Guachafitas,El que llega tarde y de una se sirve como si hubiera ayudado a cocinar,"El director técnico del sancocho. No picó ni una papa, pero es el primero en agarrar el plato más hondo."
+399,Roja,Musica,Kiara y Ricardo Montaner cantando «Vivir lo nuestro»,El dueto que hizo llorar a una generación entera de quinceañeras y que todavía suena en cada radio romántica que se respete.
+400,Roja,Espanto,Juan Machete,El llanero que vendió el alma al diablo por ganado y terminó vagando por la sabana sin un solo becerro. El primer venezolano arruinado por confiar en un negocio que sonaba muy bueno.
+401,Roja,Personajes,Yeferson Soteldo,"Chiquitico y habilidoso, gambeteaba rivales como tú esquivas a los que venden rifas en el semáforo."
+402,Roja,Comida,El dulce de lechosa con clavitos,"El postre obligatorio de diciembre que nadie pide pero todos comen. Dulce, fibroso y con olor a Navidad."
+403,Roja,Objetos,La perinola de palo,Juguete y arma de tradición. Tu tío todavía la juega en Navidad con una concentración digna de un cirujano.
+404,Roja,Lugares,El mercado municipal,"Donde el verdulero te grita 'a la orden mi amor' aunque tengas 80 años, y la auyama siempre viene 'sin pesar el pedacito de ñapa'."
+405,Roja,Evento,El paseo a Margarita pagado a plazos,El viaje soñado que llevas pagando dos años y todavía no has hecho la maleta.
+406,Roja,Dichos,"""Caerle a alguien a punta de bolígrafo""","Quejarse o atacar a alguien por escrito en el grupo, porque cara a cara no hay tanto valor."
+407,Roja,Personajes,El vendedor de empanadas de la playa,Camina kilómetros bajo el sol cargando la cesta y te las vende calientes aunque tú estés sudando frío.
+408,Roja,Guachafitas,Guardar el bombillo bueno y dejar prendido el malo «por si acaso»,"La administración de recursos del venezolano: lo bueno se guarda para nunca, lo malo se usa hasta que explote."
+409,Roja,Musica,La novela de las 9 que paralizaba el país,"Antes de Netflix, había un horario sagrado donde nadie llamaba, nadie visitaba y la calle quedaba más vacía que cola de banco un domingo."
+410,Roja,Espanto,El Diablo de Yare,Baila con máscara y traje rojo el día de Corpus Christi y al final se arrodilla ante el Santísimo. El único diablo que respeta el horario de misa.
+411,Roja,Personajes,Wuilker Faríñez,El arquero milagro de la Vinotinto. Tapa todo menos las ganas del país de clasificar a un Mundial.
+412,Roja,Comida,Los suspiros que se deshacen en la boca,Azúcar batida con aire vendida como postre. Comes uno y te quedan los dientes pidiendo perdón.
+413,Roja,Objetos,El trompo con la púa gastada,Bailaba como campeón en el patio hasta que se le dobló la punta. Ahora gira chueco pero igual lo defiendes con tu vida.
+414,Roja,Lugares,El terminal de pasajeros,"Caos organizado: gritos de 'Valencia, Valencia, Valencia', vendedores de chicles, maletas amarradas con mecate y un bus que sale 'ya mismito' desde hace dos horas."
+415,Roja,Evento,El día que sube el dólar y baja el ánimo,"Te despiertas, abres el monitor paralelo y ya sabes que ese día comes sin lujo."
+416,Roja,Dichos,"""Estar como el perro de las dos tortas""",No decidirte entre dos opciones y terminar quedándote sin ninguna de las dos.
+417,Roja,Personajes,El que se queda hablando en la puerta,"Dijo «bueno, ya me voy» hace cuarenta minutos y todavía está parado contándote la novela de su prima."
+418,Roja,Guachafitas,El que cuenta el chiste y se ríe solo antes del final,El comediante que se arruina su propio remate. Lleva diez minutos riéndose y todavía nadie ha entendido nada.
+419,Roja,Musica,Topacio,La protagonista ciega que hizo que tu abuela perdonara cualquier cosa con tal de que el galán por fin se diera cuenta.
+420,Roja,Espanto,La Sayona de la carretera,Hermosa dama que pide la cola de noche y al subirse muestra un colmillo de menos y un mensaje para los maridos infieles. Punto de control vehicular del más allá.
+421,Roja,Personajes,Soledad Bravo,La voz de la canción de protesta venezolana. Cantaba con un sentimiento que despertaba hasta al que dormía en misa.
+422,Roja,Comida,Las polvorosas que te ahogan,"La galleta más seca del universo. Deliciosa, pero no intentes comerla sin un vaso de agua al lado o pasas pena."
+423,Roja,Objetos,La metra 'culebra',La metra grande y bonita que ganabas y jamás apostabas. Vivía en el bolsillo como talismán de la suerte.
+424,Roja,Lugares,La farmacia que tiene de todo menos lo que buscas,"Encuentras perfume, chocolates, peluches, juguetes y hasta una licuadora. ¿La pastilla que necesitas? 'Ay, mi amor, esa justo se acabó.'"
+425,Roja,Evento,Comprar por encargo a la que «trae cosas de Miami»,La economía informal más confiable del país. Te trae hasta los repuestos del carro en la maleta de mano.
+426,Roja,Dichos,"""Salir con un domingo siete""","Aparecerte con una sorpresa terrible y fuera de lugar, generalmente un embarazo no planificado o una deuda olvidada."
+427,Roja,Personajes,La reina de belleza del pueblo,"Camina por la plaza como si fuera la pasarela del Miss Venezuela, saludando con la mano de la realeza."
+428,Roja,Guachafitas,Vestirse completo de la marca pirata del mercado de Quinta Crespo,"El «Nike» con la palomita pa'l lado contrario y el «Adidas» de cuatro rayas. Marca propia, orgullo nacional."
+429,Roja,Musica,Cristal,"La novela donde aprendimos que toda venezolana de bien tiene una madre perdida, un secreto y un final feliz que tardó 200 capítulos."
+430,Roja,Espanto,El Muerto que pide la cola,"Lo recoges en plena oscuridad, conversa contigo lo más normal y al llegar al cementerio se baja sin pagar el pasaje. Pasajero fantasma con saldo eterno en cero."
+431,Roja,Personajes,Yordano,El italiano que cantaba en español más romántico que un mensaje de buenos días con foto de flor y gif.
+432,Roja,Comida,Una Susy a temperatura ambiente,El chocolate que se derretía en la lonchera y manchaba el cuaderno. Sabor a infancia y a regaño de la maestra.
+433,Roja,Objetos,El papagayo de bolsa plástica,"Hecho con palitos, bolsa y cabuya en plena Semana Santa. Volaba mejor que cualquier cometa comprada, palabra de honor."
+434,Roja,Lugares,El centro comercial con aire acondicionado polar,El refugio nacional contra la calor. Entras a sudar afuera y adentro te congelas tanto que tienes que comprar un suéter que no necesitabas.
+435,Roja,Evento,La pichirre que cobra hasta el hielo en su fiesta,"Te invita, pero el ron lo pones tú, el pasapalo lo traes tú, y el hielo lo vendes por cubito."
+436,Roja,Dichos,"""Pagar el pato""","Cargar con la culpa de algo que ni siquiera hiciste, usualmente porque eras el más cercano cuando reventó."
+437,Roja,Personajes,El taxista filósofo,"Te lleva del punto A al B y de paso te resuelve la crisis del país, el sentido de la vida y por qué tu equipo va perdiendo."
+438,Roja,Guachafitas,Tener el control remoto envuelto en una bolsa de pan,"La tecnología sagrada de la sala. Nadie sabe por qué, pero todos respetan el plástico amarillento desde 1998."
+439,Roja,Musica,Kassandra,La gitana que conquistó hasta a los Balcanes: dicen que detuvo una guerra porque todos querían saber el final. Soft power criollo puro.
+440,Roja,Espanto,La luz que se mueve en el cementerio,Esa lucecita que flota entre las tumbas y que tu tía jura que es un alma penando. La ciencia dice que es fósforo; tu tía dice que la ciencia no sabe nada.
+441,Roja,Personajes,Franco De Vita,Compositor de baladas que sonaban en cada quinceañero y en cada despecho post-ruptura del país.
+442,Roja,Comida,Una Cocosette mordida en el recreo,La galleta de coco que cambiabas por la merienda de otro. La economía escolar giraba alrededor de ella.
+443,Roja,Objetos,La caja de pollo convertida en gallinero,"Reciclaje criollo nivel experto: hoy cargó pollo congelado, mañana es jaula, pasado es maceta y al final, leña para la parrilla."
+444,Roja,Lugares,La parada del autobús bajo el sol,"El purgatorio del transporte público. No hay techo, no hay sombra, no hay bus, pero sí hay un señor que jura que 'ya viene, ya viene'."
+445,Roja,Evento,El domingo de plancha familiar después de la rumba,"Todos tirados en el mueble, el ventilador a máxima potencia y nadie con fuerzas ni para pedir agua."
+446,Roja,Dichos,"""Estar más pelado que rodilla de chivo""",Nivel de quiebra tan profundo que ni la imagen del chivo alcanza para describirlo.
+447,Roja,Personajes,El que se cuela en la fiesta,"Nadie sabe quién lo invitó, pero ya está en la cocina sirviéndose whisky y bailando con la tía del cumpleañero."
+448,Roja,Guachafitas,El que arregla la antena moviéndose por toda la sala hasta que «se ve»,El sacrificio del espectador: tienes que quedarte parado en un pie como flamenco para que no se vaya la señal del béisbol.
+449,Roja,Musica,Por Estas Calles,La novela que se parecía tanto a la realidad que ya no sabías si estabas viendo la tele o asomándote por la ventana.
+450,Roja,Espanto,El encanto de la laguna,"Dicen que en el fondo hay una sirena que se lleva a los que nadan solos. Por eso tu mamá no te dejaba meterte después de comer, no era por la digestión."
+451,Roja,Personajes,Karina,"'Sálvame, sálvame', cantaba mientras nosotros también pedíamos que nos salvaran de la cola del pasaporte."
+452,Roja,Comida,Un Toronto que te regalan el 24,"El bombón de la 'cesta navideña' que se reparte por compromiso. Nadie compra una caja para sí mismo, pero todos la comen."
+453,Roja,Objetos,El koala (la riñonera) del bachaquero,"Banco ambulante amarrado a la cintura. Adentro: efectivo, el celular, los caramelos del vuelto y los secretos de la economía paralela."
+454,Roja,Lugares,El estacionamiento del 'centro',"Donde el parquero apareció de la nada con un trapo rojo, te 'cuidó' el carro sin que se lo pidieras y ahora te cobra como si fuera valet de hotel."
+455,Roja,Evento,La cola para echar gasolina que dura toda la noche,"Llevas cobija, termo de café y un vecino nuevo de cola. Para cuando llegas a la bomba ya son compadres."
+456,Roja,Dichos,"""Coger los corotos""","Agarrar tus cosas e irte molesto de un lugar, idealmente con un portazo épico de despedida."
+457,Roja,Personajes,El abuelo que cuenta la misma historia,"Te narra por décima vez cómo conoció a la abuela, y tú asientes como si fuera la primera, porque lo amas."
+458,Roja,Guachafitas,Llevar el termo de tinto al estadio como si fuera oro líquido,El que se mete el café de la abuela escondido para no pagar el del kiosco. Sale más caro el sustento que la entrada.
+459,Roja,Musica,La Dama de Rosa,Donde Jeannette Rodríguez sufría con una elegancia que tu mamá intentaba imitar incluso para ir a comprar el pan.
+460,Roja,Espanto,El espíritu burlón del caserío,"Te esconde el sombrero, te apaga la vela y se ríe en la esquina del cuarto. El primo molestoso del más allá, sin sangre pero con la misma maña."
+461,Roja,Personajes,Yolanda Moreno,La primera bailarina de Venezuela que llevó el joropo a escenarios donde la gente ni sabía qué era una alpargata.
+462,Roja,Comida,Una Samba de fresa,La que tenía la 'cremita' en el centro y siempre se pegaba al papelito. Lujo de chuchería de los noventa.
+463,Roja,Objetos,La bombona de gas vacía,El tesoro más codiciado del país. Vive afuera de la puerta esperando 'el camión' que viene cada tres semanas o cuando Dios quiera.
+464,Roja,Lugares,La peluquería del barrio,"Cortan el pelo, hacen la pedicura, opinan de tu vida amorosa, te dan el chisme completo de la cuadra y bautizan al niño. Todo por el mismo precio."
+465,Roja,Evento,El parrillero del barrio un sábado en la tarde,"Humo, cerveza, una corneta a todo volumen y la chuleta que «ya va a estar» desde hace tres horas."
+466,Roja,Dichos,"""Echarle agua al guarapo""",Aguar la fiesta o rebajar el entusiasmo de alguien con un comentario realista y aguafiestas.
+467,Roja,Personajes,El mensajero de la farmacia en moto,"Llega más rápido que una ambulancia. Si pides una pastilla, te la trae antes de que cuelgues el teléfono."
+468,Roja,Guachafitas,El que se hace el sordo cuando le toca pagar la cuenta,"De repente le entró una llamada importantísima, se le cayó algo debajo de la mesa y descubrió que tenía que ir al baño. Todo al mismo tiempo."
+469,Roja,Musica,La música de la cola en la radio AM,Ese hilo musical entre cuñas de muebles y boletines que solo escuchas cuando llevas tres horas en el tranque y ya perdiste la fe.
+470,Roja,Personajes,Ali Primera,El cantor del pueblo. Sus canciones necesarias siguen sonando más vigentes que el último aumento de pasaje.
+471,Roja,Comida,El queso de mano recién hecho,"Suave, salado y doblado como una arepa. Se acaba antes de llegar a la nevera porque vas 'probando'."
+472,Roja,Objetos,El tanque de agua en el techo,"El medidor de tu felicidad. Si está lleno, eres millonario; si suena a hueco cuando lo golpeas, prepárate para el tobo."
+473,Roja,Lugares,El liceo público,"Donde aprendiste más en el receso que en el aula. Sede de la fórmula del Sandwich del kiosco, el primer amor y la falta de profesor en la última hora."
+474,Roja,Evento,La novena de aguinaldos en el colegio,Nueve días cantando frente al pesebre mientras esperas el chocolate caliente y el pan de jamón del final.
+475,Roja,Dichos,"""Quedar como un zapato""","Pasar la pena más grande frente a todo el mundo, sin posibilidad de recuperar la dignidad."
+476,Roja,Personajes,El que vende cualquier cosa en el semáforo,"Cargadores, mandarinas, agüita, peluches, periódico, una idea de negocio... todo cabe en una luz roja."
+477,Roja,Guachafitas,Mandar audios de cinco minutos para decir «ok»,"El que convierte un «sí» en un podcast con introducción, desarrollo, conclusión y un «¿aló? ¿me escuchaste?» al final."
+478,Roja,Musica,El llamado «¡Bomba!» del locutor de fiesta,"El grito que anuncia que la canción romántica viene cargada, para que sueltes a tu pareja o la abraces más fuerte, según el caso."
+479,Roja,Personajes,Gualberto Ibarreto,El oriental de la voz dulce que cantaba a las playas de Margarita que ya no podemos pagar.
+480,Roja,Comida,La nevera llena de envases de mantequilla con sobras,Abres uno buscando mantequilla y encontras caraotas de hace una semana. La caja de sorpresas más peligrosa de la casa.
+481,Roja,Objetos,La cauchera (la honda),Arma de precisión hecha con una horqueta y una liga de cámara. Terror de los mangos ajenos y de las ventanas del vecino.
+482,Roja,Lugares,La playa de Higuerote,El plan de fin de semana del caraqueño que no llegó a Margarita. Cola de tres horas para una arena prestada y un mar que ya conoces.
+483,Roja,Evento,El patinatón navideño en la madrugada,"Te levantas de madrugada a misa, sales a patinar en la calle cerrada y desayunas pan con tetero."
+484,Roja,Dichos,"""Echar un pollo""","Decir un disparate enorme con toda la seguridad del mundo, generalmente en plena reunión importante."
+485,Roja,Personajes,La señora del puesto de jugos naturales,Te exprime una naranja con un brazo de hierro mientras te cuenta los chismes del mercado completo.
+486,Roja,Guachafitas,El abuelo que le baja el volumen a la novela para «ahorrar luz»,"Economía energética inventada. Igual le baja el volumen a la radio antes de apagarla, no vaya a ser que gaste de más."
+487,Roja,Musica,Un seis por derecho cantado a capela,"Dos llaneros improvisando versos sobre tu vida en tiempo real, y tú rezando para que no rimen tu nombre con algo vergonzoso."
+488,Roja,Personajes,Un Velo por el Mar... mejor: Vytas Brenner,"El pionero del rock progresivo criollo, que mezclaba joropo con sintetizadores antes de que fuera cool."
+489,Roja,Comida,La empanada de pabellón gigante,Todo el almuerzo metido dentro de una empanada. La ingeniería culinaria venezolana en su máxima expresión grasienta.
+490,Roja,Objetos,El frasco de mayonesa relleno de caraotas,"Ningún envase muere en Venezuela. El de mayonesa guarda caraotas, el de Nescafé guarda azúcar, y todos mienten sobre su contenido."
+491,Roja,Lugares,Canaima,"Tepuyes, ríos color té y saltos por todos lados. El lugar más prehistórico de Venezuela, donde uno espera ver un dinosaurio asomarse en cualquier momento."
+492,Roja,Evento,La caraota refrita del desayuno,"Lo que sobró de la cena, ahora frito con queso encima. La reencarnación más sabrosa de la cocina criolla."
+493,Roja,Dichos,"""Estar en olla de grillos""",Encontrarte en medio de un desorden total donde todos hablan y nadie se entiende.
+494,Roja,Personajes,El que se mete en discusiones ajenas en Twitter,"Defiende equipos, partidos y artistas que ni le pagan, peleando con desconocidos a las 2:00 a.m."
+495,Roja,Guachafitas,Comprar el pollo entero y pelearse en la mesa por la rabadilla,La parte más fea del pollo es la más peleada del país. Hay familias divididas desde tiempos de Pérez Jiménez por ese pedacito.
+496,Roja,Musica,El órgano del señor de la cantina,"Teclado con ritmo automático, voz de despecho y un repertorio donde todo termina en bolero. La banda sonora oficial del último trago."
+497,Roja,Personajes,Desorden Público,La banda de ska que lleva décadas tocando 'Allá cayó' mientras aquí todo sigue cayendo.
+498,Roja,Comida,Los pasteles andinos de la parada,"Fritos, rellenos de carne y comprados en plena Trasandina con frío de montaña. Saben a viaje familiar y a curva peligrosa."
+499,Roja,Objetos,El pote de Toddy reciclado,"Después del chocolate viene su segunda vida eterna: guardando harina, tornillos, botones o ese 'por si acaso' que nunca usas."
+500,Roja,Lugares,El Hatillo,"El pueblito colonial de moda donde vas a comer un postre carísimo, tomarte la foto en una casa de colores y comprar una artesanía que no necesitabas."
+501,Roja,Evento,El corte de luz justo en el clímax de la novela,Se va la luz cuando van a revelar quién es el papá. El país entero protesta desde la oscuridad.
+502,Roja,Dichos,"""Tener la sartén por el mango""",Estar en posición de poder y mandar en la situación. El sueño de todo suegro.
+503,Roja,Personajes,El pana que organiza el viaje pero nunca confirma,"Hizo el grupo de WhatsApp, puso la fecha, mandó la cotización... y al final no fue ni él."
+504,Roja,Guachafitas,El que se baña con la lámpara del teléfono porque se fue la luz,"Multitasking de la oscuridad: enjabonarse, alumbrar y rezar que no se caiga el celular en el tobo, todo a la vez."
+505,Roja,Musica,Sonido Caracas en el carrito por puesto,Bajo tan fuerte que las ventanas vibran y tú llegas a tu destino con el corazón latiendo al compás del reguetón ajeno.
+506,Roja,Personajes,Caramelos de Cianuro,El rock nacional que sonaba en cada fiesta de liceo. 'Las Estrellas' todavía suena en la rumba del cuarentón.
+507,Roja,Comida,El pernil navideño,La estrella de la cena del 24 que el tío 'cuida' toda la tarde con un cuchillo en la mano. Que Dios proteje al que llegue tarde.
+508,Roja,Objetos,La lata de galletas con costura,"La trampa más cruel de toda abuela: abres esperando galletas y adentro hay agujas, hilos y un dedal. Decepción garantizada."
+509,Roja,Lugares,La cima del Pico Bolívar,"El punto más alto del país. Pocos llegan, todos presumen y casi nadie aguanta el frío sin parecer un tequeño congelado."
+510,Roja,Evento,La pelea por el control remoto del béisbol,"La sala dividida entre Caracas y Magallanes, y la abuela exigiendo ver su telenovela en pleno noveno inning."
+511,Roja,Dichos,"""Más viejo que el frío""","Algo o alguien con una antigüedad imposible de calcular, como el chiste que tu tío repite cada Navidad."
+512,Roja,Personajes,El que se baña los domingos por la mañana cantando,Convierte la regadera en el Teresa Carreño y la cuadra entera sufre su repertorio de baladas despechadas.
+513,Roja,Guachafitas,Decir «ya casi llego» desde la cama sin haberse levantado,El que mide las distancias en mentiras. Está a una hora pero en su cabeza ya está parqueando frente a tu casa.
+514,Roja,Musica,El himno del equipo sonando en el estadio,Treinta mil personas desafinando juntas con tal sentimiento que de repente ganar el juego pasa a segundo plano.
+515,Roja,Personajes,Nelson Arrieta,El gaitero zuliano que en diciembre suena en cada centro comercial junto al olor a hallaca y a deuda navideña.
+516,Roja,Comida,El pan de jamón con pasas y aceitunas,"El campo de batalla decembrino: la mitad lo ama, la otra mitad le quita las pasas con cirugía de precisión."
+517,Roja,Objetos,El secador de pelo usado como soplador de parrilla,"Cuando el carbón no prende, el ingenio criollo no descansa. Para eso sirve el secador viejo de tu hermana."
+518,Roja,Lugares,El abasto a las once de la noche,"El milagro de la cuadra: justo cuando se te acabó el papel tualé o la cerveza, ahí está, con la santamaría a medio cerrar pero dispuesto a salvarte."
+519,Roja,Evento,El despecho con botella en mano y vallenato,"Te dejaron, así que pones a Diomedes a todo volumen y le explicas tu vida al ventilador."
+520,Roja,Dichos,"""Dar la cara""","Asumir la responsabilidad cuando todo se complicó, acto de honor casi extinto."
+521,Roja,Personajes,El que se acuesta en la grama del parque a las 6 a.m.,"Hace ejercicio una vez al año, se toma una foto estirando y desaparece hasta el próximo 1 de enero."
+522,Roja,Guachafitas,El que le echa la culpa al perro de los ruidos en la cama,"«Fue Firulais», jura con la cara más seria del mundo, mientras el perro lo mira como diciendo «yo ni estaba aquí, mano»."
+523,Roja,Musica,La gaita que le hicieron a la maestra del colegio,"Porque en diciembre todo el mundo merece su propia gaita: la maestra, el portero y hasta el perro de la esquina."
+524,Roja,Personajes,Ricardo Aguirre,'El Monumental de la Gaita'. La 'Grey Zuliana' suena en cada hogar maracucho como himno religioso de la chinita.
+525,Roja,Comida,La ensalada de gallina de diciembre,"Papa, pollo y mayonesa en cantidades industriales. Hecha en una ponchera del tamaño de un lavamanos."
+526,Roja,Objetos,El cauchito de la lavadora amarrado al portón,Sistema de seguridad nivel barrio: una liga gruesa que mantiene el portón cerrado mejor que cualquier candado importado.
+527,Roja,Lugares,La cola del cajero automático,"Una fila de fe ciega. Cuando por fin te toca, el cajero dice 'fuera de servicio' o suelta dos billetes que no alcanzan ni para el pasaje."
+528,Roja,Evento,El mototaxi esquivando huecos como en un videojuego,"Te agarras como puedas, cierras los ojos y rezas. Él conoce cada hueco de la ciudad como tu mamá conoce tus mentiras."
+529,Roja,Dichos,"""Estar entre la espada y la pared""","Atrapado entre dos opciones malas, sin escape posible, como cuando tu mamá y tu novia pelean."
+530,Roja,Personajes,El que se sabe toda la novela,Te cuenta el final antes de que la veas y se ofende si no te emociona tanto como él con el villano.
+531,Roja,Guachafitas,Guardar el dinero en la media o en el sostén en vez del banco,"La banca privada más segura de Venezuela. Cero comisiones, máxima confianza y huele a victoria al final del día."
+532,Roja,Musica,Un bolero a la medianoche con luz de vela,"Romántico hasta que recuerdas que la vela está prendida porque, otra vez, se fue la luz a mitad de la canción."
+533,Roja,Personajes,Guaco,La 'Superbanda' que lleva 60 años sonando y todavía no sabemos cuántos integrantes tiene exactamente.
+534,Roja,Comida,El ponche crema casero,El trago navideño que parece inofensivo hasta que llevas tres y estás bailando gaita encima de la mesa.
+535,Roja,Objetos,La sábana de Hello Kitty del tío de 50 años,"Nadie sabe cómo llegó ahí, pero es la más fresquita y el tío la defiende sin vergüenza alguna."
+536,Roja,Lugares,El kiosco de revistas y chucherías,"El mini-supermercado de la acera. Vende cigarros sueltos, chicles, recargas, periódicos viejos y consejos no solicitados sobre el país."
+537,Roja,Evento,La caída de la señal del cable en pleno juego,"Bases llenas, dos outs, y la pantalla se congela. El grito se escucha en todo el edificio."
+538,Roja,Dichos,"""Echarse el muerto""","Asumir la culpa de un problema ajeno por solidaridad, lealtad o pura mala suerte."
+539,Roja,Personajes,La maestra de preescolar,"Santa con paciencia infinita que aguanta cuarenta carajitos, tres mocos y un vómito al día, y todavía sonríe."
+540,Roja,Guachafitas,El que pone la silla en la cola para «guardar el puesto» y desaparece,"El fantasma de la fila. Dejó una silla plástica, un paraguas y un primo de testigo, y volvió tres horas después como si nada."
+541,Roja,Musica,El joropo del acto cultural escolar,"Liquilique alquilado, falda con vuelos y un niño que se sabía el zapateo mejor que las tablas de multiplicar."
+542,Roja,Personajes,"Maelo Ruiz... no, Felipe Pirela","'El Bolerista de América', maracucho de voz tan suave que enamoraba hasta a la suegra más arrecha."
+543,Roja,Comida,Las hallacas que sobran hasta febrero,Se congelan 'para después' y aparecen en marzo escondidas detrás del hielo. La que nunca se acaba.
+544,Roja,Objetos,El cooler azul con la tapa rota,"El alma de toda playa, río y sancocho. Pierde el hielo en dos horas pero igual lo cargas porque es tradición familiar."
+545,Roja,Lugares,La carnicería del barrio,"Donde el carnicero te conoce, te 'rebaja' el cuerito de la pierna pero te pesa la grasa, y siempre tiene 'algo especial pa' usted, doña'."
+546,Roja,Evento,El sobón que te pasa el brazo por encima en el metro,"Vagón repleto, calor de horno, y un desconocido más pegado que tu sombra."
+547,Roja,Dichos,"""Calentar la oreja""",Susurrarle a alguien chismes o malas ideas hasta convencerlo de algo que no quería hacer.
+548,Roja,Personajes,El que llega a la reunión solo a comer,"No pone un bolívar para la torta, pero es el primero en la mesa pidiendo «córtame un pedazo grande»."
+549,Roja,Guachafitas,Manejar la moto con toda la familia y el mercado encima,"Cinco personas, un perro, dos bolsas y un coroto amarrado con mecate. La física se rinde ante el ingenio del motorizado."
+550,Roja,Musica,La cuña pegajosa que no te puedes sacar de la cabeza,Esa tonadita de una marca de jabón o malta que llevas tarareando 30 años sin haber comprado el producto jamás.
+551,Roja,Personajes,Trino Mora,"El pionero del rock en español en Venezuela, cuando rockear era casi un acto de rebeldía nacional."
+552,Roja,Comida,Un tinto negrito en la oficina,El cafecito que reúne a todo el departamento alrededor del termo. Más chisme se hace ahí que trabajo en todo el día.
+553,Roja,Objetos,El termómetro de mercurio que se sacude,"Antes de medirte la fiebre había que sacudirlo como maraca. Si se caía y se rompía, jugabas con las bolitas plateadas. Travesura tóxica."
+554,Roja,Lugares,El Centro de Caracas (casco histórico),"Plaza Bolívar, palomas, buhoneros y el ruido de tres siglos de historia. Donde los próceres bajan del caballo de bronce a quejarse de la cola."
+555,Roja,Evento,La feria del pueblo con calesita y algodón de azúcar,"Luces de colores, música a todo volumen y un toro mecánico que nadie aguanta más de tres segundos."
+556,Roja,Dichos,"""Estar como caballo de coleo""","Andar nervioso, alborotado y sin control, listo para salir corriendo en cualquier momento."
+557,Roja,Personajes,El fanático del béisbol que insulta al televisor,Grita instrucciones al mánager como si lo escuchara y jura que él lo haría mejor desde el mueble.
+558,Roja,Guachafitas,El que se sabe la letra del himno cambiada por groserías desde el liceo,Patrimonio cultural inmaterial. La versión «oficial» del recreo que todavía se le escapa en los actos del 5 de julio.
+559,Roja,Musica,"El despecho de Pasta Base… digo, de bar de pueblo","Cuando el rocolo escupe una de esas canciones donde el tipo perdió a la mujer, el carro y la dignidad, todo en la misma estrofa."
+560,Roja,Personajes,Corina Smith,"La cantante pop que pasó de YouTube a los escenarios, demostrando que el talento criollo sí emigra para arriba."
+561,Roja,Comida,Una empanada de carne mechada en la playa,"Caliente, grasienta y servida en una servilleta que se transparenta. El desayuno de quien madrugó para agarrar puesto."
+562,Roja,Objetos,La plancha de hierro fundido,La que se calentaba en la cocina y pesaba un kilo. Tu abuela la usaba y de paso ejercitaba el brazo. Indestructible como ella.
+563,Roja,Lugares,El estadio Universitario,"Catedral del beisbol criollo. Caracas vs Magallanes, cerveza tibia, hot dog con todo y un narrador interno que se sabe el nombre de todo el mundo."
+564,Roja,Evento,El primer aguacero que inunda toda la calle,Llovió diez minutos y ya la avenida es un río. Los carros flotan y los muchachos se bañan en la esquina.
+565,Roja,Dichos,"""Meter la pata hasta el fondo""","Equivocarte no como un error sencillo, sino como una obra maestra de la metida de pata."
+566,Roja,Personajes,El que arregla todo con alambre y teipe,"Mecánico, plomero, electricista y carpintero sin título. Si se rompe, él lo «arregla» hasta que se vuelva a romper."
+567,Roja,Guachafitas,Echarse perfume encima en vez de bañarse cuando se va el agua,"La ducha seca nacional. Tres rociadas de colonia barata y un desodorante con fe, y pa'la calle como si nada."
+568,Roja,Musica,Música de chinchorro un domingo de resaca,"Salsa romántica suave, ventilador girando y la promesa de que hoy no se hace absolutamente nada más que mecerse."
+569,Roja,Personajes,Lasso,"'Ojalá' la dedicaste a alguien que ya ni se acuerda de ti, pero la canción sigue pegando."
+570,Roja,Comida,El sándwich de mortadela del recreo,"Pan blanco, mortadela y nada más. El lujo de quien no le quedaba para la cantina, pero igual sabroso."
+571,Roja,Objetos,El radio de pilas que solo agarra una emisora,Compañero fiel del apagón. Da igual lo que quieras oír: solo pega esa emisora de música llanera con interferencia incluida.
+572,Roja,Lugares,La cola del peaje,Donde se forma la procesión nacional un día feriado. Avanzas un metro cada media hora y siempre hay alguien que se mete en cola con cara de inocente.
+573,Roja,Evento,La visita médica de la tía que llega con remedios caseros,"Para todo tiene una hoja, un brebaje o un té amargo. «Tómate esto y verás que se te quita»."
+574,Roja,Dichos,"""Sacarle el cuerpo""",Esquivar una responsabilidad o a una persona con la elegancia de un torero asustado.
+575,Roja,Personajes,La doña que vende dulces criollos en la ventana de su casa,"Jalea de mango, conserva de coco y besitos de coco. Su cocina huele a infancia y a papelón."
+576,Roja,Guachafitas,El que pide la cuenta «dividida» y empieza a sacar la calculadora del impuesto,"El contador de la mesa. «Yo solo me tomé dos refrescos», dice el que se comió tres parrillas y un postre."
+577,Roja,Musica,El cañonazo de fin de año en la radio,Esa lista de éxitos que solo existe para que el 31 de diciembre brindes con gente que no veías desde el cañonazo anterior.
+578,Roja,Personajes,Micro TDH,El urbano que canta del amor y el desamor mientras tú haces playback frente al espejo.
+579,Roja,Comida,Un raspado de cola con leche condensada,"Hielo, sirope rojo fosforescente y un chorro de leche que lo hace 'gourmet'. Te pinta la lengua y la conciencia."
+580,Roja,Objetos,El paragüero hecho con un tobo viejo,"Decoración criolla en la entrada. Antes cargaba agua, ahora carga paraguas rotos que nadie va a arreglar jamás."
+581,Roja,Lugares,La playa de Cata,"El postalita de Aragua: media luna de arena, palmeras y un mar bravo que te revuelca dos veces antes de dejarte salir con respeto."
+582,Roja,Evento,"El domingo de misa, almuerzo y siesta sagrada","La trinidad del descanso criollo. Después de la siesta, nadie es responsable de sus actos."
+583,Roja,Dichos,"""Estar guayabo""","Andar nostálgico y triste por un amor perdido, idealmente con vallenato de fondo."
+584,Roja,Personajes,El pana que se duerme en toda fiesta,"A las 11 ya está roncando en el mueble con el plato en la mano, mientras la rumba apenas empieza."
+585,Roja,Guachafitas,"Usar la franela vieja como trapo, pijama y luego de gala según la ocasión","La franela camaleón. Empezó siendo de salir, pasó a dormir, terminó secando el carro y todavía respira."
+586,Roja,Musica,Un tema de Yordano para llorar con elegancia,"Cuando quieres sufrir, pero con clase y buena producción, sin caer en el despecho de cantina barata."
+587,Roja,Personajes,Big Soto,El trapero criollo que rapea de billetes verdes que aquí solo vemos en sueños y en el paralelo.
+588,Roja,Comida,La tizana en el cumpleaños,"Un mar de frutas picadas nadando en jugo dulce. El postre y la bebida en un solo vaso, servido con un cucharón."
+589,Roja,Objetos,La bicicleta 'cross' sin frenos,"Se frenaba con la suela del zapato o contra la pared del vecino. Tenía pegatinas, mechones de colores y cero seguridad."
+590,Roja,Lugares,El centro comercial Sambil,"Templo del consumo, punto de encuentro y refugio del aire acondicionado. 'Nos vemos en el Sambil' es una dirección válida en todo el país."
+591,Roja,Evento,La rifa del trabajo que nunca entrega el premio,Compraste diez números «por colaborar» y el premio se lo ganó la sobrina de la organizadora. Qué casualidad.
+592,Roja,Dichos,"""Echar leña al fuego""",Empeorar deliberadamente una pelea ajena por puro entretenimiento. Aporte clásico del primo metiche.
+593,Roja,Personajes,El que maneja con una mano y come con la otra,"Hamburguesa en una mano, teléfono entre el hombro y la oreja, y todavía te toca corneta por ir lento."
+594,Roja,Guachafitas,El que pregunta «¿y eso qué es?» en el menú y termina pidiendo lo de siempre,"Estudió la carta entera, le preguntó al mesonero por cada plato sofisticado y al final pidió pollo con tajadas. Como siempre."
+595,Roja,Musica,La salsa que pone el vecino a las 6 a.m. del sábado,Su derecho a celebrar la vida con El Gran Combo a todo volumen pesa más que tu derecho a dormir hasta tarde un solo día.
+596,Roja,Personajes,Danny Ocean,'Me rehúso' a aceptar que ya pasaron años de esa canción y que media diáspora la lloró en algún aeropuerto.
+597,Roja,Comida,El pollo en brasa del domingo,Con sus papas y su ensalada de col bañada en salsa rosada. El almuerzo de quien no quiso cocinar y nadie lo juzga.
+598,Roja,Objetos,El abrigo que solo se usa una vez al año en Mérida,Vive en el fondo del closet esperando ese único viaje al páramo. El resto del año es testigo mudo de tu sudor.
+599,Roja,Lugares,La cola para echar gasolina,"El campamento más largo del país. La gente lleva silla, comida, abanico y hasta se hace amiga del de adelante. Acampar mientras el tanque sueña."
+600,Roja,Evento,El profesor que llega tarde pero igual pasa lista,"Entra a los cuarenta minutos, no da clase, pero le importa muchísimo saber quién faltó."
+601,Roja,Dichos,"""Estar más limpio que talón de lavandera""","Sin un solo billete, brillando de pura pobreza. La metáfora más criolla de la quiebra."
+602,Roja,Personajes,El locutor de radio AM de la madrugada,Voz de terciopelo que dedica baladas a doña Carmen de Petare y manda saludos a todo el este del país.
+603,Roja,Guachafitas,Tener una matica sembrada en una lata de leche Klim oxidada,"El jardín botánico del balcón criollo. Ahí crece sábila, orégano orejón y una bendición que dejó la vecina antes de mudarse."
+604,Roja,Personajes,Catherine Fulop,"La actriz que conquistó Argentina y ahora es más argentina que el dulce de leche, pero sigue diciendo 'chamo'."
+605,Roja,Comida,Las arepas fritas con queso amarillo,"Cuando no hay budare o hay flojera, se fríen. Quedan crujientes por fuera, peligrosas para el colesterol y deliciosas."
+606,Roja,Objetos,La franela de la promoción que ya no te queda,Reliquia del liceo que guardas por nostalgia. Te quedaba flojita en 5to año y hoy no te pasa de los hombros.
+607,Roja,Lugares,El barrio 23 de Enero,"Los bloques más famosos de Caracas, con escaleras infinitas, historia política a flor de piel y una vista de la ciudad que cuesta cada peldaño."
+608,Roja,Evento,La cola para sacar el pasaporte que parece interminable,"Un trámite que te envejece. Pides cita, te dan para dentro de un año, y aún así llegas y no apareces en el sistema."
+609,Roja,Dichos,"""Hacerle el feo a la comida""","Despreciar un plato delante de quien lo cocinó, pecado mortal en cualquier casa venezolana."
+610,Roja,Personajes,El que se cree DJ con la corneta del carro,Baja todas las ventanas para que el barrio sepa que tiene buen gusto musical. Spoiler: no lo tiene.
+611,Roja,Guachafitas,El que se duerme en la película y jura que «solo cerró los ojos un ratico»,"Roncó toda la trama, se perdió el final y pregunta «¿y entonces quién era el malo?» con todo el descaro del mundo."
+612,Roja,Personajes,Ruddy Rodríguez,La galana de las novelas de los 90 por la que medio país llegaba temprano a la casa para ver el capítulo.
+613,Roja,Comida,El perico para el desayuno,"Huevos revueltos con tomate y cebolla, el desayuno que se hace en cinco minutos. Acompaña arepa, pan o lo que aparezca."
+614,Roja,Objetos,El vaso de Mickey Mouse del McDonald's,"Coleccionable noventero que ascendió a vajilla oficial de la casa. Para tomar agua, jugo y hasta el guarapo de tu abuela."
+615,Roja,Lugares,La lavandería del barrio,Donde dejas la ropa y rezas para que no te la cambien por la del vecino. La señora siempre te dice 'mañana a las dos' y nunca está lista a las dos.
+616,Roja,Evento,El pana que pide la cola y termina manejando él,Empezó pidiéndote el aventón y al final tú vas de copiloto en tu propio carro.
+617,Roja,Dichos,"""Llevarse a alguien por delante""","Atropellar a la gente, literal o figuradamente, por andar apurado y sin mirar a nadie."
+618,Roja,Personajes,La señora que reza el rosario en el autobús,Encomienda el viaje completo a todos los santos porque conoce al chofer y sabe cómo maneja.
+619,Roja,Guachafitas,Llevar la nevera de anime a la playa más llena de cervezas que de hielo,"La logística del sol y arena: el hielo se derrite en dos horas, las cervezas se calientan y igual se las toman como agua bendita."
+620,Roja,Personajes,Coraima Torres,La 'Kassandra' que se transmitió en 180 países. Hay gente en Serbia que aprendió español viéndola sufrir.
+621,Roja,Comida,El casabe con suero,La torta crujiente de yuca que truena al partirla. Con suero salado encima es un manjar prehispánico que sigue vigente.
+622,Roja,Objetos,La cartera de tu mamá que tiene de todo,"Un universo paralelo: pañitos, caramelos, aspirinas, una factura del 2015, hilo, aguja y, en el fondo, las llaves que jura no encontrar."
+623,Roja,Lugares,El Saladillo de Maracaibo,"Cuna de la gaita y de las casas de colores. Donde todo maracucho jura que se inventó el patacón, el queso y la alegría."
+624,Roja,Evento,La cuadra que se va la luz solo en tu casa,"Todo el barrio con luz menos tú. Sales al frente, miras al cielo y maldices al transformador personal."
+625,Roja,Dichos,"""Estar en el aire""","No tener nada resuelto ni decidido. Estado civil, laboral y mental del venezolano promedio."
+626,Roja,Personajes,El que pregunta «¿y a cómo está el dólar?» en cada conversación,Economista de cafetín que actualiza la tasa antes que el propio paralelo y te lo dice sin que preguntes.
+627,Roja,Guachafitas,El que arregla los lentes rotos con teipe y sigue su vida normal,"El profesor Chiflado del barrio. Tres vueltas de teipe en la patica, una ladeadita permanente y orgullo de no haber gastado un real."
+628,Roja,Personajes,Gabriela Spanic,"'La Usurpadora', que jugó a la gemela buena y la gemela mala con una dedicación digna de premio."
+629,Roja,Comida,Una catalina (paledonia) con café,"La galleta oscura de papelón y especias, dura como piedra. Se moja en el café para que no te tumbe un diente."
+630,Roja,Objetos,El llavero con quince llaves de puertas que ya no existen,"Nadie sabe qué abren la mitad, pero botarlas da yeta. Pesan como un ancla y suenan a inseguridad bien guardada."
+631,Roja,Lugares,La carretera vieja Caracas-La Guaira,"Curvas, neblina y nostalgia. La ruta del que no quiere pagar autopista pero sí quiere marearse y ver el mar aparecer por sorpresa."
+632,Roja,Evento,El cumpleaños sorpresa que todo el mundo sabía menos el festejado,Llevaban semanas planeándolo en un grupo de WhatsApp y él fue el último en enterarse... por accidente.
+633,Roja,Dichos,"""Echar un cuento""",Narrar una anécdota tan elaborada que ni tú recuerdas qué parte fue verdad.
+634,Roja,Personajes,El pana que se ofrece a ayudar en la mudanza y desaparece,Llega cuando ya subiste la nevera por las escaleras y se va apenas hay pizza repartida.
+635,Roja,Guachafitas,Anunciar que vas a dejar de tomar todos los lunes del año,El propósito más reciclado de Venezuela. El lunes dura hasta que alguien dice «¿nos echamos una fría?» a las cuatro de la tarde.
+636,Roja,Personajes,Lupita Ferrer,La primera actriz venezolana que abrió camino en Hollywood cuando 'soñar en grande' era ilegal por escaso.
+637,Roja,Comida,Los chicharrones de la carretera,"Colgados en ganchos a la vista de todos, sin nevera y sin remordimiento. Paras, compras y rezas para que el estómago aguante."
+638,Roja,Objetos,El espejo retrovisor amarrado con alambre,"El carro perdió un retrovisor en 2018 y desde entonces sobrevive con alambre, oraciones y la fe del conductor."
+639,Roja,Lugares,El abasto que fía,La institución financiera más confiable del barrio. 'Anótamelo en la libreta' es un contrato de honor más serio que cualquier banco.
+640,Roja,Evento,La cena navideña que empieza a la 1 a.m.,Comes la hallaca de madrugada porque la abuela «todavía no está lista» y nadie se atreve a apurarla.
+641,Roja,Dichos,"""Quedarse en el sitio""",Sorprenderse tanto con algo que el cuerpo deja de funcionar momentáneamente.
+642,Roja,Personajes,El que se sabe el chiste pero lo cuenta mal,"Se ríe antes del final, se le olvida el remate y aun así espera que toda la mesa le aplauda."
+643,Roja,Personajes,Jean Carlo Simancas,"El galán eterno de las novelas, que enamoraba a tres generaciones de tías con una sola mirada."
+644,Roja,Comida,Una arepa 'pelúa' rebosada,"Carne mechada y queso amarillo rallado por encima como melena. El nombre lo explica todo, el sabor lo justifica."
+645,Roja,Objetos,La cornetica del Polar Ice en la cava de playa,"El sonido que anuncia que el vendedor está cerca. Sagrado como las campanas de la iglesia, pero más bienvenido bajo el sol."
+646,Roja,Lugares,Choroní de noche con tambores,"Cuando el cuero del tambor suena, el pueblo entero se mueve y nadie duerme. La fiesta de San Juan que despierta hasta a los muertos."
+647,Roja,Evento,El regateo en el mercado municipal,Un duelo de voluntades por dos bolívares de diferencia. Al final compras de más «porque me cayó bien».
+648,Roja,Dichos,"""Ponerse las pilas""","Espabilarse y empezar a hacer las cosas en serio, generalmente cuando ya es demasiado tarde."
+649,Roja,Personajes,La cajera del supermercado que pide cambio,"Te pregunta si tienes «el sencillo» con cara de súplica, como si fuera culpa tuya que no haya monedas en el país."
+650,Roja,Personajes,Carlos Mata,Galán y cantante de novela que tenía a las señoras suspirando y a los esposos celosos del televisor.
+651,Roja,Comida,El tequeñón del centro comercial,"El tequeño tamaño familiar que comes con cuchillo y tenedor. Caro, gigante y bañado en salsa, puro show de feria."
+652,Roja,Objetos,El ventilador de techo que tiembla,Gira con un bamboleo que te quita el sueño porque crees que se va a caer encima de ti. Lleva 20 años amenazando y nunca cumple.
+653,Roja,Lugares,El ambulatorio del barrio,"Donde llegas a las cinco de la mañana por una ficha, te atienden a las dos de la tarde y el doctor te receta 'reposo y bastante líquido'."
+654,Roja,Evento,El motorizado que te entrega el pedido frío,"Pediste caliente, llegó tibio, y el delivery jura que «salió hace cinco minutos» de hace una hora."
+655,Roja,Dichos,"""Estar más perdido que cochino en feria""","Andar completamente desorientado y rodeado de peligro, sin saber que eres el plato principal."
+656,Roja,Personajes,El que llega de Estados Unidos hablando medio inglés,Pasó tres meses en Doral y ya se le olvidó cómo se dice «cola». Ahora todo es «traffic» y «el rentón».
+657,Roja,Personajes,Amanda Gutiérrez... mejor: Hilda Carrero,La villana de novela perfecta: la odiabas tanto que querías meterte en el televisor a darle un correazo.
+658,Roja,Comida,La cachapa con cochino y mantequilla derritiéndose,Cuando la mantequilla baja por los lados ya sabes que el día va a ser bueno. La felicidad es de color amarillo.
+659,Roja,Objetos,El cuaderno Caribe forrado con plástico transparente,Útil escolar de élite. Forrarlo con la regla y sin burbujas era un arte que separaba a los pulcros de los desastres.
+660,Roja,Lugares,La parada de los 'piratas',"El transporte informal de toda esquina: un carro lleno hasta el mecate, música a todo volumen y un chofer que maneja como si lo persiguieran."
