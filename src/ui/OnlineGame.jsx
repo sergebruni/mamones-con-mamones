@@ -446,6 +446,12 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
         </div>
       )}
 
+      {puedeAvanzar && (
+        <button className="og__next" onClick={siguiente}>
+          Siguiente ronda →
+        </button>
+      )}
+
       {/* Jugadas en el centro */}
       {enMesa && (
         <div className="og__mesa">
@@ -473,11 +479,6 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
         </div>
       )}
 
-      {puedeAvanzar && (
-        <button className="og__next" onClick={siguiente}>
-          Siguiente ronda →
-        </button>
-      )}
       {fase === "terminado" && (
         <div className="og__endbtns">
           {sala.host_uid === uid && (
