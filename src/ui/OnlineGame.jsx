@@ -3,6 +3,10 @@ import { supabase } from "../lib/supabase.js";
 import { initSfx, isSfxEnabled, setSfxEnabled, spinTicks, beep, beepUrge, ding } from "../lib/sfx.js";
 import "./OnlineGame.css";
 
+// ¿El dispositivo tiene mouse con hover? (escritorio sí, móvil táctil no)
+const CAN_HOVER =
+  typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover: hover)").matches;
+
 function metaGanar(n) {
   if (n >= 8) return 4;
   if (n === 7) return 5;
@@ -56,6 +60,8 @@ function Carta({ color, titulo, flavor, onClick, onDoubleClick, disabled, ganado
       onPointerDown={startPress}
       onPointerUp={endPress}
       onPointerLeave={endPress}
+      onMouseEnter={() => CAN_HOVER && !anon && flavor && onLongPress && onLongPress({ color, titulo, flavor })}
+      onMouseLeave={() => CAN_HOVER && onLongPressEnd && onLongPressEnd()}
       onContextMenu={(e) => e.preventDefault()}
     >
       {anon ? (
