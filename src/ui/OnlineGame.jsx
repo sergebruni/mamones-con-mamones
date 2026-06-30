@@ -20,12 +20,44 @@ const EFECTOS = {
   6: { emoji: "🃏", name: "Jugada doble", desc: "Juegas DOS cartas." },
 };
 
-function Carta({ color, titulo, flavor, onClick, onDoubleClick, disabled, ganadora, peor, anon }) {
+function Carta({ color, titulo, flavor, onClick, onDoubleClick, disabled, ganadora, peor, anon, onLongPress, onLongPressEnd }) {
+  const timer = useRef(null);
+  const longRef = useRef(false);
+
+  const startPress = () => {
+    longRef.current = false;
+    if (anon || !flavor) return; // nada que ampliar
+    timer.current = setTimeout(() => {
+      longRef.current = true;
+      onLongPress && onLongPress({ color, titulo, flavor });
+    }, 400);
+  };
+  const endPress = () => {
+    if (timer.current) clearTimeout(timer.current);
+    if (longRef.current) onLongPressEnd && onLongPressEnd();
+  };
+  const handleClick = () => {
+    if (longRef.current) {
+      longRef.current = false;
+      return; // fue pulsación larga: no dispares el clic
+    }
+    onClick && onClick();
+  };
+
   const cls = `carta carta--${color} ${ganadora ? "carta--gana" : ""} ${peor ? "carta--peor" : ""} ${
-    onClick || onDoubleClick ? "carta--click" : ""
-  }`;
+    disabled ? "carta--off" : ""
+  } ${onClick || onDoubleClick ? "carta--click" : ""}`;
+
   return (
-    <button className={cls} onClick={onClick} onDoubleClick={onDoubleClick} disabled={disabled}>
+    <button
+      className={cls}
+      onClick={handleClick}
+      onDoubleClick={onDoubleClick}
+      onPointerDown={startPress}
+      onPointerUp={endPress}
+      onPointerLeave={endPress}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       {anon ? (
         <span className="carta__dorso">🤔</span>
       ) : (
@@ -52,6 +84,8 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const [rot, setRot] = useState(0); // rotación de la ruleta
   const [verRes, setVerRes] = useState(false); // mostrar resultado de la ruleta
   const [muted, setMuted] = useState(!isSfxEnabled());
+  const [preview, setPreview] = useState(null); // carta ampliada (long-press)
+  const cerrarPreview = () => setPreview(null);
   const lastSyncRef = useRef("");
   const firedRef = useRef("");
   const turnsRef = useRef(5);
@@ -335,7 +369,13 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
             <span className="carta__dorso">🟢 ?</span>
           </div>
         ) : (
-          <Carta color="verde" titulo={cartaVerde} flavor={flavores[cartaVerde]} />
+          <Carta
+            color="verde"
+            titulo={cartaVerde}
+            flavor={flavores[cartaVerde]}
+            onLongPress={setPreview}
+            onLongPressEnd={cerrarPreview}
+          />
         )}
       </div>
 
@@ -411,6 +451,8 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                   ganadora={esMejor}
                   peor={esPeor}
                   onClick={handler}
+                  onLongPress={setPreview}
+                  onLongPressEnd={cerrarPreview}
                 />
                 {m.nombre && <span className="og__autor">{m.nombre}</span>}
               </div>
@@ -440,7 +482,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
       {/* Mano del jugador */}
       {!esJuez && fase !== "terminado" && (
         <div className="og__hand">
-          <p className="og__handlabel">Tu mano</p>
+          <p className="og__handlabel">Tu mano · mantén pulsada una carta para leerla</p>
           <div className="og__handrow">
             {hand.map((c, i) => {
               const puedeJugar = fase === "jugando" && !yaJugue && !congelado;
@@ -455,6 +497,8 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                     anon={!espiada}
                     onClick={() => setPeek((p) => ({ ...p, [i]: !p[i] }))}
                     onDoubleClick={puedeJugar ? () => jugar(c) : undefined}
+                    onLongPress={setPreview}
+                    onLongPressEnd={cerrarPreview}
                   />
                 );
               }
@@ -466,9 +510,21 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                   flavor={flavores[c]}
                   onClick={puedeJugar ? () => jugar(c) : undefined}
                   disabled={!puedeJugar}
+                  onLongPress={setPreview}
+                  onLongPressEnd={cerrarPreview}
                 />
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {/* Vista ampliada al mantener pulsada una carta */}
+      {preview && (
+        <div className="og__preview" onPointerUp={cerrarPreview} onClick={cerrarPreview}>
+          <div className={`og__preview-card og__preview-card--${preview.color}`}>
+            <span className="og__preview-titulo">{preview.titulo}</span>
+            {preview.flavor && <span className="og__preview-flavor">{preview.flavor}</span>}
           </div>
         </div>
       )}
