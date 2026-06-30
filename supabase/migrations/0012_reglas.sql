@@ -205,7 +205,8 @@ begin
 
   v_verde := nueva_verde(p_sala);
   update salas set fase = 'jugando', ronda = ronda + 1, juez_uid = v_next, carta_verde = v_verde,
-                   mejor_mesa_id = null, peor_uid = null, ruleta_efecto = null, penalizado_uid = null
+                   mejor_mesa_id = null, peor_uid = null, ruleta_efecto = null, penalizado_uid = null,
+                   fase_hasta = now() + interval '60 seconds', ronda_inicio = now()
   where id = p_sala;
 end $$;
 
