@@ -18,7 +18,7 @@ Versión criolla de *Manzanas con Manzanas* (Apples to Apples) con jerga venezol
 - Vite + React + Phaser 3 + Supabase. Gestor: **bun**.
 - `src/main.jsx`, `src/App.jsx` (pantallas: menu / sp / lobby).
 - `src/ui/Menu.jsx` — menú principal (botón Multijugador beta).
-- `src/ui/Lobby.jsx` — lobby online: crear/unirse, **presencia**, **config de sala** (modo, cartas-para-ganar, piensa rápido), **reconexión** (localStorage `mcm_room`), migración de host.
+- `src/ui/Lobby.jsx` — lobby online: crear/unirse, **presencia**, **config de sala** (modo, cartas-para-ganar, piensa rápido), **reconexión** (localStorage `mcm_room`), migración de host, **invitar/compartir** (Web Share API + fallback a portapapeles; enlace profundo `?sala=CÓDIGO`).
 - `src/ui/OnlineGame.jsx` — **tablero online** (React/HTML reutilizando el arte de las cartas). Renderiza estado remoto + intenciones por RPC. Realtime + **polling de respaldo cada 3s**.
 - `src/lib/supabase.js` — cliente singleton, `ensureAuth()` (login anónimo + `realtime.setAuth`).
 - `src/lib/sfx.js` — sonidos con Web Audio (tic ruleta/reloj, ding); botón mute.
@@ -71,10 +71,15 @@ bun run build
 
 ## Pendiente / ideas (no hechas)
 - **Notificaciones**: solo se hizo PWA instalable. Faltan notificaciones **locales** (es tu turno / eres juez) y **Web Push** (app cerrada; requiere VAPID + tabla de suscripciones + Edge Function + en iOS PWA instalada).
+- **Chat de voz (posible mejora):** la feature más compleja. Ventaja: ya usamos Supabase Realtime → su canal *broadcast* sirve de **señalización** WebRTC gratis. Lo difícil se concentra en: (1) **NAT traversal/TURN** — STUN gratis cubre ~80–85%, el resto necesita TURN (servidor `coturn` propio o servicio de pago); (2) **iOS/PWA** (permisos de micrófono, autoplay, audio en background); (3) **escala de la malla P2P** — bien a 4–6 jugadores, pesada a 8–10 (ahí conviene un SFU como LiveKit/Daily/Agora). Plan sugerido: prototipo **malla + push-to-talk + señalización por Realtime + solo STUN** para validar a 4–6, y si funciona agregar TURN. Alternativa barata previa: **chat de texto** (tabla `mensajes` + Realtime, ~medio día).
 - **Single-player (Phaser)** NO está a paridad con las reglas nuevas del online (tiene su propia Amarga/ruleta de fases anteriores).
-- La **rueda visual** muestra los 6 sectores aunque “congelada” esté excluida del sorteo (decorativo).
 - Endurecer anti-trampa de presencia (un solo “coordinador” reporta conectados).
 - Llevar el flavor/long-press y otros detalles también al single-player si se desea.
+
+## Hecho recientemente (sin commitear aún)
+- **Rueda visual dinámica:** la Ruleta del Mamón Amargo ahora muestra 5 ó 6 sectores según *Piensa Rápido* (antes mostraba siempre 6 con 🥶 aunque estuviera excluida). Sectores y `conic-gradient` se calculan en JS (`efectosRuleta`, `COLOR_EFECTO`, `ruletaBg`) y el aterrizaje se calcula por índice en la lista activa (`OnlineGame.jsx`). Para 6 efectos es idéntico a antes.
+- **Invitar/compartir sala:** botón en el lobby (Web Share API con fallback a portapapeles) que comparte un enlace `?sala=CÓDIGO`; `App.jsx` lee el parámetro al cargar, entra al lobby y precarga el código (la invitación tiene prioridad sobre la reconexión automática).
+- **500 cartas rojas nuevas:** generadas en `db/rojas-500.csv` y **anexadas a `cartas.csv`** (INDICE 161–660; se quitaron 490 placeholders vacíos del Sheet). Seed regenerado (`0002_seed_cartas.sql`: **659 rojas + 50 verdes**). El mazo tenía un duplicado propio previo ("El bachaquero de la esquina", INDICE 11 y 69) que el dedupe del seed eliminó solo. **Falta correr el SQL `0002` en Supabase** para aplicarlo.
 
 ## Último commit relevante
 `0017_ruleta_congelada` — “Mano congelada” solo aparece en la ruleta con Piensa Rápido activo.
