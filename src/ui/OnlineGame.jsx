@@ -213,7 +213,9 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     return () => supabase.removeChannel(ch);
   }, [salaId, uid, fetchSala, fetchPlayers, fetchHand, fetchMesa, fetchJugaron, fetchMisJugadas]);
 
-  // Respaldo: si algún evento de Realtime se pierde, refrescamos el estado cada 3s.
+  // Respaldo cada 3s: refresca el estado y pide resolver el timeout.
+  // resolver_timeout lo decide el SERVIDOR con su propio reloj (no el del navegador),
+  // así que aunque haya desfase de hora, la fase vencida se resuelve en ≤3s.
   useEffect(() => {
     const t = setInterval(() => {
       fetchSala();
@@ -222,9 +224,12 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
       fetchJugaron();
       fetchMisJugadas();
       fetchHand();
+      supabase.rpc("resolver_timeout", { p_sala: salaId }).then(({ error }) => {
+        if (error) console.warn("resolver_timeout:", error.message);
+      });
     }, 3000);
     return () => clearInterval(t);
-  }, [fetchSala, fetchMesa, fetchPlayers, fetchJugaron, fetchMisJugadas, fetchHand]);
+  }, [salaId, fetchSala, fetchMesa, fetchPlayers, fetchJugaron, fetchMisJugadas, fetchHand]);
 
   // Reiniciar "peek" cuando cambia la ronda/mano.
   useEffect(() => setPeek({}), [ronda]);
