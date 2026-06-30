@@ -24,6 +24,20 @@ const EFECTOS = {
   6: { emoji: "🃏", name: "Jugada doble", desc: "Juegas DOS cartas." },
 };
 
+// Color de la cuña de cada efecto en la ruleta.
+const COLOR_EFECTO = {
+  1: "#ffd35c",
+  2: "#8a1c10",
+  3: "#2e8b2e",
+  4: "#e08a1c",
+  5: "#3a6ea5",
+  6: "#6b3fa0",
+};
+
+// Efectos que entran al sorteo. 'Mano congelada' (2) solo con Piensa Rápido.
+const efectosRuleta = (piensaRapido) =>
+  piensaRapido ? [1, 2, 3, 4, 5, 6] : [1, 3, 4, 5, 6];
+
 function Carta({ color, titulo, flavor, onClick, onDoubleClick, disabled, ganadora, peor, anon, onLongPress, onLongPressEnd }) {
   const timer = useRef(null);
   const longRef = useRef(false);
@@ -113,6 +127,13 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const mejorMesaId = sala?.mejor_mesa_id;
   const peorUid = sala?.peor_uid;
   const ruletaEfecto = sala?.ruleta_efecto;
+
+  // Sectores de la ruleta (5 ó 6 según Piensa Rápido), repartidos parejo.
+  const efectosActivos = efectosRuleta(piensaRapido);
+  const segDeg = 360 / efectosActivos.length;
+  const ruletaBg = `conic-gradient(${efectosActivos
+    .map((e, idx) => `${COLOR_EFECTO[e]} ${idx * segDeg}deg ${(idx + 1) * segDeg}deg`)
+    .join(", ")})`;
 
   const me = players.find((p) => p.uid === uid);
   const miEfecto = me?.efecto_ronda;
@@ -248,14 +269,14 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   useEffect(() => {
     if (fase === "resultado" && ruletaEfecto) {
       turnsRef.current += 5;
-      const seg = ruletaEfecto - 1;
-      setRot(360 * turnsRef.current - (seg * 60 + 30));
+      const idx = Math.max(0, efectosActivos.indexOf(ruletaEfecto));
+      setRot(360 * turnsRef.current - (idx * segDeg + segDeg / 2));
       setVerRes(false);
       spinTicks(2600);
       const t = setTimeout(() => setVerRes(true), 2600);
       return () => clearTimeout(t);
     }
-  }, [fase, ruletaEfecto, peorUid]);
+  }, [fase, ruletaEfecto, peorUid, piensaRapido]);
 
   // Beep del reloj en los últimos segundos.
   useEffect(() => {
@@ -406,14 +427,14 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
       {muestraRuleta && (
         <div className="ruleta">
           <div className="ruleta__pointer" />
-          <div className="ruleta__wheel" style={{ transform: `rotate(${rot}deg)` }}>
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div className="ruleta__wheel" style={{ transform: `rotate(${rot}deg)`, background: ruletaBg }}>
+            {efectosActivos.map((e, idx) => (
               <span
-                key={i}
+                key={e}
                 className="ruleta__seg"
-                style={{ transform: `rotate(${(i - 1) * 60 + 30}deg) translateY(-54px)` }}
+                style={{ transform: `rotate(${idx * segDeg + segDeg / 2}deg) translateY(-54px)` }}
               >
-                {EFECTOS[i].emoji}
+                {EFECTOS[e].emoji}
               </span>
             ))}
             <span className="ruleta__hub" />

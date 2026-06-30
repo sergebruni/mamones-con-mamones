@@ -318,14 +318,8 @@
   height: 156px;
   border-radius: 50%;
   border: 5px solid #0c2114;
-  background: conic-gradient(
-    #ffd35c 0deg 60deg,
-    #8a1c10 60deg 120deg,
-    #2e8b2e 120deg 180deg,
-    #e08a1c 180deg 240deg,
-    #3a6ea5 240deg 300deg,
-    #6b3fa0 300deg 360deg
-  );
+  /* El conic-gradient real se calcula en JS (ruletaBg) según los sectores activos. */
+  background: #0c2114;
   transition: transform 2.6s cubic-bezier(0.16, 0.74, 0.2, 1);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
