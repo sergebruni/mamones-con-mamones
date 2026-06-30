@@ -5,10 +5,10 @@ import "./Lobby.css";
 
 const MIN_JUGADORES = 4;
 
-export default function Lobby({ onBack }) {
+export default function Lobby({ onBack, initialCode }) {
   const [uid, setUid] = useState(null);
   const [nombre, setNombre] = useState(() => localStorage.getItem("mcm_nombre") || "");
-  const [codigoInput, setCodigoInput] = useState("");
+  const [codigoInput, setCodigoInput] = useState((initialCode || "").toUpperCase());
   const [room, setRoom] = useState(null); // { codigo, sala_id }
   const [players, setPlayers] = useState([]);
   const [fase, setFase] = useState("lobby");
@@ -16,6 +16,7 @@ export default function Lobby({ onBack }) {
   const [hostUid, setHostUid] = useState(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [copiado, setCopiado] = useState(false);
   const channelRef = useRef(null);
   const lastSyncRef = useRef("");
 
@@ -34,8 +35,9 @@ export default function Lobby({ onBack }) {
   }, []);
 
   // Reconexión: si quedó una sala guardada y seguimos siendo miembros, reentrar.
+  // Si llegamos por un enlace de invitación, esa sala tiene prioridad: no reconectamos.
   useEffect(() => {
-    if (!uid || room) return;
+    if (!uid || room || initialCode) return;
     let saved;
     try {
       saved = JSON.parse(localStorage.getItem("mcm_room") || "null");
@@ -184,6 +186,28 @@ export default function Lobby({ onBack }) {
     if (error) setError(error.message);
   };
 
+  // Comparte un enlace de invitación (Web Share API) o lo copia al portapapeles.
+  const compartirInvitacion = async () => {
+    const url = `${window.location.origin}/?sala=${room.codigo}`;
+    const texto = `¡Únete a mi sala de Mamones con Mamones! 🍋\nCódigo: ${room.codigo}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Mamones con Mamones", text: texto, url });
+        return;
+      }
+    } catch (e) {
+      if (e?.name === "AbortError") return; // el usuario canceló el diálogo
+      // cualquier otro fallo: caemos al portapapeles
+    }
+    try {
+      await navigator.clipboard.writeText(`${texto}\n${url}`);
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    } catch {
+      setError(`No se pudo compartir. Dicta el código: ${room.codigo}`);
+    }
+  };
+
   const salir = async () => {
     if (room) {
       try {
@@ -212,7 +236,12 @@ export default function Lobby({ onBack }) {
           <p className="lobby__eyebrow">Sala</p>
           <h1 className="lobby__code">{room.codigo}</h1>
 
-          <p className="lobby__hint">Comparte este código para que se unan.</p>
+          <div className="lobby__share">
+            <button className="btn btn--invite" onClick={compartirInvitacion}>
+              {copiado ? "¡Enlace copiado! ✅" : "🔗 Invitar a la sala"}
+            </button>
+            <p className="lobby__hint">O dicta el código para que se unan.</p>
+          </div>
 
           <div className="players">
             <p className="players__title">Conectados ({players.length})</p>
@@ -324,6 +353,12 @@ export default function Lobby({ onBack }) {
     <div className="lobby">
       <div className="lobby__panel">
         <h1 className="lobby__title">Jugar en línea</h1>
+
+        {initialCode && (
+          <p className="lobby__invite">
+            Te invitaron a la sala <strong>{initialCode}</strong>. Escribe tu nombre y únete 👇
+          </p>
+        )}
 
         <label className="field">
           <span className="field__label">Tu nombre</span>

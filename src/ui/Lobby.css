@@ -120,6 +120,36 @@
 .btn--ghost {
   background: transparent;
 }
+.btn--invite {
+  background: rgba(255, 211, 92, 0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.btn--invite:hover:not(:disabled) {
+  background: rgba(255, 211, 92, 0.22);
+}
+
+/* Compartir / invitar */
+.lobby__share {
+  margin-bottom: 18px;
+}
+.lobby__share .lobby__hint {
+  margin: 8px 0 0;
+}
+.lobby__invite {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+  background: rgba(255, 211, 92, 0.12);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.lobby__invite strong {
+  color: var(--gold);
+  letter-spacing: 2px;
+}
 
 .divider {
   display: flex;

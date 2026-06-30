@@ -3,9 +3,24 @@ import Menu from "./ui/Menu.jsx";
 import Lobby from "./ui/Lobby.jsx";
 import PhaserGame from "./game/PhaserGame.jsx";
 
+// Lee ?sala=CODIGO de la URL (enlace de invitación) una sola vez y lo limpia.
+function leerInvitacion() {
+  try {
+    const code = new URLSearchParams(window.location.search).get("sala");
+    if (!code) return "";
+    const url = new URL(window.location.href);
+    url.searchParams.delete("sala");
+    window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    return code.trim().toUpperCase().slice(0, 6);
+  } catch {
+    return "";
+  }
+}
+const INVITACION = leerInvitacion();
+
 // Pantallas: "menu" | "sp" (single-player) | "lobby" (multijugador).
 export default function App() {
-  const [screen, setScreen] = useState("menu");
+  const [screen, setScreen] = useState(INVITACION ? "lobby" : "menu");
   const [gameConfig, setGameConfig] = useState(null);
 
   if (screen === "sp" && gameConfig) {
@@ -39,7 +54,7 @@ export default function App() {
   }
 
   if (screen === "lobby") {
-    return <Lobby onBack={() => setScreen("menu")} />;
+    return <Lobby initialCode={INVITACION} onBack={() => setScreen("menu")} />;
   }
 
   return (
