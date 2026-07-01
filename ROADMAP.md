@@ -17,7 +17,7 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 - [ ] **Chat de texto en la sala** `[MP]` — tabla `mensajes` + Realtime. La versión barata del voz-chat. Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Reacciones / emotes** sobre las cartas jugadas (👏😂🤢). Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Recap de fin de partida** — mejor jugada, quién ganó más rondas, carta más votada (reusa `mesa_juego`). Esfuerzo 🟢 · Impacto 🟡
-- [ ] **Optimizar imágenes** — logo ~975KB / favicon ~376KB pesan mucho; generar versiones livianas. Esfuerzo 🟢 · Impacto 🟢
+- [x] **Optimizar imágenes** — `scripts/optimize-assets.mjs` (sharp): redimensiona + recomprime. Total 3.9MB → 639KB (**-83%**): logo 953→106KB, favicon 368→4KB, plantillas ~1.27MB→~265KB c/u. ✅
 
 ## Profundidad de juego (SP + MP)
 - [ ] **Carta en blanco** — el jugador escribe su propia roja esa ronda (estilo Cards Against Humanity). Gran rejugabilidad. Esfuerzo 🟡 · Impacto 🔴
