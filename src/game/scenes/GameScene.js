@@ -129,8 +129,9 @@ export default class GameScene extends Phaser.Scene {
     this.computeLayout();
 
     // Generar versiones de las plantillas con esquinas redondeadas (una sola vez).
-    this.greenTex = this.ensureRoundedTexture("plantillaVerde", "plantillaVerdeRound", 0.1);
-    this.redTex = this.ensureRoundedTexture("plantillaAmarilla", "plantillaAmarillaRound", 0.1);
+    // Esquinas redondeadas fijas (~10px en pantalla, igual que el borde de selección).
+    this.greenTex = this.ensureRoundedTexture("plantillaVerde", "plantillaVerdeRound", 10 / this.greenW);
+    this.redTex = this.ensureRoundedTexture("plantillaAmarilla", "plantillaAmarillaRound", 10 / this.cardW);
 
     // Capa estática (fondo + cabecera) detrás de la capa dinámica (ui).
     this.staticLayer = this.add.container(0, 0);
@@ -1338,7 +1339,7 @@ export default class GameScene extends Phaser.Scene {
   // Se usa en "Pela el ojo" y en las boca-abajo del montoncito.
   makeCardBack(w, h) {
     const c = this.add.container(0, 0);
-    const r = Math.min(w, h) * 0.1;
+    const r = 10;
     const g = this.add.graphics();
     g.fillStyle(COLORS.panel, 1);
     g.fillRoundedRect(-w / 2, -h / 2, w, h, r);
@@ -1662,9 +1663,8 @@ export default class GameScene extends Phaser.Scene {
     if (isWinner) {
       const border = this.add.graphics();
       border.lineStyle(4, COLORS.gold, 1);
-      // Mismo radio que la carta (concéntrico con sus esquinas redondeadas).
-      const rad = Math.min(w, h) * 0.1 + 3;
-      border.strokeRoundedRect(-w / 2 - 3, -h / 2 - 3, w + 6, h + 6, rad);
+      // Radio fijo 10, alineado al borde de la carta (que también usa radio 10).
+      border.strokeRoundedRect(-w / 2, -h / 2, w, h, 10);
       container.add(border);
     }
 
