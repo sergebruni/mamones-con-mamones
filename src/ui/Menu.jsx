@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ComoJugar from "./ComoJugar.jsx";
+import AcercaDe from "./AcercaDe.jsx";
 import "./Menu.css";
 
 const PIENSA_RAPIDO_INFO =
@@ -28,6 +29,7 @@ export default function Menu({ onStart, onMultiplayer }) {
   const [piensaRapido, setPiensaRapido] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showComo, setShowComo] = useState(false);
+  const [showAcerca, setShowAcerca] = useState(false);
 
   const piensaDisponible = players > 5; // regla del online: solo con más de 5
 
@@ -49,8 +51,8 @@ export default function Menu({ onStart, onMultiplayer }) {
             <button className="btn" onClick={() => setShowComo(true)}>
               Cómo jugar
             </button>
-            <button className="btn" disabled>
-              Opciones
+            <button className="btn" onClick={() => setShowAcerca(true)}>
+              Acerca de
             </button>
           </div>
         )}
@@ -138,6 +140,7 @@ export default function Menu({ onStart, onMultiplayer }) {
       </div>
 
       {showComo && <ComoJugar onClose={() => setShowComo(false)} />}
+      {showAcerca && <AcercaDe onClose={() => setShowAcerca(false)} />}
     </div>
   );
 }

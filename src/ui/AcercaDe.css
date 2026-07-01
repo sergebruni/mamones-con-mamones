@@ -1,0 +1,82 @@
+.acerca {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.62);
+  animation: acercaFade 0.2s ease-out;
+}
+.acerca__panel {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #0c2114;
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 24px 22px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  color: var(--text-light);
+}
+.acerca__x {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.acerca__title {
+  margin: 0 0 16px;
+  text-align: center;
+  color: var(--gold);
+  font-size: clamp(20px, 5vw, 26px);
+}
+.acerca__sec {
+  margin-bottom: 16px;
+}
+.acerca__sec h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #fff;
+}
+.acerca__sec p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.acerca__sec b {
+  color: #fff;
+}
+.acerca__list {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.acerca__list li {
+  margin-bottom: 4px;
+}
+.acerca__link {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+.acerca__link:hover {
+  opacity: 0.85;
+}
+.acerca__ok {
+  margin-top: 8px;
+}
+@keyframes acercaFade {
+  from {
+    opacity: 0;
+  }
+}
