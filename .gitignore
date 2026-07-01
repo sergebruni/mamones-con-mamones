@@ -3,3 +3,7 @@ dist/
 .env
 .DS_Store
 *.log
+
+# Config local de sesión / de otro proyecto (no aplica a este repo)
+.claude/
+CLAUDE.md
