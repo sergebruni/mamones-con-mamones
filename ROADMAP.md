@@ -13,7 +13,7 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 ---
 
 ## Quick wins (bajo esfuerzo, alto retorno)
-- [ ] **Pantalla "Cómo jugar"** — el menú ya tiene el botón deshabilitado. Modal con reglas + qué hace cada efecto de la ruleta. Esfuerzo 🟢 · Impacto 🟡
+- [x] **Pantalla "Cómo jugar"** — modal con reglas + los 6 efectos de la ruleta (`src/ui/ComoJugar.jsx`), abierto desde el botón del menú. ✅
 - [ ] **Chat de texto en la sala** `[MP]` — tabla `mensajes` + Realtime. La versión barata del voz-chat. Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Reacciones / emotes** sobre las cartas jugadas (👏😂🤢). Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Recap de fin de partida** — mejor jugada, quién ganó más rondas, carta más votada (reusa `mesa_juego`). Esfuerzo 🟢 · Impacto 🟡

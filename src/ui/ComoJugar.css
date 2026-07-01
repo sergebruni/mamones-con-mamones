@@ -1,0 +1,93 @@
+.como {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.62);
+  animation: comoFade 0.2s ease-out;
+}
+.como__panel {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #0c2114;
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 24px 22px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  color: var(--text-light);
+}
+.como__x {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.como__title {
+  margin: 0 0 16px;
+  text-align: center;
+  color: var(--gold);
+  font-size: clamp(22px, 5vw, 28px);
+}
+.como__sec {
+  margin-bottom: 16px;
+}
+.como__sec h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #fff;
+}
+.como__sec p {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.como__sec ol {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.como__sec li {
+  margin-bottom: 3px;
+}
+.como__sec b {
+  color: #fff;
+}
+.como__fx {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.como__fxrow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.35;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+.como__fxemoji {
+  font-size: 22px;
+  flex: none;
+}
+.como__ok {
+  margin-top: 8px;
+}
+@keyframes comoFade {
+  from {
+    opacity: 0;
+  }
+}

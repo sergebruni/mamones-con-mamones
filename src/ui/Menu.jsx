@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ComoJugar from "./ComoJugar.jsx";
 import "./Menu.css";
 
 const PIENSA_RAPIDO_INFO =
@@ -26,6 +27,7 @@ export default function Menu({ onStart, onMultiplayer }) {
   const [players, setPlayers] = useState(4); // total: tú + bots
   const [piensaRapido, setPiensaRapido] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [showComo, setShowComo] = useState(false);
 
   const piensaDisponible = players > 5; // regla del online: solo con más de 5
 
@@ -42,7 +44,7 @@ export default function Menu({ onStart, onMultiplayer }) {
             <button className="btn" onClick={onMultiplayer}>
               Multijugador (beta)
             </button>
-            <button className="btn" disabled>
+            <button className="btn" onClick={() => setShowComo(true)}>
               Cómo jugar
             </button>
             <button className="btn" disabled>
@@ -132,6 +134,8 @@ export default function Menu({ onStart, onMultiplayer }) {
           </div>
         )}
       </div>
+
+      {showComo && <ComoJugar onClose={() => setShowComo(false)} />}
     </div>
   );
 }
