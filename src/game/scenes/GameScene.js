@@ -255,9 +255,20 @@ export default class GameScene extends Phaser.Scene {
     this.greenH = this.greenW * CARD_RATIO;
     this.greenFont = Math.max(13, Math.round(this.greenW * 0.16));
 
+    // En retrato el marcador es una tira de chips bajo la cabecera (reserva alto);
+    // en horizontal va en un panel a la derecha (no ocupa alto del centro).
+    const nPlayers = (this.players && this.players.length) || 4;
+    if (this.isPortrait) {
+      const perRow = Math.max(1, Math.floor(this.W / this.f(100)));
+      const rows = Math.ceil(nPlayers / perRow);
+      this.scoreH = rows * this.f(30) + this.f(6);
+    } else {
+      this.scoreH = 0;
+    }
+
     // Anclas verticales.
     this.yHeader = Math.max(44, Math.min(56, this.H * 0.085));
-    this.yGreen = this.yHeader + this.greenH / 2 + 12;
+    this.yGreen = this.yHeader + this.scoreH + this.greenH / 2 + 12;
     this.yStatus = this.yGreen + this.greenH / 2 + this.f(22);
     this.yHand = this.H - this.cardH / 2 - 14;
     this.yButton = this.H - this.f(40);
@@ -325,15 +336,19 @@ export default class GameScene extends Phaser.Scene {
     header.fillRect(0, 0, this.W, this.yHeader);
     this.staticLayer.add(header);
 
-    const title = this.add
-      .text(this.W / 2, this.yHeader / 2, "🍈 Mamones con Mamones", {
-        fontFamily: "Segoe UI, sans-serif",
-        fontSize: `${this.f(26)}px`,
-        color: "#ffffff",
-        fontStyle: "bold",
-      })
-      .setOrigin(0.5);
-    this.staticLayer.add(title);
+    // Título completo solo en horizontal; en retrato la cabecera es angosta y se
+    // dejaría el espacio para "Ronda/Meta" (el logo ya está en el menú).
+    if (!this.isPortrait) {
+      const title = this.add
+        .text(this.W / 2, this.yHeader / 2, "🍈 Mamones con Mamones", {
+          fontFamily: "Segoe UI, sans-serif",
+          fontSize: `${this.f(26)}px`,
+          color: "#ffffff",
+          fontStyle: "bold",
+        })
+        .setOrigin(0.5);
+      this.staticLayer.add(title);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -431,6 +446,10 @@ export default class GameScene extends Phaser.Scene {
   // ---------------------------------------------------------------------------
 
   startRound() {
+    // Recalcular el layout ya con los jugadores creados (afecta el alto del
+    // marcador en retrato y, por ende, la posición de la carta verde).
+    this.computeLayout();
+
     this.currentGreen = this.drawGreen();
     this.submissions = [];
     this.phase = "play";
@@ -887,6 +906,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   drawScoreboard() {
+    if (this.isPortrait) return this.drawScoreStrip();
+
     const w = Math.min(this.f(230), this.W * 0.36);
     const rowH = this.f(32);
     const padTop = this.f(38);
@@ -946,6 +967,64 @@ export default class GameScene extends Phaser.Scene {
         })
         .setOrigin(1, 0.5);
       this.ui.add(score);
+    });
+  }
+
+  // Marcador compacto para retrato: chips "nombre pts" centradas, con salto de
+  // línea; la del Juez va en dorado. Ocupa this.scoreH bajo la cabecera.
+  drawScoreStrip() {
+    const margin = this.f(12);
+    const maxW = this.W - margin * 2;
+    const gap = this.f(6);
+    const chipH = this.f(26);
+    const padX = this.f(9);
+    const yTop = this.yHeader + this.f(5);
+
+    // Construir chips (texto) y medir su ancho.
+    const chips = this.players.map((p, i) => {
+      const isJudge = i === this.judgeIndex;
+      const label = this.add
+        .text(0, 0, `${isJudge ? "⚖️ " : ""}${p.name} ${p.score}`, {
+          fontFamily: "Segoe UI, sans-serif",
+          fontSize: `${this.f(13)}px`,
+          color: isJudge ? COLORS.dark : COLORS.textLight,
+          fontStyle: "bold",
+        })
+        .setOrigin(0.5);
+      return { label, w: label.width + padX * 2, isJudge };
+    });
+
+    // Repartir en filas que quepan en el ancho.
+    const rows = [[]];
+    let rowW = 0;
+    for (const c of chips) {
+      const extra = rows[rows.length - 1].length ? gap : 0;
+      if (rowW + extra + c.w > maxW && rows[rows.length - 1].length) {
+        rows.push([]);
+        rowW = 0;
+      }
+      rows[rows.length - 1].push(c);
+      rowW += (rows[rows.length - 1].length > 1 ? gap : 0) + c.w;
+    }
+
+    // Dibujar cada fila centrada.
+    rows.forEach((row, ri) => {
+      const totalW = row.reduce((s, c) => s + c.w, 0) + gap * (row.length - 1);
+      let x = (this.W - totalW) / 2;
+      const cy = yTop + ri * (chipH + gap) + chipH / 2;
+      for (const c of row) {
+        const g = this.add.graphics();
+        g.fillStyle(c.isJudge ? COLORS.gold : COLORS.panel, c.isJudge ? 1 : 0.8);
+        g.fillRoundedRect(x, cy - chipH / 2, c.w, chipH, chipH / 2);
+        if (!c.isJudge) {
+          g.lineStyle(1, COLORS.panelBorder, 0.9);
+          g.strokeRoundedRect(x, cy - chipH / 2, c.w, chipH, chipH / 2);
+        }
+        this.ui.add(g);
+        c.label.setPosition(x + c.w / 2, cy);
+        this.ui.add(c.label);
+        x += c.w + gap;
+      }
     });
   }
 

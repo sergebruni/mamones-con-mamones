@@ -46,6 +46,7 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 - [ ] **Tests** — no hay ninguno; unos pocos sobre las funciones SQL (descarte/no-repetición/piensa rápido) evitarían regresiones. Esfuerzo 🟡 · Impacto 🟡
 - [ ] **Anti-trampa de presencia** — un solo "coordinador" reporta conectados. Esfuerzo 🟡 · Impacto 🟢
 - [ ] **SP 7–8 jugadores** — hoy el single-player permite 4–6 (espacio en pantalla); las metas 5/4 son solo del online. Esfuerzo 🟡 · Impacto 🟢
+- [ ] **Nitidez hi-DPI en single-player** — el canvas de Phaser renderiza a resolución CSS (Scale.RESIZE), así que en móviles retina el texto/cartas se ven más suaves que el online (DOM). Fix: renderizar a `devicePixelRatio` (reescalar los topes de `computeLayout`). Esfuerzo 🟡 · Impacto 🟡
 
 ---
 
