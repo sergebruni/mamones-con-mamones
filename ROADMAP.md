@@ -18,10 +18,10 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 - [x] **Logo del juego en el home** (en vez del título de texto); + favicon, splash y reverso de cartas.
 - [x] **Sección "Acerca de / Nuestro Equipo"** (`src/ui/AcercaDe.jsx`), con enlace a x.com/sergebruni.
 - [x] **Single-player responsive en móvil** (retrato: marcador en chips, sin solapes con la carta verde).
+- [x] **Chat de texto en la sala** `[MP]` — bottom-sheet con Realtime **broadcast** (efímero, sin tabla). Botón 💬 con badge de no leídos.
+- [x] **Reacciones / emotes** `[MP]` — 👏😂🤢🔥❤️ sobre cada carta jugada, flotan para todos (broadcast).
 
 ## Quick wins (bajo esfuerzo, alto retorno)
-- [ ] **Chat de texto en la sala** `[MP]` — tabla `mensajes` + Realtime. La versión barata del voz-chat. Esfuerzo 🟢 · Impacto 🟡
-- [ ] **Reacciones / emotes** sobre las cartas jugadas (👏😂🤢). Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Recap de fin de partida** — mejor jugada, quién ganó más rondas, carta más votada (reusa `mesa_juego`). Esfuerzo 🟢 · Impacto 🟡
 
 ## Profundidad de juego (SP + MP)

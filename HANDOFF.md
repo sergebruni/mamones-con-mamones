@@ -80,6 +80,7 @@ bun run build
 - Llevar el flavor/long-press y otros detalles también al single-player si se desea.
 
 ## Hecho recientemente
+- **Chat de texto + reacciones en la sala (MP):** ambos por **Realtime broadcast** (efímero, sin tabla ni migración) reusando el canal `juego:${salaId}`; `chanRef` para enviar. Chat = bottom-sheet (botón 💬 con badge de no leídos, `enviarChat`). Reacciones = 👏😂🤢🔥❤️ por carta (`enviarReaccion`/`mostrarReaccion`), flotan sobre la carta (por `mesa.id`, igual en todos). Solo MP (en SP no hay otros humanos).
 - **Sección "Acerca de":** modal `src/ui/AcercaDe.jsx` (equipo Zona Gaming, origen del juego, filosofía) abierto desde el menú; reemplazó al botón "Opciones" (que estaba deshabilitado). "Sergio Bruni" enlaza a `x.com/sergebruni`.
 - **Single-player más responsive en móvil (retrato):** el marcador ya no se solapa con la carta verde — en retrato es una **tira de chips** con salto de línea bajo la cabecera (`drawScoreStrip`), y `computeLayout` reserva su alto (`scoreH`) bajando la verde; en horizontal sigue el panel a la derecha. El título grande solo se muestra en horizontal (en retrato chocaba con "Ronda/Meta"). `startRound` recalcula el layout con los jugadores ya creados. Pendiente posible: nitidez en pantallas hi-DPI (el canvas Phaser renderiza a resolución CSS; ver ROADMAP).
 - **Pantalla "Cómo jugar":** modal con las reglas (objetivo, ronda, meta, modos, la ruleta y sus 6 efectos, Piensa Rápido, descarte) en `src/ui/ComoJugar.jsx` (+ `.css`), abierto desde el botón del menú (antes deshabilitado). Es de menú, cubre SP y MP.

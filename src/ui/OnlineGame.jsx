@@ -120,12 +120,21 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const [preview, setPreview] = useState(null); // carta ampliada (long-press)
   const [flying, setFlying] = useState(null); // carta volando al centro de la mesa
   const [myPlayed, setMyPlayed] = useState([]); // tus cartas ya en el montoncito (esta ronda)
+  const [chat, setChat] = useState([]); // mensajes de la sala (efímeros, por broadcast)
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatUnread, setChatUnread] = useState(0);
+  const [chatInput, setChatInput] = useState("");
+  const [reactions, setReactions] = useState([]); // emojis flotando sobre cartas
+  const [reactFor, setReactFor] = useState(null); // id de mesa con el picker abierto
   const cerrarPreview = () => setPreview(null);
   const lastSyncRef = useRef("");
   const firedRef = useRef(0);
   const turnsRef = useRef(5);
   const dingRef = useRef("");
   const rootRef = useRef(null);
+  const chanRef = useRef(null); // canal Realtime (para enviar chat/reacciones)
+  const chatOpenRef = useRef(false);
+  const chatEndRef = useRef(null);
 
   useEffect(() => initSfx(), []);
   const toggleMute = () => {
@@ -226,6 +235,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     refrescar();
 
     const ch = supabase.channel(`juego:${salaId}`, { config: { presence: { key: uid } } });
+    chanRef.current = ch;
     ch.on("presence", { event: "sync" }, () => {
       const connected = Object.keys(ch.presenceState());
       const key = connected.slice().sort().join(",");
@@ -243,11 +253,21 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
         fetchMisJugadas();
       })
       .on("postgres_changes", { event: "*", schema: "public", table: "cartas_mano", filter: `sala_id=eq.${salaId}` }, fetchHand)
+      .on("broadcast", { event: "chat" }, ({ payload }) => {
+        setChat((c) => [...c.slice(-59), payload]);
+        if (!chatOpenRef.current) setChatUnread((u) => u + 1);
+      })
+      .on("broadcast", { event: "reaccion" }, ({ payload }) => {
+        mostrarReaccion(payload.mesaId, payload.emoji);
+      })
       .subscribe(async (status) => {
         if (status === "SUBSCRIBED") await ch.track({});
       });
 
-    return () => supabase.removeChannel(ch);
+    return () => {
+      supabase.removeChannel(ch);
+      chanRef.current = null;
+    };
   }, [salaId, uid, fetchSala, fetchPlayers, fetchHand, fetchMesa, fetchJugaron, fetchMisJugadas]);
 
   // Respaldo cada 3s: refresca el estado y pide resolver el timeout.
@@ -273,6 +293,15 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     setPeek({});
     setMyPlayed([]);
   }, [ronda]);
+
+  // Chat: al abrir, marca leído; auto-scroll al último mensaje.
+  useEffect(() => {
+    chatOpenRef.current = chatOpen;
+    if (chatOpen) setChatUnread(0);
+  }, [chatOpen]);
+  useEffect(() => {
+    if (chatOpen) chatEndRef.current?.scrollIntoView({ block: "end" });
+  }, [chat, chatOpen]);
 
   // Al vencer la fase, reintenta resolver hasta que el server la procese (tolera
   // desfases de reloj y eventos perdidos). El server valida now() >= fase_hasta.
@@ -337,6 +366,27 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
       setFlying(null);
     }, 520);
   };
+  // --- Chat y reacciones (efímeros, vía broadcast del canal) ---
+  const uid7 = () => `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  const mostrarReaccion = (mesaId, emoji) => {
+    const id = uid7();
+    setReactions((r) => [...r, { id, mesaId, emoji }]);
+    setTimeout(() => setReactions((r) => r.filter((x) => x.id !== id)), 1400);
+  };
+  const enviarChat = () => {
+    const text = chatInput.trim().slice(0, 200);
+    if (!text) return;
+    const msg = { id: uid7(), uid, nombre: me?.nombre || "Tú", text };
+    chanRef.current?.send({ type: "broadcast", event: "chat", payload: msg });
+    setChat((c) => [...c.slice(-59), msg]); // optimista (a mí no me llega el broadcast)
+    setChatInput("");
+  };
+  const enviarReaccion = (mesaId, emoji) => {
+    chanRef.current?.send({ type: "broadcast", event: "reaccion", payload: { mesaId, emoji } });
+    mostrarReaccion(mesaId, emoji); // optimista
+    setReactFor(null);
+  };
+
   const elegirGanadora = (id) => rpc("elegir_ganadora", { p_sala: salaId, p_mesa_id: id });
   const elegirPeor = (id) => rpc("elegir_peor", { p_sala: salaId, p_mesa_id: id });
   const pasar = (target) => rpc("pasar_mamon", { p_sala: salaId, p_target: target });
@@ -403,6 +453,10 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
           {piensaRapido ? " · ⚡" : ""} · Ronda {ronda} · Meta {meta}
         </span>
         <span className="og__topbtns">
+          <button className="og__mute og__chatbtn" onClick={() => setChatOpen((v) => !v)} title="Chat">
+            💬
+            {chatUnread > 0 && <span className="og__badge">{chatUnread > 9 ? "9+" : chatUnread}</span>}
+          </button>
           <button className="og__mute" onClick={toggleMute} title="Sonido">
             {muted ? "🔇" : "🔊"}
           </button>
@@ -530,6 +584,34 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                   onLongPress={setPreview}
                   onLongPressEnd={cerrarPreview}
                 />
+
+                {/* Emojis flotando sobre la carta */}
+                {reactions
+                  .filter((r) => r.mesaId === m.id)
+                  .map((r) => (
+                    <span key={r.id} className="og__reactfloat">
+                      {r.emoji}
+                    </span>
+                  ))}
+
+                {/* Reaccionar a la carta */}
+                <button
+                  className="og__reactbtn"
+                  onClick={() => setReactFor(reactFor === m.id ? null : m.id)}
+                  title="Reaccionar"
+                >
+                  😀
+                </button>
+                {reactFor === m.id && (
+                  <div className="og__reactpick">
+                    {["👏", "😂", "🤢", "🔥", "❤️"].map((e) => (
+                      <button key={e} onClick={() => enviarReaccion(m.id, e)}>
+                        {e}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 {m.nombre && <span className="og__autor">{m.nombre}</span>}
               </div>
             );
@@ -643,6 +725,46 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
             <span className="carta__titulo">{flying.carta}</span>
             {flying.flavor && <span className="carta__flavor">{flying.flavor}</span>}
           </div>
+        </div>
+      )}
+
+      {/* Chat de la sala (efímero) */}
+      {chatOpen && (
+        <div className="og__chat">
+          <div className="og__chat-head">
+            <span>💬 Chat de la sala</span>
+            <button className="og__chat-x" onClick={() => setChatOpen(false)} aria-label="Cerrar">
+              ✕
+            </button>
+          </div>
+          <div className="og__chat-log">
+            {chat.length === 0 && <p className="og__chat-empty">Aún no hay mensajes. ¡Saluda! 👋</p>}
+            {chat.map((m) => (
+              <div key={m.id} className={`og__msg ${m.uid === uid ? "og__msg--yo" : ""}`}>
+                {m.uid !== uid && <span className="og__msg-name">{m.nombre}</span>}
+                <span className="og__msg-text">{m.text}</span>
+              </div>
+            ))}
+            <div ref={chatEndRef} />
+          </div>
+          <form
+            className="og__chat-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              enviarChat();
+            }}
+          >
+            <input
+              className="og__chat-input"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              maxLength={200}
+              placeholder="Escribe un mensaje…"
+            />
+            <button className="og__chat-send" type="submit" aria-label="Enviar">
+              ➤
+            </button>
+          </form>
         </div>
       )}
     </div>
