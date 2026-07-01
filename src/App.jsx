@@ -25,16 +25,18 @@ export default function App() {
   const [screen, setScreen] = useState(INVITACION ? "lobby" : "menu");
   const [gameConfig, setGameConfig] = useState(null);
 
+  const volverAlMenu = () => {
+    setGameConfig(null);
+    setScreen("menu");
+  };
+
   let content;
   if (screen === "sp" && gameConfig) {
     content = (
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <PhaserGame config={gameConfig} />
+        <PhaserGame config={gameConfig} onExit={volverAlMenu} />
         <button
-          onClick={() => {
-            setGameConfig(null);
-            setScreen("menu");
-          }}
+          onClick={volverAlMenu}
           style={{
             position: "absolute",
             top: 12,

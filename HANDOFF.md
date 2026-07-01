@@ -53,7 +53,8 @@ Versión criolla de *Manzanas con Manzanas* (Apples to Apples) con jerga venezol
 - 0014 fix rowtype (escalares). 0015 resolver_timeout escalar.
 - **0016 ensure_schema** (idempotente: re-asegura TODAS las columnas + recrea funciones de ronda; correr esto deja todo consistente).
 - **0017 ruleta_congelada**: congelar solo con Piensa Rápido.
-- **0018 descarte_rojas** (último): descarte de rojas por partida (`salas.mazo_rojo`). Una carta jugada/descartada NO reaparece en ninguna mano hasta que termina la partida; `repartir_mano` excluye manos + mesa + descarte y recicla el descarte si el mazo se agota. Índice único `cartas_mano(sala_id,carta)` como garantía dura. **Correr en Supabase para que aplique.**
+- **0018 descarte_rojas**: descarte de rojas por partida (`salas.mazo_rojo`). Una carta jugada/descartada NO reaparece en ninguna mano hasta que termina la partida; `repartir_mano` excluye manos + mesa + descarte y recicla el descarte si el mazo se agota. Índice único `cartas_mano(sala_id,carta)` como garantía dura.
+- **0019 recap_historial** (último): `salas.historial jsonb` para el recap final. Se anexa una entrada por ronda ganada (`{ronda, verde, roja, ganador_uid, ganador}`) en `elegir_ganadora` y en el auto-win (1 carta) de `resolver_timeout`; se resetea en `iniciar_partida`/`reiniciar_partida`. **Correr en Supabase para que aplique** (si no, el recap MP saldrá con el podio pero sin el repaso ronda a ronda).
 
 ## Gotchas aprendidos (importantes)
 - **pgbouncer + rowtype cacheado:** funciones con `select * into v_sala salas` y luego `v_sala.<columna_nueva>` fallan con *“record has no field …”* tras agregar columnas. **Fix:** leer la columna nueva como **escalar** (`select col into v_x ...`). Ya aplicado en cerrar_jugadas/avanzar_ronda/resolver_timeout.
@@ -73,11 +74,12 @@ bun run build
 ## Pendiente / ideas (no hechas)
 > Lista completa y priorizada de ideas futuras en **`ROADMAP.md`** (con sección ✅ Hecho).
 
-**Próximos pasos sugeridos (al cerrar sesión, 2026-07-01):**
-1. **Recap de fin de partida** (quick win: mejor jugada / rondas ganadas / carta más votada, reusa `mesa_juego`).
+**Próximos pasos sugeridos (2026-07-01):**
+1. ✅ **Recap de fin de partida** — hecho (SP + MP). **Pendiente operativo: correr la migración `0019` en Supabase.**
 2. **Analytics (PostHog)** para decidir el resto con datos.
-3. **App móvil**: si se quiere ir a tiendas, **Capacitor** (no React Native) — ver ROADMAP › Plataforma/distribución.
-4. Abierto: **nitidez hi-DPI del single-player** (¿era eso lo del "no optimizado mobile"? el marcador/solapes ya se arregló).
+3. **Carta en blanco** o **filtro de categorías** — la mejora de juego con más retorno.
+4. **App móvil**: si se quiere ir a tiendas, **Capacitor** (no React Native) — ver ROADMAP › Plataforma/distribución.
+5. Abierto: **nitidez hi-DPI del single-player** (el marcador/solapes ya se arregló).
 
 
 - **Notificaciones**: solo se hizo PWA instalable. Faltan notificaciones **locales** (es tu turno / eres juez) y **Web Push** (app cerrada; requiere VAPID + tabla de suscripciones + Edge Function + en iOS PWA instalada).
@@ -87,6 +89,8 @@ bun run build
 - Llevar el flavor/long-press y otros detalles también al single-player si se desea.
 
 ## Hecho recientemente
+- **Recap de fin de partida (SP + MP):** overlay compartido en el DOM `src/ui/Recap.jsx` (+ `.css`) con **campeón**, **podio** (rondas ganadas por jugador) y **repaso ronda a ronda** (verde → roja ganadora → quién). **MP:** nueva columna `salas.historial` (migración `0019`) que `OnlineGame` lee en fase `terminado`. **SP (Phaser):** `GameScene` acumula `this.history` (push en `awardBest`) y al `gameover` emite `game.events.emit("mcm:gameover", …)`; `PhaserGame.jsx` escucha y renderiza el mismo `<Recap>` (botón "Jugar de nuevo" → `mcm:replay` → `restartGame`; "← Menú" → `onExit`). Regla de paridad cumplida ([[paridad-sp-mp]]). *(No hay "carta más votada": el Juez elige y las reacciones son efímeras.)* **Falta correr `0019` en Supabase.**
+- **Scroll en pantallas largas (móvil):** `.lobby` y `.menu` recortaban por arriba (flex `align-items:center` sin overflow, con `body{overflow:hidden}`). Fix: `overflow-y:auto` en el contenedor y centrar el panel con `margin:auto` (centra si cabe, scrollea desde arriba si no). Los modales (Cómo jugar / Acerca de) ya scrolleaban bien (`max-height:88vh; overflow-y:auto`).
 - **Chat de texto + reacciones en la sala (MP):** ambos por **Realtime broadcast** (efímero, sin tabla ni migración) reusando el canal `juego:${salaId}`; `chanRef` para enviar. Chat = bottom-sheet (botón 💬 con badge de no leídos, `enviarChat`). Reacciones = 👏😂🤢🔥❤️ por carta (`enviarReaccion`/`mostrarReaccion`), flotan sobre la carta (por `mesa.id`, igual en todos). Solo MP (en SP no hay otros humanos).
 - **Sección "Acerca de":** modal `src/ui/AcercaDe.jsx` (equipo Zona Gaming, origen del juego, filosofía) abierto desde el menú; reemplazó al botón "Opciones" (que estaba deshabilitado). "Sergio Bruni" enlaza a `x.com/sergebruni`.
 - **Single-player más responsive en móvil (retrato):** el marcador ya no se solapa con la carta verde — en retrato es una **tira de chips** con salto de línea bajo la cabecera (`drawScoreStrip`), y `computeLayout` reserva su alto (`scoreH`) bajando la verde; en horizontal sigue el panel a la derecha. El título grande solo se muestra en horizontal (en retrato chocaba con "Ronda/Meta"). `startRound` recalcula el layout con los jugadores ya creados. Pendiente posible: nitidez en pantallas hi-DPI (el canvas Phaser renderiza a resolución CSS; ver ROADMAP).

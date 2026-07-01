@@ -1,0 +1,181 @@
+.recap {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  /* Scrollable en pantallas cortas; centrado con margin:auto en el panel. */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  background: rgba(4, 14, 8, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.recap__panel {
+  width: min(460px, 100%);
+  margin: auto;
+  background: rgba(12, 33, 20, 0.96);
+  border: 1px solid var(--panel-border);
+  border-radius: 22px;
+  padding: 26px 24px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+.recap__eyebrow {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.recap__champ {
+  margin: 6px 0 20px;
+  text-align: center;
+  font-size: clamp(24px, 6vw, 34px);
+  color: var(--gold);
+}
+
+.recap__sec {
+  margin-bottom: 20px;
+}
+.recap__h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+/* Podio */
+.recap__podio {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.recap__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+}
+.recap__row--yo {
+  border-color: var(--panel-border);
+  background: rgba(255, 211, 92, 0.1);
+}
+.recap__pos {
+  font-size: 18px;
+  min-width: 26px;
+  text-align: center;
+}
+.recap__name {
+  flex: 1;
+  font-weight: 600;
+  color: var(--text-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.recap__rondas {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Repaso ronda a ronda */
+.recap__rondas-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 34vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.recap__ronda {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "num jugada"
+    "num gano";
+  gap: 2px 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.recap__rnum {
+  grid-area: num;
+  align-self: center;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+.recap__jugada {
+  grid-area: jugada;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.recap__flecha {
+  color: var(--text-muted);
+}
+.recap__verde,
+.recap__roja {
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.recap__verde {
+  background: #2e8b2e;
+  color: #eafbe9;
+}
+.recap__roja {
+  background: #8a1c10;
+  color: #ffe9e5;
+}
+.recap__gano {
+  grid-area: gano;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Botones */
+.recap__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.recap__btn {
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.recap__btn--primary {
+  background: var(--gold);
+  color: var(--dark);
+  border-color: var(--gold);
+}
+.recap__btn--ghost {
+  background: transparent;
+  color: var(--text-light);
+}

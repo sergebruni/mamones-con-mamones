@@ -20,9 +20,8 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 - [x] **Single-player responsive en móvil** (retrato: marcador en chips, sin solapes con la carta verde).
 - [x] **Chat de texto en la sala** `[MP]` — bottom-sheet con Realtime **broadcast** (efímero, sin tabla). Botón 💬 con badge de no leídos.
 - [x] **Reacciones / emotes** `[MP]` — 👏😂🤢🔥❤️ sobre cada carta jugada, flotan para todos (broadcast).
-
-## Quick wins (bajo esfuerzo, alto retorno)
-- [ ] **Recap de fin de partida** — mejor jugada, quién ganó más rondas, carta más votada (reusa `mesa_juego`). Esfuerzo 🟢 · Impacto 🟡
+- [x] **Recap de fin de partida** (SP + MP) — overlay compartido `src/ui/Recap.jsx`: campeón, **podio** (rondas ganadas) y **repaso ronda a ronda** (verde → roja ganadora → quién). MP persiste `salas.historial` (migración `0019`); SP lo emite desde Phaser (`mcm:gameover`). *(Nota: no hay "carta más votada" porque el Juez elige y las reacciones son efímeras.)*
+- [x] **Scroll en pantallas largas (móvil)** — el lobby/menú ya no recortan arriba: `overflow-y:auto` + panel centrado con `margin:auto`.
 
 ## Profundidad de juego (SP + MP)
 - [ ] **Carta en blanco** — el jugador escribe su propia roja esa ronda (estilo Cards Against Humanity). Gran rejugabilidad. Esfuerzo 🟡 · Impacto 🔴

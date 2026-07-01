@@ -146,6 +146,11 @@ export default class GameScene extends Phaser.Scene {
     // Reorganizar todo cuando cambie el tamaño de la ventana / orientación.
     this.scale.on("resize", this.handleResize, this);
     this.events.once("shutdown", () => this.scale.off("resize", this.handleResize, this));
+
+    // Puente con React (PhaserGame): el recap de fin de partida se dibuja en el
+    // DOM. Al pulsar "Jugar de nuevo" allí, React emite 'mcm:replay'.
+    this.game.events.on("mcm:replay", this.restartGame, this);
+    this.events.once("shutdown", () => this.game.events.off("mcm:replay", this.restartGame, this));
   }
 
   // Entrada para desplazar la mano horizontalmente (arrastre + rueda del ratón).
@@ -388,6 +393,9 @@ export default class GameScene extends Phaser.Scene {
     this.players.forEach((p) => {
       while (p.hand.length < HAND_SIZE) p.hand.push(this.drawRed());
     });
+
+    // Historial de la partida para el recap final (una entrada por ronda ganada).
+    this.history = [];
 
     // El primer Juez es un bot, así el humano juega de una en la ronda 1.
     this.judgeIndex = 1;
@@ -776,6 +784,13 @@ export default class GameScene extends Phaser.Scene {
     const best = this.submissions[submissionIndex];
     this.players[best.playerIndex].score += 1;
     this.lastResult = { winnerIndex: best.playerIndex, card: best.card };
+    // Registrar la ronda para el recap (verde jugada → roja ganadora → quién).
+    this.history.push({
+      ronda: this.round,
+      verde: this.currentGreen,
+      roja: best.card,
+      ganador: this.players[best.playerIndex].name,
+    });
   }
 
   worstSelectableIndices() {
@@ -797,6 +812,16 @@ export default class GameScene extends Phaser.Scene {
     const winner = this.players[this.lastResult.winnerIndex];
     this.phase = winner.score >= metaGanar(this.players.length) ? "gameover" : "result";
     this.render();
+    // Al terminar, avisar a React para que muestre el recap (overlay en el DOM).
+    if (this.phase === "gameover") {
+      this.game.events.emit("mcm:gameover", {
+        campeon: winner.name,
+        standings: this.players
+          .map((p) => ({ nombre: p.name, rondas: p.score, yo: !p.isBot }))
+          .sort((a, b) => b.rondas - a.rondas),
+        rondas: this.history,
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -884,9 +909,11 @@ export default class GameScene extends Phaser.Scene {
       this.drawSubmissions(true);
       this.drawNextButton("Siguiente ronda", () => this.nextRound());
     } else if (this.phase === "gameover") {
+      // El recap (campeón, podio y repaso) y el botón "Jugar de nuevo" los
+      // dibuja React encima del canvas (ver PhaserGame). Aquí solo dejamos las
+      // jugadas de la última ronda como fondo.
       this.drawCenterCaption("¡Fin de la partida!");
       this.drawSubmissions(true);
-      this.drawNextButton("Jugar de nuevo", () => this.restartGame());
     }
 
     // La ruleta vive en su propio overlay animado (this.rouletteLayer), por

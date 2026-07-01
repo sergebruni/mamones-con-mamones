@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "../lib/supabase.js";
 import { initSfx, isSfxEnabled, setSfxEnabled, spinTicks, beep, beepUrge, ding } from "../lib/sfx.js";
+import Recap from "./Recap.jsx";
 import "./OnlineGame.css";
 
 // ¿El dispositivo tiene mouse con hover? (escritorio sí, móvil táctil no)
@@ -620,16 +621,17 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
       )}
 
       {fase === "terminado" && (
-        <div className="og__endbtns">
-          {sala.host_uid === uid && (
-            <button className="og__next" onClick={reiniciar}>
-              Jugar otra vez
-            </button>
-          )}
-          <button className="og__leave2" onClick={salir}>
-            Salir de la sala
-          </button>
-        </div>
+        <Recap
+          campeon={[...players].sort((a, b) => b.puntos - a.puntos)[0]?.nombre}
+          standings={[...players]
+            .sort((a, b) => b.puntos - a.puntos)
+            .map((p) => ({ nombre: p.nombre, rondas: p.puntos, yo: p.uid === uid }))}
+          rondas={sala.historial || []}
+          onReplay={sala.host_uid === uid ? reiniciar : null}
+          replayLabel="Jugar otra vez"
+          onLeave={salir}
+          leaveLabel="Salir de la sala"
+        />
       )}
 
       {/* Mano del jugador */}
