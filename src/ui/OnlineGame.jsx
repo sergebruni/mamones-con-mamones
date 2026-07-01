@@ -15,6 +15,17 @@ function metaGanar(n) {
   return 8;
 }
 
+// Posición de la carta 'i' dentro del montoncito del centro (leve desorden).
+function pileCardStyle(i) {
+  const ox = ((i * 37) % 15) - 7;
+  const oy = ((i * 23) % 11) - 5;
+  const rot = ((i * 29) % 21) - 10;
+  return {
+    transform: `translate(calc(-50% + ${ox}px), calc(-50% + ${oy}px)) rotate(${rot}deg) scale(0.8)`,
+    zIndex: i,
+  };
+}
+
 const EFECTOS = {
   1: { emoji: "👀", name: "Pela el ojo", desc: "Mano boca abajo: espía y juega de memoria." },
   2: { emoji: "🥶", name: "Mano congelada", desc: "10 segundos sin poder jugar." },
@@ -106,6 +117,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const [muted, setMuted] = useState(!isSfxEnabled());
   const [preview, setPreview] = useState(null); // carta ampliada (long-press)
   const [flying, setFlying] = useState(null); // carta volando al centro de la mesa
+  const [myPlayed, setMyPlayed] = useState([]); // tus cartas ya en el montoncito (esta ronda)
   const cerrarPreview = () => setPreview(null);
   const lastSyncRef = useRef("");
   const firedRef = useRef(0);
@@ -254,8 +266,11 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     return () => clearInterval(t);
   }, [salaId, fetchSala, fetchMesa, fetchPlayers, fetchJugaron, fetchMisJugadas, fetchHand]);
 
-  // Reiniciar "peek" cuando cambia la ronda/mano.
-  useEffect(() => setPeek({}), [ronda]);
+  // Reiniciar "peek" y el montoncito propio cuando cambia la ronda.
+  useEffect(() => {
+    setPeek({});
+    setMyPlayed([]);
+  }, [ronda]);
 
   // Al vencer la fase, reintenta resolver hasta que el server la procese (tolera
   // desfases de reloj y eventos perdidos). El server valida now() >= fase_hasta.
@@ -304,20 +319,21 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     rpc("jugar_carta", { p_sala: salaId, p_carta: carta });
     setMisJugadas((n) => n + 1); // optimista
   };
-  // Juega animando la carta desde su lugar en la mano hasta el centro de la mesa.
+  // Juega animando la carta en arco desde la mano hasta el montoncito del centro.
   const jugarConAnim = (carta, el) => {
     if (!el || !rootRef.current) return jugar(carta);
     const r = el.getBoundingClientRect();
     const cont = rootRef.current.getBoundingClientRect();
     const dx = cont.left + cont.width / 2 - (r.left + r.width / 2);
     const dy = cont.top + cont.height * 0.4 - (r.top + r.height / 2);
-    setFlying({ carta, flavor: flavores[carta], left: r.left, top: r.top, w: r.width, h: r.height, dx, dy, go: false });
+    setFlying({ carta, flavor: flavores[carta], left: r.left, top: r.top, w: r.width, h: r.height, dx, dy });
     setHand((h) => h.filter((c) => c !== carta)); // quítala de la mano al instante
     jugar(carta);
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => setFlying((f) => (f ? { ...f, go: true } : f)))
-    );
-    setTimeout(() => setFlying(null), 480);
+    // Al aterrizar, la carta se queda en el montoncito (boca arriba, es tuya).
+    setTimeout(() => {
+      setMyPlayed((m) => [...m, carta]);
+      setFlying(null);
+    }, 520);
   };
   const elegirGanadora = (id) => rpc("elegir_ganadora", { p_sala: salaId, p_mesa_id: id });
   const elegirPeor = (id) => rpc("elegir_peor", { p_sala: salaId, p_mesa_id: id });
@@ -370,6 +386,8 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
 
   const puedeAvanzar = fase === "resultado" && (sala.host_uid === uid || esJuez);
   const enMesa = fase === "juzgando" || fase === "resultado" || fase === "terminado";
+  const otrosEnMesa = jugaron.filter((u) => u !== uid).length; // rivales que ya jugaron
+  const muestraPila = fase === "jugando" && (myPlayed.length > 0 || otrosEnMesa > 0);
   const fx = ruletaEfecto ? EFECTOS[ruletaEfecto] : null;
   const peorNombre = players.find((p) => p.uid === peorUid)?.nombre || "alguien";
   const muestraRuleta = fase === "resultado" && modo === "amarga" && !!ruletaEfecto;
@@ -580,7 +598,31 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
         </div>
       )}
 
-      {/* Carta volando al centro de la mesa al jugarla */}
+      {/* Montoncito de cartas jugadas (durante la ronda) */}
+      {muestraPila && (
+        <div className="og__pile">
+          {myPlayed.map((c, i) => (
+            <div key={`me-${i}`} className="og__pilecard" style={pileCardStyle(i)}>
+              <div className="carta carta--roja">
+                <span className="carta__titulo">{c}</span>
+              </div>
+            </div>
+          ))}
+          {Array.from({ length: otrosEnMesa }).map((_, i) => (
+            <div
+              key={`o-${i}`}
+              className="og__pilecard"
+              style={pileCardStyle(myPlayed.length + i)}
+            >
+              <div className="carta carta--roja og__dorso">
+                <span className="carta__dorso">🤔</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Carta volando en arco al montoncito al jugarla */}
       {flying && (
         <div
           className="og__fly"
@@ -589,10 +631,8 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
             top: flying.top,
             width: flying.w,
             height: flying.h,
-            transform: flying.go
-              ? `translate(${flying.dx}px, ${flying.dy}px) scale(0.72)`
-              : "translate(0, 0) scale(1)",
-            opacity: flying.go ? 0 : 1,
+            "--dx": `${flying.dx}px`,
+            "--dy": `${flying.dy}px`,
           }}
         >
           <div className="carta carta--roja">

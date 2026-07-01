@@ -121,6 +121,8 @@ export default class GameScene extends Phaser.Scene {
     this.roundStartMs = 0;
     this.piensaRapidoVictim = null; // índice del castigado por Piensa Rápido esta ronda
     this._animatingPlay = false; // bloquea jugar mientras una carta vuela al centro
+    this._pile = []; // cartas visibles en el montoncito del centro
+    this._pileCount = 0; // huecos usados del montoncito (para el desorden)
   }
 
   create() {
@@ -446,6 +448,8 @@ export default class GameScene extends Phaser.Scene {
 
     // Cerrar cualquier overlay de ruleta colgante (seguridad).
     this.closeRoulette(false);
+    // Vaciar el montoncito del centro (nueva ronda).
+    this.clearPile();
 
     // Cuántas cartas debe jugar cada jugador esta ronda (Jugada Doble => 2).
     this.playsNeeded = this.players.map(() => 0);
@@ -550,6 +554,7 @@ export default class GameScene extends Phaser.Scene {
 
     const idx = Phaser.Math.Between(0, bot.hand.length - 1);
     const card = bot.hand.splice(idx, 1)[0];
+    this.dropBotCardToPile(); // boca abajo al montoncito (antes de enviar)
     this.submitCard(playerIndex, card);
   }
 
@@ -568,44 +573,92 @@ export default class GameScene extends Phaser.Scene {
     // ⏳ A ciegas: al confirmar la primera carta se revela el adjetivo verde.
     if (this.fx.jugarACiegas && !this.greenRevealed) this.greenRevealed = true;
 
-    const text = this.players[0].hand[handIndex];
-
     // Posición mundial de la carta tocada, para volarla desde ahí al centro.
     const lx = this.cardW / 2 + handIndex * (this.cardW + this.handGap);
     const fromX = (this.handContainer ? this.handContainer.x : 0) + lx;
     const fromY = this.yHand;
 
-    // Ocultar la carta original en la mano mientras vuela la copia.
+    // Ocultar la carta original y sacarla de la mano (datos) de una vez, para que
+    // un re-render durante el vuelo no la muestre de nuevo.
     const orig = this.handContainer && this.handContainer.list[handIndex];
     if (orig) orig.setVisible(false);
+    const card = this.players[0].hand.splice(handIndex, 1)[0];
 
     this._animatingPlay = true;
-    this.animateCardToCenter(text, fromX, fromY, () => {
+    const flyer = this.makeRedCard(card);
+    flyer.setPosition(fromX, fromY);
+    this.animLayer.add(flyer);
+    this.animateToPile(flyer, fromX, fromY, () => {
       this._animatingPlay = false;
-      const card = this.players[0].hand.splice(handIndex, 1)[0];
       this.submitCard(0, card);
     });
   }
 
-  // Vuela una copia de la carta desde (fromX, fromY) hasta el centro de la mesa.
-  animateCardToCenter(text, fromX, fromY, onComplete) {
-    const flyer = this.makeRedCard(text);
-    flyer.setPosition(fromX, fromY);
-    this.animLayer.add(flyer);
+  // Posición (relativa al centro) del hueco 'slot' del montoncito: leve desorden.
+  pileSlot(slot) {
+    return {
+      ox: this.f(((slot * 37) % 15) - 7),
+      oy: this.f(((slot * 23) % 11) - 5),
+      rot: ((slot * 29) % 21) - 10,
+    };
+  }
+
+  // Vuela 'gameObj' en ARCO desde (fromX, fromY) al montoncito del centro y lo
+  // deja ahí (visible). onDone se llama al aterrizar.
+  animateToPile(gameObj, fromX, fromY, onDone) {
+    const slot = this._pileCount++;
+    const { ox, oy, rot } = this.pileSlot(slot);
+    const toX = this.W / 2 + ox;
+    const toY = this.yCenter + oy;
+    const start = new Phaser.Math.Vector2(fromX, fromY);
+    const end = new Phaser.Math.Vector2(toX, toY);
+    // Punto de control por encima para que el vuelo trace una curva.
+    const mid = new Phaser.Math.Vector2((fromX + toX) / 2, Math.min(fromY, toY) - this.f(90));
+    const curve = new Phaser.Curves.QuadraticBezier(start, mid, end);
+    const prox = { v: 0 };
     this.tweens.add({
-      targets: flyer,
-      x: this.W / 2,
-      y: this.yCenter,
-      scale: 0.82,
-      alpha: 0,
-      angle: Phaser.Math.Between(-8, 8),
-      duration: 420,
-      ease: "Cubic.easeIn",
+      targets: prox,
+      v: 1,
+      duration: 480,
+      ease: "Sine.easeInOut",
+      onUpdate: () => {
+        const p = curve.getPoint(prox.v);
+        gameObj.setPosition(p.x, p.y);
+      },
       onComplete: () => {
-        flyer.destroy();
-        onComplete && onComplete();
+        gameObj.setPosition(toX, toY);
+        this._pile.push(gameObj); // se queda en el montoncito
+        onDone && onDone();
       },
     });
+    this.tweens.add({
+      targets: gameObj,
+      scale: 0.7,
+      angle: rot,
+      duration: 480,
+      ease: "Sine.easeInOut",
+    });
+  }
+
+  // Coloca una carta boca abajo (jugada de un bot) en el montoncito.
+  dropBotCardToPile() {
+    const slot = this._pileCount++;
+    const { ox, oy, rot } = this.pileSlot(slot);
+    const back = this.makeCardBack(this.cardW, this.cardH);
+    back.setPosition(this.W / 2 + ox, this.yCenter + oy);
+    back.setAngle(rot);
+    back.setScale(0.55);
+    this.animLayer.add(back);
+    this._pile.push(back);
+    this.tweens.add({ targets: back, scale: 0.7, duration: 200, ease: "Back.easeOut" });
+  }
+
+  // Limpia el montoncito del centro (al empezar la ronda o al pasar a juzgar).
+  clearPile() {
+    (this._pile || []).forEach((o) => this.tweens.killTweensOf(o));
+    if (this.animLayer) this.animLayer.removeAll(true);
+    this._pile = [];
+    this._pileCount = 0;
   }
 
   submitCard(playerIndex, card) {
@@ -648,6 +701,8 @@ export default class GameScene extends Phaser.Scene {
     // Piensa Rápido: si se tardaron, el último en jugar pierde su carta (vuelve a
     // su mano). Excepción: si todos jugaron en <5s, no se castiga a nadie.
     this.aplicarPiensaRapido();
+
+    this.clearPile(); // el montoncito se reparte para juzgar
 
     this.phase = "judging";
     // Se mezclan las jugadas para que el Juez las vea de forma anónima.
