@@ -71,6 +71,8 @@ bun run build
 ```
 
 ## Pendiente / ideas (no hechas)
+> Lista completa y priorizada de ideas futuras en **`ROADMAP.md`**.
+
 - **Notificaciones**: solo se hizo PWA instalable. Faltan notificaciones **locales** (es tu turno / eres juez) y **Web Push** (app cerrada; requiere VAPID + tabla de suscripciones + Edge Function + en iOS PWA instalada).
 - **Single-player 7–8 jugadores:** hoy el SP permite 4–6 (para que las jugadas quepan en pantalla); las metas 5/4 (7–8 jug.) siguen siendo solo del online.
 - **Chat de voz (posible mejora):** la feature más compleja. Ventaja: ya usamos Supabase Realtime → su canal *broadcast* sirve de **señalización** WebRTC gratis. Lo difícil se concentra en: (1) **NAT traversal/TURN** — STUN gratis cubre ~80–85%, el resto necesita TURN (servidor `coturn` propio o servicio de pago); (2) **iOS/PWA** (permisos de micrófono, autoplay, audio en background); (3) **escala de la malla P2P** — bien a 4–6 jugadores, pesada a 8–10 (ahí conviene un SFU como LiveKit/Daily/Agora). Plan sugerido: prototipo **malla + push-to-talk + señalización por Realtime + solo STUN** para validar a 4–6, y si funciona agregar TURN. Alternativa barata previa: **chat de texto** (tabla `mensajes` + Realtime, ~medio día).
