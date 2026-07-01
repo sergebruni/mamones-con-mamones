@@ -54,12 +54,12 @@ function Carta({ color, titulo, flavor, onClick, onDoubleClick, disabled, ganado
     if (timer.current) clearTimeout(timer.current);
     if (longRef.current) onLongPressEnd && onLongPressEnd();
   };
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (longRef.current) {
       longRef.current = false;
       return; // fue pulsación larga: no dispares el clic
     }
-    onClick && onClick();
+    onClick && onClick(e);
   };
 
   const cls = `carta carta--${color} ${ganadora ? "carta--gana" : ""} ${peor ? "carta--peor" : ""} ${
@@ -105,11 +105,13 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const [verRes, setVerRes] = useState(false); // mostrar resultado de la ruleta
   const [muted, setMuted] = useState(!isSfxEnabled());
   const [preview, setPreview] = useState(null); // carta ampliada (long-press)
+  const [flying, setFlying] = useState(null); // carta volando al centro de la mesa
   const cerrarPreview = () => setPreview(null);
   const lastSyncRef = useRef("");
   const firedRef = useRef(0);
   const turnsRef = useRef(5);
   const dingRef = useRef("");
+  const rootRef = useRef(null);
 
   useEffect(() => initSfx(), []);
   const toggleMute = () => {
@@ -302,6 +304,21 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     rpc("jugar_carta", { p_sala: salaId, p_carta: carta });
     setMisJugadas((n) => n + 1); // optimista
   };
+  // Juega animando la carta desde su lugar en la mano hasta el centro de la mesa.
+  const jugarConAnim = (carta, el) => {
+    if (!el || !rootRef.current) return jugar(carta);
+    const r = el.getBoundingClientRect();
+    const cont = rootRef.current.getBoundingClientRect();
+    const dx = cont.left + cont.width / 2 - (r.left + r.width / 2);
+    const dy = cont.top + cont.height * 0.4 - (r.top + r.height / 2);
+    setFlying({ carta, flavor: flavores[carta], left: r.left, top: r.top, w: r.width, h: r.height, dx, dy, go: false });
+    setHand((h) => h.filter((c) => c !== carta)); // quítala de la mano al instante
+    jugar(carta);
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => setFlying((f) => (f ? { ...f, go: true } : f)))
+    );
+    setTimeout(() => setFlying(null), 480);
+  };
   const elegirGanadora = (id) => rpc("elegir_ganadora", { p_sala: salaId, p_mesa_id: id });
   const elegirPeor = (id) => rpc("elegir_peor", { p_sala: salaId, p_mesa_id: id });
   const pasar = (target) => rpc("pasar_mamon", { p_sala: salaId, p_target: target });
@@ -358,7 +375,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
   const muestraRuleta = fase === "resultado" && modo === "amarga" && !!ruletaEfecto;
 
   return (
-    <div className="og">
+    <div className="og" ref={rootRef}>
       <header className="og__top">
         <span className="og__code">Sala {codigo}</span>
         <span className="og__meta">
@@ -530,7 +547,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                     flavor={flavores[c]}
                     anon={!espiada}
                     onClick={() => setPeek((p) => ({ ...p, [i]: !p[i] }))}
-                    onDoubleClick={puedeJugar ? () => jugar(c) : undefined}
+                    onDoubleClick={puedeJugar ? (e) => jugarConAnim(c, e.currentTarget) : undefined}
                     onLongPress={setPreview}
                     onLongPressEnd={cerrarPreview}
                   />
@@ -542,7 +559,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                   color="roja"
                   titulo={c}
                   flavor={flavores[c]}
-                  onClick={puedeJugar ? () => jugar(c) : undefined}
+                  onClick={puedeJugar ? (e) => jugarConAnim(c, e.currentTarget) : undefined}
                   disabled={!puedeJugar}
                   onLongPress={setPreview}
                   onLongPressEnd={cerrarPreview}
@@ -559,6 +576,28 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
           <div className={`og__preview-card og__preview-card--${preview.color}`}>
             <span className="og__preview-titulo">{preview.titulo}</span>
             {preview.flavor && <span className="og__preview-flavor">{preview.flavor}</span>}
+          </div>
+        </div>
+      )}
+
+      {/* Carta volando al centro de la mesa al jugarla */}
+      {flying && (
+        <div
+          className="og__fly"
+          style={{
+            left: flying.left,
+            top: flying.top,
+            width: flying.w,
+            height: flying.h,
+            transform: flying.go
+              ? `translate(${flying.dx}px, ${flying.dy}px) scale(0.72)`
+              : "translate(0, 0) scale(1)",
+            opacity: flying.go ? 0 : 1,
+          }}
+        >
+          <div className="carta carta--roja">
+            <span className="carta__titulo">{flying.carta}</span>
+            {flying.flavor && <span className="carta__flavor">{flying.flavor}</span>}
           </div>
         </div>
       )}

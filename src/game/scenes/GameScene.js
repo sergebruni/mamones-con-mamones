@@ -120,6 +120,7 @@ export default class GameScene extends Phaser.Scene {
     this.redDiscard = new Set();
     this.roundStartMs = 0;
     this.piensaRapidoVictim = null; // índice del castigado por Piensa Rápido esta ronda
+    this._animatingPlay = false; // bloquea jugar mientras una carta vuela al centro
   }
 
   create() {
@@ -132,6 +133,7 @@ export default class GameScene extends Phaser.Scene {
     // Capa estática (fondo + cabecera) detrás de la capa dinámica (ui).
     this.staticLayer = this.add.container(0, 0);
     this.ui = this.add.container(0, 0);
+    this.animLayer = this.add.container(0, 0); // cartas volando al centro (sobre la UI)
     this.drawStatic();
 
     this.setupGame();
@@ -560,13 +562,50 @@ export default class GameScene extends Phaser.Scene {
     if (this.phase !== "play") return;
     if (this.judgeIndex === 0) return; // El humano es Juez: no juega.
     if (this.handFrozen) return; // 🥶 Mano congelada.
+    if (this._animatingPlay) return; // ya hay una carta volando al centro
     if (this.humanSubmittedCount() >= this.humanPlaysNeeded) return; // ya cumplió su cupo
 
     // ⏳ A ciegas: al confirmar la primera carta se revela el adjetivo verde.
     if (this.fx.jugarACiegas && !this.greenRevealed) this.greenRevealed = true;
 
-    const card = this.players[0].hand.splice(handIndex, 1)[0];
-    this.submitCard(0, card);
+    const text = this.players[0].hand[handIndex];
+
+    // Posición mundial de la carta tocada, para volarla desde ahí al centro.
+    const lx = this.cardW / 2 + handIndex * (this.cardW + this.handGap);
+    const fromX = (this.handContainer ? this.handContainer.x : 0) + lx;
+    const fromY = this.yHand;
+
+    // Ocultar la carta original en la mano mientras vuela la copia.
+    const orig = this.handContainer && this.handContainer.list[handIndex];
+    if (orig) orig.setVisible(false);
+
+    this._animatingPlay = true;
+    this.animateCardToCenter(text, fromX, fromY, () => {
+      this._animatingPlay = false;
+      const card = this.players[0].hand.splice(handIndex, 1)[0];
+      this.submitCard(0, card);
+    });
+  }
+
+  // Vuela una copia de la carta desde (fromX, fromY) hasta el centro de la mesa.
+  animateCardToCenter(text, fromX, fromY, onComplete) {
+    const flyer = this.makeRedCard(text);
+    flyer.setPosition(fromX, fromY);
+    this.animLayer.add(flyer);
+    this.tweens.add({
+      targets: flyer,
+      x: this.W / 2,
+      y: this.yCenter,
+      scale: 0.82,
+      alpha: 0,
+      angle: Phaser.Math.Between(-8, 8),
+      duration: 420,
+      ease: "Cubic.easeIn",
+      onComplete: () => {
+        flyer.destroy();
+        onComplete && onComplete();
+      },
+    });
   }
 
   submitCard(playerIndex, card) {

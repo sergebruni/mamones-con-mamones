@@ -290,6 +290,20 @@
   font-weight: 700;
 }
 
+/* --- Carta volando al centro al jugarla --- */
+.og__fly {
+  position: fixed;
+  z-index: 70;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.45s ease-in;
+  will-change: transform, opacity;
+}
+.og__fly .carta {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 /* --- Ruleta del Mamón Amargo --- */
 .ruleta {
   display: flex;
