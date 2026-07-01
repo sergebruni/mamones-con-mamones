@@ -12,12 +12,17 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 
 ---
 
+## ✅ Hecho
+- [x] **Pantalla "Cómo jugar"** — modal con reglas + los 6 efectos de la ruleta (`src/ui/ComoJugar.jsx`).
+- [x] **Optimizar imágenes** — `scripts/optimize-assets.mjs` (sharp): 3.9MB → 639KB (**-83%**).
+- [x] **Logo del juego en el home** (en vez del título de texto); + favicon, splash y reverso de cartas.
+- [x] **Sección "Acerca de / Nuestro Equipo"** (`src/ui/AcercaDe.jsx`), con enlace a x.com/sergebruni.
+- [x] **Single-player responsive en móvil** (retrato: marcador en chips, sin solapes con la carta verde).
+
 ## Quick wins (bajo esfuerzo, alto retorno)
-- [x] **Pantalla "Cómo jugar"** — modal con reglas + los 6 efectos de la ruleta (`src/ui/ComoJugar.jsx`), abierto desde el botón del menú. ✅
 - [ ] **Chat de texto en la sala** `[MP]` — tabla `mensajes` + Realtime. La versión barata del voz-chat. Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Reacciones / emotes** sobre las cartas jugadas (👏😂🤢). Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Recap de fin de partida** — mejor jugada, quién ganó más rondas, carta más votada (reusa `mesa_juego`). Esfuerzo 🟢 · Impacto 🟡
-- [x] **Optimizar imágenes** — `scripts/optimize-assets.mjs` (sharp): redimensiona + recomprime. Total 3.9MB → 639KB (**-83%**): logo 953→106KB, favicon 368→4KB, plantillas ~1.27MB→~265KB c/u. ✅
 
 ## Profundidad de juego (SP + MP)
 - [ ] **Carta en blanco** — el jugador escribe su propia roja esa ronda (estilo Cards Against Humanity). Gran rejugabilidad. Esfuerzo 🟡 · Impacto 🔴
