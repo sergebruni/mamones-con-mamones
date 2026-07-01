@@ -71,7 +71,14 @@ bun run build
 ```
 
 ## Pendiente / ideas (no hechas)
-> Lista completa y priorizada de ideas futuras en **`ROADMAP.md`**.
+> Lista completa y priorizada de ideas futuras en **`ROADMAP.md`** (con sección ✅ Hecho).
+
+**Próximos pasos sugeridos (al cerrar sesión, 2026-07-01):**
+1. **Recap de fin de partida** (quick win: mejor jugada / rondas ganadas / carta más votada, reusa `mesa_juego`).
+2. **Analytics (PostHog)** para decidir el resto con datos.
+3. **App móvil**: si se quiere ir a tiendas, **Capacitor** (no React Native) — ver ROADMAP › Plataforma/distribución.
+4. Abierto: **nitidez hi-DPI del single-player** (¿era eso lo del "no optimizado mobile"? el marcador/solapes ya se arregló).
+
 
 - **Notificaciones**: solo se hizo PWA instalable. Faltan notificaciones **locales** (es tu turno / eres juez) y **Web Push** (app cerrada; requiere VAPID + tabla de suscripciones + Edge Function + en iOS PWA instalada).
 - **Single-player 7–8 jugadores:** hoy el SP permite 4–6 (para que las jugadas quepan en pantalla); las metas 5/4 (7–8 jug.) siguen siendo solo del online.

@@ -45,6 +45,11 @@ Leyenda de esfuerzo/impacto: 🟢 bajo · 🟡 medio · 🔴 alto.
 - [ ] **Cartas de la comunidad** (envío + moderación). Esfuerzo 🔴 · Impacto 🟡
 - [ ] **Curar el mazo** con datos de qué cartas ganan más (requiere analytics). Esfuerzo 🟢 · Impacto 🟡
 
+## Plataforma / distribución
+- [ ] **App para tiendas (iOS/Android) — recomendado: Capacitor.** Envuelve el build web (`dist/`) en un WebView nativo reutilizando el **100% del código** (React DOM **y** Phaser corren igual dentro del WebView). Da App Store/Play + **push/haptics nativos**; ya hay manifest/íconos/splash. Pendientes: *safe-areas* del notch (CSS `env(safe-area-inset-*)`), deep links para invitaciones (`?sala=`), cuenta Apple ($99/año) + Play ($25 único). Se puede scaffold en el repo (`ios/`+`android/`, `capacitor.config`). Esfuerzo 🟡 · Impacto 🟡
+  - **React Native NO recomendado aquí:** exigiría reescribir toda la UI (RN no usa DOM/CSS) y **Phaser no corre en RN** (el single-player quedaría en WebView de todas formas). Solo Supabase portaría directo.
+  - La **PWA actual ya es instalable** (opción $0, con límites en iOS).
+
 ## Salud técnica
 - [ ] **Analytics (PostHog)** — instrumentar: dónde abandonan, qué efectos gustan, qué cartas ganan más. Guía todo lo demás. Esfuerzo 🟢 · Impacto 🟡
 - [ ] **Code-splitting de Phaser** — el bundle son ~1.9MB y los jugadores de solo-online cargan Phaser sin usarlo. Esfuerzo 🟡 · Impacto 🟡
