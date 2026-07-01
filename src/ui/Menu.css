@@ -124,6 +124,46 @@
   line-height: 1.35;
 }
 
+/* Selector de cantidad de jugadores */
+.pcount {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.pcount__btn {
+  flex: 1;
+  max-width: 90px;
+  padding: 12px 0;
+  border-radius: 14px;
+  border: 2px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-light);
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pcount__btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.pcount__btn--active {
+  border-color: var(--gold);
+  background: rgba(255, 211, 92, 0.12);
+  color: var(--gold);
+}
+
+.create__note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+.toggle--off {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Toggle */
 .toggle-row {
   display: flex;

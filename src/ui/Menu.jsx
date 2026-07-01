@@ -13,16 +13,21 @@ const MODES = [
   {
     id: "amarga",
     name: "Amarga",
-    desc: "Variante con otra mecánica (en construcción).",
+    desc: "El Juez elige la mejor y la PEOR; quien saca la peor gira La Ruleta del Mamón Amargo.",
     badge: "Beta",
   },
 ];
 
+const PLAYER_OPTIONS = [4, 5, 6];
+
 export default function Menu({ onStart, onMultiplayer }) {
   const [step, setStep] = useState("home"); // home | create
   const [mode, setMode] = useState("clasica");
+  const [players, setPlayers] = useState(4); // total: tú + bots
   const [piensaRapido, setPiensaRapido] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+
+  const piensaDisponible = players > 5; // regla del online: solo con más de 5
 
   return (
     <div className="menu">
@@ -48,6 +53,19 @@ export default function Menu({ onStart, onMultiplayer }) {
 
         {step === "create" && (
           <div className="create">
+            <p className="create__label">¿Cuántos jugadores? (tú + bots)</p>
+            <div className="pcount">
+              {PLAYER_OPTIONS.map((n) => (
+                <button
+                  key={n}
+                  className={`pcount__btn ${players === n ? "pcount__btn--active" : ""}`}
+                  onClick={() => setPlayers(n)}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+
             <p className="create__label">Elige el modo de juego</p>
 
             <div className="modes">
@@ -67,10 +85,11 @@ export default function Menu({ onStart, onMultiplayer }) {
             </div>
 
             <div className="toggle-row">
-              <label className="toggle">
+              <label className={`toggle ${piensaDisponible ? "" : "toggle--off"}`}>
                 <input
                   type="checkbox"
-                  checked={piensaRapido}
+                  checked={piensaRapido && piensaDisponible}
+                  disabled={!piensaDisponible}
                   onChange={(e) => setPiensaRapido(e.target.checked)}
                 />
                 <span className="toggle__track">
@@ -93,6 +112,9 @@ export default function Menu({ onStart, onMultiplayer }) {
                 {showInfo && <span className="info__tip">{PIENSA_RAPIDO_INFO}</span>}
               </span>
             </div>
+            {!piensaDisponible && (
+              <p className="create__note">Piensa rápido requiere más de 5 jugadores.</p>
+            )}
 
             <div className="create__actions">
               <button className="btn btn--ghost" onClick={() => setStep("home")}>
@@ -100,7 +122,9 @@ export default function Menu({ onStart, onMultiplayer }) {
               </button>
               <button
                 className="btn btn--primary"
-                onClick={() => onStart({ mode, piensaRapido })}
+                onClick={() =>
+                  onStart({ mode, players, piensaRapido: piensaRapido && piensaDisponible })
+                }
               >
                 Comenzar
               </button>

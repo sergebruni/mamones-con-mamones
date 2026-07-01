@@ -12,8 +12,19 @@ import Phaser from "phaser";
 import { GameData } from "../data/cards.js";
 
 const HAND_SIZE = 7;
-const WIN_SCORE = 5; // Puntos para ganar la partida.
 const CARD_RATIO = 1264 / 848; // alto/ancho de las plantillas (verticales).
+
+// Meta de puntos para ganar, según cantidad de jugadores (igual que el online).
+function metaGanar(n) {
+  if (n >= 8) return 4;
+  if (n === 7) return 5;
+  if (n === 6) return 6;
+  if (n === 5) return 7;
+  return 8; // 4 jugadores (mínimo)
+}
+
+// Color de cada sector de la ruleta, por número de efecto (1..6).
+const RULETA_COLORS = [0xffd35c, 0x8a1c10, 0x2e8b2e, 0xe08a1c, 0x3a6ea5, 0x6b3fa0];
 
 // Paleta de la mesa.
 const COLORS = {
@@ -104,6 +115,11 @@ export default class GameScene extends Phaser.Scene {
     this.fx = { pelaElOjo: false, manoCongelada: false, jugarACiegas: false, jugadaDoble: false };
     this._lastTapTime = 0;
     this._lastTapIndex = -1;
+
+    // Descarte de rojas de la partida (una carta jugada no reaparece hasta reiniciar).
+    this.redDiscard = new Set();
+    this.roundStartMs = 0;
+    this.piensaRapidoVictim = null; // índice del castigado por Piensa Rápido esta ronda
   }
 
   create() {
@@ -320,11 +336,14 @@ export default class GameScene extends Phaser.Scene {
   // ---------------------------------------------------------------------------
 
   setupGame() {
-    // Config de partida elegida en el menú (modo, piensaRapido).
+    // Config de partida elegida en el menú (modo, piensaRapido, jugadores).
     const cfg = this.registry.get("gameConfig") || {};
     this.mode = cfg.mode || "clasica"; // "clasica" | "amarga"
-    this.piensaRapido = !!cfg.piensaRapido;
-    // TODO(piensaRapido): el último en jugar pierde el turno y recupera su carta.
+    // Total de jugadores: tú + bots. Mínimo 4, máximo 6 (como el online, acotado
+    // por el espacio en pantalla para las jugadas).
+    const total = Phaser.Math.Clamp(cfg.players || 4, 4, 6);
+    // Piensa Rápido solo tiene sentido con más de 5 jugadores (regla del online).
+    this.piensaRapido = !!cfg.piensaRapido && total > 5;
 
     // Fuente de cartas: cartas.json (vía registry), con cards.js como respaldo.
     const data = this.registry.get("cartas");
@@ -334,16 +353,18 @@ export default class GameScene extends Phaser.Scene {
     this.greenSource = [...new Set(verdes)];
     this.redSource = [...new Set(rojas)];
 
+    // Jugadores: tú + (total-1) bots.
+    this.players = [{ name: "Tú", isBot: false, hand: [], score: 0 }];
+    for (let i = 1; i < total; i++) {
+      this.players.push({ name: `Bot ${i}`, isBot: true, hand: [], score: 0 });
+    }
+
+    // Descarte vacío y mazos frescos al empezar la partida.
+    this.redDiscard = new Set();
     this.refillGreenDeck();
     this.refillRedDeck();
 
-    this.players = [
-      { name: "Tú", isBot: false, hand: [], score: 0 },
-      { name: "Bot 1", isBot: true, hand: [], score: 0 },
-      { name: "Bot 2", isBot: true, hand: [], score: 0 },
-    ];
-
-    // Reparto inicial.
+    // Reparto inicial (sin repetir: drawRed excluye manos y descarte).
     this.players.forEach((p) => {
       while (p.hand.length < HAND_SIZE) p.hand.push(this.drawRed());
     });
@@ -371,8 +392,23 @@ export default class GameScene extends Phaser.Scene {
     this.greenDeck = Phaser.Utils.Array.Shuffle([...this.greenSource]);
   }
 
+  // Cartas rojas que ya están en la mano de algún jugador (para no repartirlas).
+  redEnManos() {
+    const s = new Set();
+    this.players.forEach((p) => p.hand.forEach((c) => s.add(c)));
+    return s;
+  }
+
+  // Reconstruye el mazo rojo con las cartas que NO están en manos ni descartadas.
+  // Si no queda ninguna, recicla el descarte (como el online al agotarse el mazo).
   refillRedDeck() {
-    this.redDeck = Phaser.Utils.Array.Shuffle([...this.redSource]);
+    const enManos = this.redEnManos();
+    let pool = this.redSource.filter((c) => !enManos.has(c) && !this.redDiscard.has(c));
+    if (pool.length === 0) {
+      this.redDiscard.clear();
+      pool = this.redSource.filter((c) => !enManos.has(c));
+    }
+    this.redDeck = Phaser.Utils.Array.Shuffle(pool);
   }
 
   drawGreen() {
@@ -403,6 +439,7 @@ export default class GameScene extends Phaser.Scene {
     this.handFrozen = false;
     this.greenRevealed = true;
     this.humanPlaysNeeded = 1;
+    this.piensaRapidoVictim = null;
     this.fx = { pelaElOjo: false, manoCongelada: false, jugarACiegas: false, jugadaDoble: false };
 
     // Cerrar cualquier overlay de ruleta colgante (seguridad).
@@ -426,6 +463,9 @@ export default class GameScene extends Phaser.Scene {
         this.time.delayedCall(delay + 700 + i * 250 + n * 450, () => this.botPlayCard(i));
       }
     });
+
+    // Marca de inicio de la fase de jugadas (ventana de 5s de Piensa Rápido).
+    this.roundStartMs = this.time.now;
 
     // Si el humano es el Juez, no juega carta: solo espera las jugadas de los bots.
     this.render();
@@ -493,11 +533,10 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  // Devuelve la mano del jugador al mazo y le reparte 7 cartas nuevas.
+  // Descarta la mano del jugador (no vuelve a repartirse) y le da 7 cartas nuevas.
   redealHand(playerIndex) {
     const p = this.players[playerIndex];
-    while (p.hand.length) this.redDeck.push(p.hand.pop());
-    Phaser.Utils.Array.Shuffle(this.redDeck);
+    while (p.hand.length) this.redDiscard.add(p.hand.pop());
     while (p.hand.length < HAND_SIZE) p.hand.push(this.drawRed());
   }
 
@@ -531,7 +570,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   submitCard(playerIndex, card) {
-    this.submissions.push({ playerIndex, card });
+    this.submissions.push({ playerIndex, card, at: this.time.now });
 
     // ¿Ya jugaron todos? (con Jugada Doble alguien debe 2 cartas)
     const expected = this.playsNeeded.reduce((a, b) => a + b, 0);
@@ -547,7 +586,30 @@ export default class GameScene extends Phaser.Scene {
     return this.submissions.some((s) => s.playerIndex === playerIndex);
   }
 
+  // Piensa Rápido: castiga al último en jugar si la ronda tardó ≥5s. Le devuelve
+  // su carta a la mano y la saca de las jugadas. Requiere ≥2 jugadores distintos.
+  aplicarPiensaRapido() {
+    this.piensaRapidoVictim = null;
+    if (!this.piensaRapido || this.submissions.length < 2) return;
+    const distintos = new Set(this.submissions.map((s) => s.playerIndex)).size;
+    if (distintos < 2) return;
+    const ultimaMs = Math.max(...this.submissions.map((s) => s.at || 0));
+    if (ultimaMs - this.roundStartMs < 5000) return; // todos rápidos: nadie pierde
+
+    let li = 0;
+    for (let i = 1; i < this.submissions.length; i++) {
+      if ((this.submissions[i].at || 0) > (this.submissions[li].at || 0)) li = i;
+    }
+    const late = this.submissions.splice(li, 1)[0];
+    this.players[late.playerIndex].hand.push(late.card); // la carta vuelve a su mano
+    this.piensaRapidoVictim = late.playerIndex;
+  }
+
   beginJudging() {
+    // Piensa Rápido: si se tardaron, el último en jugar pierde su carta (vuelve a
+    // su mano). Excepción: si todos jugaron en <5s, no se castiga a nadie.
+    this.aplicarPiensaRapido();
+
     this.phase = "judging";
     // Se mezclan las jugadas para que el Juez las vea de forma anónima.
     Phaser.Utils.Array.Shuffle(this.submissions);
@@ -610,6 +672,7 @@ export default class GameScene extends Phaser.Scene {
 
   judgeWorst(submissionIndex) {
     const worst = this.submissions[submissionIndex];
+    if (!worst) { this.finishJudging(); return; } // sin peor válida: sigue sin ruleta
     this.worstResult = { loserIndex: worst.playerIndex, card: worst.card };
     this.finishJudging();
     // El jugador de la peor carta gira la Ruleta del Mamón Amargo.
@@ -618,7 +681,7 @@ export default class GameScene extends Phaser.Scene {
 
   finishJudging() {
     const winner = this.players[this.lastResult.winnerIndex];
-    this.phase = winner.score >= WIN_SCORE ? "gameover" : "result";
+    this.phase = winner.score >= metaGanar(this.players.length) ? "gameover" : "result";
     this.render();
   }
 
@@ -628,9 +691,12 @@ export default class GameScene extends Phaser.Scene {
 
   // Elige al azar uno de los 6 efectos, lo activa para el jugador y lo anuncia.
   activarRuletaMamonAmargo(playerIndex, depth = 0) {
-    let pick = Phaser.Math.Between(1, 6);
+    // Efectos que entran al sorteo. "Mano congelada" (2) solo con Piensa Rápido.
+    const efectos = this.piensaRapido ? [1, 2, 3, 4, 5, 6] : [1, 3, 4, 5, 6];
+    const rand = () => efectos[Phaser.Math.Between(0, efectos.length - 1)];
+    let pick = rand();
     // Corta cadenas infinitas de "pasa el mamón".
-    while (pick === 5 && depth >= 3) pick = Phaser.Math.Between(1, 6);
+    while (pick === 5 && depth >= 3) pick = rand();
 
     const fx = RULETA_EFFECTS[pick];
     this.playerEffects[playerIndex][fx.key] = true;
@@ -643,13 +709,16 @@ export default class GameScene extends Phaser.Scene {
       pick,
       fx,
       depth,
+      efectos,
       transfer: fx.key === "pasaMamon",
     };
     this.showRoulette(); // anima la rueda y al detenerse revela el efecto
   }
 
   nextRound() {
-    // Reponer manos hasta HAND_SIZE.
+    // Descartar las cartas jugadas: no vuelven a ninguna mano en esta partida.
+    this.submissions.forEach((s) => this.redDiscard.add(s.card));
+    // Reponer manos hasta HAND_SIZE (drawRed excluye manos y descarte).
     this.players.forEach((p) => {
       while (p.hand.length < HAND_SIZE) p.hand.push(this.drawRed());
     });
@@ -712,7 +781,7 @@ export default class GameScene extends Phaser.Scene {
 
   drawRoundLabel() {
     const t = this.add
-      .text(this.f(20), this.yHeader / 2, `Ronda ${this.round}`, {
+      .text(this.f(20), this.yHeader / 2, `Ronda ${this.round} · Meta ${metaGanar(this.players.length)}`, {
         fontFamily: "Segoe UI, sans-serif",
         fontSize: `${this.f(17)}px`,
         color: COLORS.goldHex,
@@ -871,6 +940,25 @@ export default class GameScene extends Phaser.Scene {
     }
 
     this.drawPill(this.W / 2, this.yStatus, msg);
+
+    // Nota de Piensa Rápido: el último en jugar perdió su carta esta ronda.
+    if (this.piensaRapidoVictim != null && (this.phase === "judging" || this.phase === "result")) {
+      const v = this.players[this.piensaRapidoVictim];
+      const txt =
+        this.piensaRapidoVictim === 0
+          ? "🐢 Te pasaste de lento: tu carta se quedó en la mano."
+          : `🐢 ${v.name} se tardó: su carta se quedó en la mano.`;
+      const note = this.add
+        .text(this.W / 2, this.yStatus + this.f(26), txt, {
+          fontFamily: "Segoe UI, sans-serif",
+          fontSize: `${this.f(13)}px`,
+          color: COLORS.textMuted,
+          align: "center",
+          wordWrap: { width: this.W * 0.9 },
+        })
+        .setOrigin(0.5);
+      this.ui.add(note);
+    }
   }
 
   // Píldora de texto centrada con fondo.
@@ -1056,11 +1144,19 @@ export default class GameScene extends Phaser.Scene {
 
   // Cartas jugadas en el centro. revealOwners=true muestra de quién es cada una.
   drawSubmissions(revealOwners) {
-    const w = this.cardW;
-    const h = this.cardH;
-    const gap = Math.max(this.handGap, this.f(28));
     const n = this.submissions.length;
-    const totalW = n * w + (n - 1) * gap;
+    let gap = Math.max(this.handGap, this.f(28));
+    // Escalar hacia abajo si las jugadas no caben a lo ancho (muchos jugadores).
+    const maxRowW = this.W * 0.96;
+    let scale = 1;
+    let totalW = n * this.cardW + (n - 1) * gap;
+    if (totalW > maxRowW) {
+      scale = maxRowW / totalW;
+      gap *= scale;
+      totalW = maxRowW;
+    }
+    const w = this.cardW * scale;
+    const h = this.cardH * scale;
     const startX = (this.W - totalW) / 2 + w / 2; // centros
     const cy = this.yCenter;
 
@@ -1072,13 +1168,14 @@ export default class GameScene extends Phaser.Scene {
       const isWinner = this.lastResult && this.lastResult.card === sub.card;
       const isWorst = this.worstResult && this.worstResult.card === sub.card;
       const card = this.makeRedCard(sub.card, isWinner);
+      card.setScale(scale);
       card.setPosition(cx, cy);
 
       if (canJudge) {
         // En Amarga, durante el paso "peor" no se puede re-elegir la mejor.
         const blocked =
           this.mode === "amarga" && this.judgingStep === "worst" && sub === this.bestPick;
-        if (!blocked) this.attachClick(card, w, h, () => this.judgePick(i));
+        if (!blocked) this.attachClick(card, this.cardW, this.cardH, () => this.judgePick(i), scale);
       }
 
       if (isWinner) {
@@ -1204,15 +1301,17 @@ export default class GameScene extends Phaser.Scene {
   }
 
   // Construye la rueda de 6 sectores con su emoji. Centrada en (cx, cy).
-  buildWheel(cx, cy, rW) {
+  // Construye la rueda con un sector por efecto activo (5 ó 6). Centrada en (cx, cy).
+  buildWheel(cx, cy, rW, efectos) {
     const wheel = this.add.container(cx, cy);
-    const colors = [0xffd35c, 0x8a1c10, 0x2e8b2e, 0xe08a1c, 0x3a6ea5, 0x6b3fa0];
+    const n = efectos.length;
+    const seg = 360 / n;
 
     const g = this.add.graphics();
-    for (let k = 0; k < 6; k++) {
-      const a0 = Phaser.Math.DegToRad(k * 60);
-      const a1 = Phaser.Math.DegToRad((k + 1) * 60);
-      g.fillStyle(colors[k], 1);
+    for (let k = 0; k < n; k++) {
+      const a0 = Phaser.Math.DegToRad(k * seg);
+      const a1 = Phaser.Math.DegToRad((k + 1) * seg);
+      g.fillStyle(RULETA_COLORS[efectos[k] - 1], 1);
       g.slice(0, 0, rW, a0, a1, false);
       g.fillPath();
     }
@@ -1220,11 +1319,11 @@ export default class GameScene extends Phaser.Scene {
     g.strokeCircle(0, 0, rW);
     wheel.add(g);
 
-    for (let k = 0; k < 6; k++) {
-      const ac = Phaser.Math.DegToRad((k + 0.5) * 60);
+    for (let k = 0; k < n; k++) {
+      const ac = Phaser.Math.DegToRad((k + 0.5) * seg);
       const er = rW * 0.62;
       const e = this.add
-        .text(Math.cos(ac) * er, Math.sin(ac) * er, RULETA_EFFECTS[k + 1].emoji, {
+        .text(Math.cos(ac) * er, Math.sin(ac) * er, RULETA_EFFECTS[efectos[k]].emoji, {
           fontSize: `${Math.round(rW * 0.34)}px`,
         })
         .setOrigin(0.5);
@@ -1281,8 +1380,10 @@ export default class GameScene extends Phaser.Scene {
       false
     );
 
+    const efectos = r.efectos || [1, 2, 3, 4, 5, 6];
+    const seg = 360 / efectos.length;
     const wheelCY = top + this.f(64) + rW;
-    const wheel = this.buildWheel(cx, wheelCY, rW);
+    const wheel = this.buildWheel(cx, wheelCY, rW, efectos);
     layer.add(wheel);
     this.rouletteWheel = wheel;
 
@@ -1302,7 +1403,8 @@ export default class GameScene extends Phaser.Scene {
     this._rouletteGeom = { cx, top, pw, ph, rW, wheelCY };
 
     // Gira hasta dejar el segmento elegido bajo el puntero (arriba = -90°).
-    const segCenter = (r.pick - 0.5) * 60;
+    const idx = efectos.indexOf(r.pick);
+    const segCenter = (Math.max(0, idx) + 0.5) * seg;
     const target = 360 * 5 + (-90 - segCenter);
     wheel.angle = 0;
     this.tweens.add({
@@ -1471,7 +1573,7 @@ export default class GameScene extends Phaser.Scene {
   // Hace clicable toda la carta. Si el contenedor tiene una imagen de carta,
   // se usa esa imagen (su zona de clic es exactamente toda la carta); si no
   // (p. ej. el botón), se usa un rectángulo centrado del tamaño dado.
-  attachClick(container, w, h, onClick) {
+  attachClick(container, w, h, onClick, baseScale = 1) {
     const target = container.cardImage || container;
     if (target === container) {
       container.setSize(w, h);
@@ -1485,10 +1587,10 @@ export default class GameScene extends Phaser.Scene {
     }
 
     target.on("pointerover", () => {
-      container.setScale(1.08);
+      container.setScale(baseScale * 1.08);
       (container.parentContainer || this.ui).bringToTop(container);
     });
-    target.on("pointerout", () => container.setScale(1));
+    target.on("pointerout", () => container.setScale(baseScale));
     // En pointerUP (no down): así, al re-renderizar tras el clic, la MISMA
     // pulsación no se encadena a una carta recién dibujada bajo el cursor.
     target.on("pointerup", onClick);
