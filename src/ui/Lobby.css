@@ -2,14 +2,18 @@
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* Scroll cuando el panel es más alto que la pantalla (móvil).
+     Centramos el panel con margin:auto: queda centrado si cabe y scrollea
+     desde arriba si no (align-items:center recortaría la parte de arriba). */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 20px;
   background: radial-gradient(circle at 50% 35%, var(--felt-top), var(--felt-bottom));
 }
 
 .lobby__panel {
   width: min(440px, 100%);
+  margin: auto;
   background: rgba(12, 33, 20, 0.78);
   border: 1px solid var(--panel-border);
   border-radius: 22px;
