@@ -1662,7 +1662,9 @@ export default class GameScene extends Phaser.Scene {
     if (isWinner) {
       const border = this.add.graphics();
       border.lineStyle(4, COLORS.gold, 1);
-      border.strokeRoundedRect(-w / 2 - 3, -h / 2 - 3, w + 6, h + 6, 10);
+      // Mismo radio que la carta (concéntrico con sus esquinas redondeadas).
+      const rad = Math.min(w, h) * 0.1 + 3;
+      border.strokeRoundedRect(-w / 2 - 3, -h / 2 - 3, w + 6, h + 6, rad);
       container.add(border);
     }
 
