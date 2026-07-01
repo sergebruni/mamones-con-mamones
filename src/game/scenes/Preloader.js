@@ -30,6 +30,7 @@ export default class Preloader extends Phaser.Scene {
     // Plantillas de cartas (servidas desde public/assets por Vite).
     this.load.image("plantillaVerde", "assets/mamon_verde.png"); // adjetivos
     this.load.image("plantillaAmarilla", "assets/mamon_amarillo.png"); // sustantivos
+    this.load.image("logo", "assets/logo.png"); // reverso de cartas + marca
     // Los mazos (cartas.json) llegan por el registry del juego, no por el loader.
   }
 

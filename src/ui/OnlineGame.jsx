@@ -90,7 +90,9 @@ function Carta({ color, titulo, flavor, onClick, onDoubleClick, disabled, ganado
       onContextMenu={(e) => e.preventDefault()}
     >
       {anon ? (
-        <span className="carta__dorso">🤔</span>
+        <span className="carta__dorso">
+          <img className="carta__logo" src="/assets/logo.png" alt="" />
+        </span>
       ) : (
         <>
           <span className="carta__titulo">{titulo}</span>
@@ -614,8 +616,10 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
               className="og__pilecard"
               style={pileCardStyle(myPlayed.length + i)}
             >
-              <div className="carta carta--roja og__dorso">
-                <span className="carta__dorso">🤔</span>
+              <div className="carta carta--roja">
+                <span className="carta__dorso">
+                  <img className="carta__logo" src="/assets/logo.png" alt="" />
+                </span>
               </div>
             </div>
           ))}

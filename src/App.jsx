@@ -2,6 +2,7 @@ import { useState } from "react";
 import Menu from "./ui/Menu.jsx";
 import Lobby from "./ui/Lobby.jsx";
 import PhaserGame from "./game/PhaserGame.jsx";
+import Splash from "./ui/Splash.jsx";
 
 // Lee ?sala=CODIGO de la URL (enlace de invitación) una sola vez y lo limpia.
 function leerInvitacion() {
@@ -20,11 +21,13 @@ const INVITACION = leerInvitacion();
 
 // Pantallas: "menu" | "sp" (single-player) | "lobby" (multijugador).
 export default function App() {
+  const [splash, setSplash] = useState(true);
   const [screen, setScreen] = useState(INVITACION ? "lobby" : "menu");
   const [gameConfig, setGameConfig] = useState(null);
 
+  let content;
   if (screen === "sp" && gameConfig) {
-    return (
+    content = (
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <PhaserGame config={gameConfig} />
         <button
@@ -51,19 +54,24 @@ export default function App() {
         </button>
       </div>
     );
-  }
-
-  if (screen === "lobby") {
-    return <Lobby initialCode={INVITACION} onBack={() => setScreen("menu")} />;
+  } else if (screen === "lobby") {
+    content = <Lobby initialCode={INVITACION} onBack={() => setScreen("menu")} />;
+  } else {
+    content = (
+      <Menu
+        onStart={(config) => {
+          setGameConfig(config);
+          setScreen("sp");
+        }}
+        onMultiplayer={() => setScreen("lobby")}
+      />
+    );
   }
 
   return (
-    <Menu
-      onStart={(config) => {
-        setGameConfig(config);
-        setScreen("sp");
-      }}
-      onMultiplayer={() => setScreen("lobby")}
-    />
+    <>
+      {content}
+      {splash && <Splash onDone={() => setSplash(false)} />}
+    </>
   );
 }

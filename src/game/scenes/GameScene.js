@@ -1334,20 +1334,28 @@ export default class GameScene extends Phaser.Scene {
     this.ui.add(tag);
   }
 
-  // Reverso de carta para "Pela el ojo" (se añade encima del frente).
+  // Reverso de carta (marca): fondo verde + borde dorado + el logo centrado.
+  // Se usa en "Pela el ojo" y en las boca-abajo del montoncito.
   makeCardBack(w, h) {
     const c = this.add.container(0, 0);
     const r = Math.min(w, h) * 0.1;
     const g = this.add.graphics();
-    g.fillStyle(0x6b4a2a, 1);
+    g.fillStyle(COLORS.panel, 1);
     g.fillRoundedRect(-w / 2, -h / 2, w, h, r);
-    g.lineStyle(2, 0x3a2400, 1);
+    g.lineStyle(Math.max(2, w * 0.04), COLORS.gold, 1);
     g.strokeRoundedRect(-w / 2, -h / 2, w, h, r);
     c.add(g);
-    const q = this.add
-      .text(0, 0, "🤔", { fontSize: `${Math.round(h * 0.3)}px` })
-      .setOrigin(0.5);
-    c.add(q);
+
+    if (this.textures.exists("logo")) {
+      const img = this.add.image(0, 0, "logo").setOrigin(0.5);
+      const src = this.textures.get("logo").getSourceImage();
+      const scale = Math.min((w * 0.8) / src.width, (h * 0.8) / src.height);
+      img.setScale(scale);
+      c.add(img);
+    } else {
+      const q = this.add.text(0, 0, "🍈", { fontSize: `${Math.round(h * 0.3)}px` }).setOrigin(0.5);
+      c.add(q);
+    }
     return c;
   }
 
