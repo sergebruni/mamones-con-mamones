@@ -23,6 +23,14 @@
   font-size: clamp(26px, 5vw, 38px);
   color: #fff;
 }
+.menu__logo {
+  display: block;
+  width: min(80%, 300px);
+  max-height: 40vh;
+  object-fit: contain;
+  margin: 4px auto 0;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.45));
+}
 
 .menu__buttons {
   display: flex;

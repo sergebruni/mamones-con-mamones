@@ -34,7 +34,9 @@ export default function Menu({ onStart, onMultiplayer }) {
   return (
     <div className="menu">
       <div className="menu__panel">
-        <h1 className="menu__title">🍈 Mamones con Mamones</h1>
+        <h1 className="menu__title">
+          <img className="menu__logo" src="/assets/logo.png" alt="Mamones con Mamones" />
+        </h1>
 
         {step === "home" && (
           <div className="menu__buttons">
