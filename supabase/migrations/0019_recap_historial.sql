@@ -8,6 +8,34 @@
 alter table public.salas add column if not exists historial jsonb not null default '[]'::jsonb;
 
 -- ---------------------------------------------------------------------------
+-- Dependencias de la meta (re-aseguradas aquí para que 0019 sea autosuficiente:
+-- elegir_ganadora y resolver_timeout llaman meta_ganar, y algunas BD nunca
+-- corrieron la 0012 que la define). cartas_para_ganar es de la 0003.
+-- ---------------------------------------------------------------------------
+create or replace function public.cartas_para_ganar(n int)
+returns int language sql immutable as $$
+  select case
+    when n >= 8 then 4
+    when n = 7 then 5
+    when n = 6 then 6
+    when n = 5 then 7
+    else 8            -- 4 jugadores (mínimo)
+  end;
+$$;
+
+-- Meta efectiva de la sala: config.meta si está fijada, si no la automática.
+create or replace function public.meta_ganar(p_sala uuid)
+returns int language sql stable security definer set search_path = public as $$
+  select coalesce(
+    nullif(s.config->>'meta', '')::int,
+    cartas_para_ganar((select count(*) from jugadores_sala j where j.sala_id = s.id))
+  )
+  from salas s where s.id = p_sala;
+$$;
+
+grant execute on function public.meta_ganar(uuid) to authenticated;
+
+-- ---------------------------------------------------------------------------
 -- elegir_ganadora: además de sumar el punto, anexa la ronda al historial.
 -- (Base: 0012 + el append.)
 -- ---------------------------------------------------------------------------
