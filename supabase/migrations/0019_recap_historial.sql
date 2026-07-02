@@ -24,11 +24,13 @@ returns int language sql immutable as $$
 $$;
 
 -- Meta efectiva de la sala: config.meta si está fijada, si no la automática.
+-- count(*) es bigint; cartas_para_ganar espera int → castear (si no, "function
+-- cartas_para_ganar(bigint) does not exist" y meta_ganar ni se crea).
 create or replace function public.meta_ganar(p_sala uuid)
 returns int language sql stable security definer set search_path = public as $$
   select coalesce(
     nullif(s.config->>'meta', '')::int,
-    cartas_para_ganar((select count(*) from jugadores_sala j where j.sala_id = s.id))
+    cartas_para_ganar((select count(*)::int from jugadores_sala j where j.sala_id = s.id))
   )
   from salas s where s.id = p_sala;
 $$;
