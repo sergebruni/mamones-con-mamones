@@ -319,11 +319,22 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
     if (fase === "resultado" && ruletaEfecto) {
       turnsRef.current += 5;
       const idx = Math.max(0, efectosActivos.indexOf(ruletaEfecto));
-      setRot(360 * turnsRef.current - (idx * segDeg + segDeg / 2));
+      const target = 360 * turnsRef.current - (idx * segDeg + segDeg / 2);
       setVerRes(false);
+      // Diferir la rotación final un par de frames: en móvil, si el ángulo
+      // objetivo se aplica en el mismo frame en que monta la rueda, el navegador
+      // pinta directo el ángulo final y la transición CSS no dispara (no gira).
+      let raf2 = 0;
+      const raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(() => setRot(target));
+      });
       spinTicks(2600);
       const t = setTimeout(() => setVerRes(true), 2600);
-      return () => clearTimeout(t);
+      return () => {
+        cancelAnimationFrame(raf1);
+        cancelAnimationFrame(raf2);
+        clearTimeout(t);
+      };
     }
   }, [fase, ruletaEfecto, peorUid, piensaRapido]);
 
@@ -650,7 +661,7 @@ export default function OnlineGame({ salaId, uid, codigo, onLeave }) {
                     titulo={c}
                     flavor={flavores[c]}
                     anon={!espiada}
-                    onClick={() => setPeek((p) => ({ ...p, [i]: !p[i] }))}
+                    onClick={() => setPeek((p) => (p[i] ? {} : { [i]: true }))}
                     onDoubleClick={puedeJugar ? (e) => jugarConAnim(c, e.currentTarget) : undefined}
                     onLongPress={setPreview}
                     onLongPressEnd={cerrarPreview}
